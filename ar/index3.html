@@ -1,3 +1,8 @@
+<!--
+ * @Description: 
+ * @Autor: Kenneth Liu
+ * @Date: 2025-01-08
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,53 +39,70 @@
     </a-entity>
   </a-scene>
   <script>
-    const vConsole = new VConsole();
+    const vConsole = new VConsole()
     console.log(vConsole);
-
+  </script>
+  <script>
     const portfolio = document.querySelector("#portfolio-panel");
     const paintandquestPreviewButton = document.querySelector("#paintandquest-preview-button");
     const paintandquestPreviewButton2 = document.querySelector("#paintandquest-preview-button2");
-    const videoElement = document.querySelector("#paintandquest-video-mp4");
     portfolio.setAttribute("visible", true);
-
+    let y = 0;
     let status = false;
 
+
     paintandquestPreviewButton.addEventListener('click', () => {
-      if (!status) {
-        paintandquestPreviewButton2.setAttribute("visible", false);
-        videoElement.play();
-        status = true;
+      if (status == false) {
+        // paintandquestPreviewButton.setAttribute("visible", false);
+        const testVideo = document.createElement("video");
+        const canplayWebm = testVideo.canPlayType('video/webm; codecs="vp8, vorbis"');
+        if (canplayWebm == "") {
+          document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-mp4");
+          document.querySelector("#paintandquest-video-mp4").play();
+        } else {
+          paintandquestPreviewButton2.setAttribute("visible", false);
+          document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-mp4");
+          document.querySelector("#paintandquest-video-mp4").play();
+          // alert('播放')
+          status = true
+
+        }
       } else {
         paintandquestPreviewButton2.setAttribute("visible", true);
-        videoElement.pause();
+        // alert('暂停')
+        // portfolio.setAttribute("visible", true);
+        document.querySelector("#paintandquest-video-mp4").pause();
+
         status = false;
       }
+
     });
+    portfolio.setAttribute("position", "0 " + y + " -0.01");
+
 
     document.addEventListener("DOMContentLoaded", function () {
       const sceneEl = document.querySelector('a-scene');
       let arSystem;
-
       sceneEl.addEventListener('loaded', function () {
+        // alert('执行')
         arSystem = sceneEl.systems["mindar-image-system"];
-      });
 
+      });
       const startButton = document.querySelector("#example-start-button");
       startButton.addEventListener('click', () => {
         console.log("start");
-        arSystem.start(); // start AR
+        arSystem.start(); // start AR 
+        arSystem.pause(true);
       });
-
-      sceneEl.addEventListener("arReady", () => {
-        alert('AR引擎已啟動');
-        videoElement.play(); // Automatically play video when AR engine is ready
+      sceneEl.addEventListener("arReady", (event) => {
+        alert('AR引擎已啟動')
       });
-
-      sceneEl.addEventListener("arError", () => {
-        alert('未打開相機！');
+      sceneEl.addEventListener("arError", (event) => {
+        alert('未打開相機！')
       });
     });
   </script>
+
 </body>
 
 </html>
