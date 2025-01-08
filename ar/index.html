@@ -1,10 +1,17 @@
+<!--
+ * @Description: 
+ * @Autor: Southern Wind
+ * @Date: 2023-07-25 11:21:40
+ * @LastEditors: Southern Wind
+ * @LastEditTime: 2023-07-28 12:01:16
+-->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AR-Camera</title>
+  <title>AR相机</title>
   <script src="./js/aframe.min.js"></script>
   <script src="./js/mindar-image-aframe.prod.js"></script>
 
@@ -13,16 +20,16 @@
 
 <body>
   <div style="position: absolute; z-index: 1000">
-    <button id="example-start-button">重新載入</button>
+    <button id="example-start-button">重新加载</button>
   </div>
   <a-scene mindar-image="imageTargetSrc: ./targets.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
     <a-assets>
       <img id="paintandquest-preview" src="./images/opc.png" />
       <img id="paintandquest-preview2" src="./images/2.png" />
-      <video id="paintandquest-video-mp4" autoplay="false" loop="true" src="./1234.mp4" playsinline webkit-playsinline></video>
+      <video id="paintandquest-video-mp4" autoplay="false" loop="true" src="./asset~7.mp4" playsinline webkit-playsinline></video>
     </a-assets>
 
-    <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable"></a-camera>
+    <a-camera position="0 0 0" look-controls="enabled:  false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable"></a-camera>
     <a-entity mindar-image-target="targetIndex: 0" mytarget>
       <a-entity visible=false id="portfolio-panel" position="0 0 -0.01">
         <a-image id="paintandquest-preview-button" class="clickable" src="#paintandquest-preview" alpha-test="0.5" position="0 0 0.1" height="0.552" width="1">
@@ -34,65 +41,70 @@
     </a-entity>
   </a-scene>
   <script>
-    const vConsole = new VConsole();
+    const vConsole = new VConsole()
     console.log(vConsole);
-
+  </script>
+  <script>
     const portfolio = document.querySelector("#portfolio-panel");
     const paintandquestPreviewButton = document.querySelector("#paintandquest-preview-button");
     const paintandquestPreviewButton2 = document.querySelector("#paintandquest-preview-button2");
-    const videoElement = document.querySelector("#paintandquest-video-mp4");
     portfolio.setAttribute("visible", true);
-
+    let y = 0;
     let status = false;
 
+
     paintandquestPreviewButton.addEventListener('click', () => {
-      if (!status) {
-        paintandquestPreviewButton2.setAttribute("visible", false);
-        videoElement.currentTime = 0; // Reset video to the beginning
-        videoElement.play().then(() => {
-          console.log("Video is playing.");
-        }).catch(error => {
-          console.error("Error playing video:", error);
-          alert("Error playing video.");
-        });
-        status = true;
+      if (status == false) {
+        // paintandquestPreviewButton.setAttribute("visible", false);
+        const testVideo = document.createElement("video");
+        const canplayWebm = testVideo.canPlayType('video/webm; codecs="vp8, vorbis"');
+        if (canplayWebm == "") {
+          document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-mp4");
+          document.querySelector("#paintandquest-video-mp4").play();
+        } else {
+          paintandquestPreviewButton2.setAttribute("visible", false);
+          document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-mp4");
+          document.querySelector("#paintandquest-video-mp4").play();
+          // alert('播放')
+          status = true
+
+        }
       } else {
         paintandquestPreviewButton2.setAttribute("visible", true);
-        videoElement.pause();
+        // alert('暂停')
+        // portfolio.setAttribute("visible", true);
+        document.querySelector("#paintandquest-video-mp4").pause();
+
         status = false;
       }
+
     });
+    portfolio.setAttribute("position", "0 " + y + " -0.01");
+
 
     document.addEventListener("DOMContentLoaded", function () {
       const sceneEl = document.querySelector('a-scene');
       let arSystem;
-
       sceneEl.addEventListener('loaded', function () {
+        // alert('执行')
         arSystem = sceneEl.systems["mindar-image-system"];
-      });
 
+      });
       const startButton = document.querySelector("#example-start-button");
       startButton.addEventListener('click', () => {
         console.log("start");
-        arSystem.start(); // start AR
+        arSystem.start(); // start AR 
+        arSystem.pause(true);
       });
-
-      sceneEl.addEventListener("arReady", () => {
-        alert('AR引擎已啟動');
-        videoElement.currentTime = 0; // Reset video to the beginning
-        videoElement.play().then(() => {
-          console.log("Video is playing.");
-        }).catch(error => {
-          console.error("Error playing video:", error);
-          alert("Error playing video.");
-        });
+      sceneEl.addEventListener("arReady", (event) => {
+        alert('AR引擎已启动')
       });
-
-      sceneEl.addEventListener("arError", () => {
-        alert('未打開相機！');
+      sceneEl.addEventListener("arError", (event) => {
+        alert('相机未启动成功！')
       });
     });
   </script>
+
 </body>
 
 </html>
