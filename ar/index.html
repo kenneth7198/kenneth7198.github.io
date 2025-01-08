@@ -1,9 +1,7 @@
 <!--
  * @Description: 
- * @Autor: Southern Wind
- * @Date: 2023-07-25 11:21:40
- * @LastEditors: Southern Wind
- * @LastEditTime: 2023-07-28 12:01:16
+ * @Autor: Kenneth Liu
+ * @Date: 2025-01-08
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -20,13 +18,13 @@
 
 <body>
   <div style="position: absolute; z-index: 1000">
-    <button id="example-start-button">重新加载</button>
+    <button id="example-start-button">重新載入</button>
   </div>
-  <a-scene mindar-image="imageTargetSrc: ./targets2.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+  <a-scene mindar-image="imageTargetSrc: ./targets.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
     <a-assets>
       <img id="paintandquest-preview" src="./images/opc.png" />
       <img id="paintandquest-preview2" src="./images/2.png" />
-      <video id="paintandquest-video-mp4" autoplay="false" loop="true" src="./1234.mp4" playsinline webkit-playsinline></video>
+      <video id="paintandquest-video-mp4" autoplay="false" loop="true" src="./asset.mp4" playsinline webkit-playsinline></video>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled:  false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable"></a-camera>
@@ -97,10 +95,10 @@
         arSystem.pause(true);
       });
       sceneEl.addEventListener("arReady", (event) => {
-        alert('AR引擎已启动')
+        alert('AR引擎已啟動')
       });
       sceneEl.addEventListener("arError", (event) => {
-        alert('相机未启动成功！')
+        alert('未打開相機！')
       });
     });
   </script>
