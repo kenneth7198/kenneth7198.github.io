@@ -48,12 +48,13 @@
     paintandquestPreviewButton.addEventListener('click', () => {
       if (!status) {
         paintandquestPreviewButton2.setAttribute("visible", false);
-        if (videoElement.readyState >= 2) {
-          videoElement.play();
-        } else {
-          console.error("Video not ready:", videoElement.error);
-          alert("Error loading video.");
-        }
+        videoElement.currentTime = 0; // Reset video to the beginning
+        videoElement.play().then(() => {
+          console.log("Video is playing.");
+        }).catch(error => {
+          console.error("Error playing video:", error);
+          alert("Error playing video.");
+        });
         status = true;
       } else {
         paintandquestPreviewButton2.setAttribute("visible", true);
@@ -78,12 +79,13 @@
 
       sceneEl.addEventListener("arReady", () => {
         alert('AR引擎已啟動');
-        if (videoElement.readyState >= 2) {
-          videoElement.play();
-        } else {
-          console.error("Video not ready:", videoElement.error);
-          alert("Error loading video.");
-        }
+        videoElement.currentTime = 0; // Reset video to the beginning
+        videoElement.play().then(() => {
+          console.log("Video is playing.");
+        }).catch(error => {
+          console.error("Error playing video:", error);
+          alert("Error playing video.");
+        });
       });
 
       sceneEl.addEventListener("arError", () => {
