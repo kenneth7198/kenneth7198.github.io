@@ -16,7 +16,14 @@
   <script src="./js/mindar-image-aframe.prod.js"></script>
 
   <script src="./js/vconsole.min.js"></script>
+  <style>
+    #paintandquest-video-mp4 { 
+      offset-position: top;
+     }
+
+  </style>
 </head>
+
 
 <body>
   <div style="position: absolute; z-index: 1000">
@@ -31,7 +38,7 @@
 
     <a-camera position="0 0 0" look-controls="enabled:  false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable"></a-camera>
     <a-entity mindar-image-target="targetIndex: 0" mytarget>
-      <a-entity visible=true id="portfolio-panel" position="0 0 -0.01">
+      <a-entity visible=false id="portfolio-panel" position="0 0 -0.01">
         <a-image id="paintandquest-preview-button" class="clickable" src="#paintandquest-preview" alpha-test="0.5" position="0 0 0.1" height="0.552" width="1">
         </a-image>
         <a-image id="paintandquest-preview-button2" class="clickable" src="#paintandquest-preview2" alpha-test="0.5" position="0 0 0.05" height="0.552" width="1">
