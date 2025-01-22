@@ -43,7 +43,7 @@
         </a-image>
         <a-image id="paintandquest-preview-button2" class="clickable" src="#paintandquest-preview2" alpha-test="0.5" position="0 0 0.05" height="0.552" width="1">
         </a-image>
-        <a-video id="paintandquest-video-link" webkit-playsinline playsinline width="1" height="0.552" position="0 0 0"></a-video>
+        <a-video id="paintandquest-video-link" webkit-playsinline playsinline width="1" height="0.552" position="0 0.2 0"></a-video>
       </a-entity>
     </a-entity>
   </a-scene>
@@ -81,7 +81,6 @@
         // alert('暂停')
         // portfolio.setAttribute("visible", true);
         document.querySelector("#paintandquest-video-mp4").pause();
-
         status = false;
       }
 
@@ -107,7 +106,7 @@
         // alert('AR引擎已启动')
       });
       sceneEl.addEventListener("arError", (event) => {
-        alert('相机未启动成功！')
+        alert('相機未啟動成功！')
       });
     });
   </script>
