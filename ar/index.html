@@ -16,13 +16,18 @@
   <script src="./js/mindar-image-aframe.prod.js"></script>
 
   <script src="./js/vconsole.min.js"></script>
+  <style>
+   
+
+  </style>
 </head>
+
 
 <body>
   <div style="position: absolute; z-index: 1000">
-    <button id="example-start-button">Reload</button>
+    <!-- <button id="example-start-button">Reload</button> -->
   </div>
-  <a-scene mindar-image="imageTargetSrc: ./targets3.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+  <a-scene mindar-image="imageTargetSrc: ./targets20.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
     <a-assets>
       <img id="paintandquest-preview" src="./images/opc.png" />
       <img id="paintandquest-preview2" src="./images/22.png" />
@@ -36,7 +41,7 @@
         </a-image>
         <a-image id="paintandquest-preview-button2" class="clickable" src="#paintandquest-preview2" alpha-test="0.5" position="0 0 0.05" height="0.552" width="1">
         </a-image>
-        <a-video id="paintandquest-video-link" webkit-playsinline playsinline width="1" height="0.552" position="0 0 0"></a-video>
+        <a-video id="paintandquest-video-link" webkit-playsinline playsinline width="1" height="0.552" position="0 0.8 0"></a-video>
       </a-entity>
     </a-entity>
   </a-scene>
@@ -74,7 +79,6 @@
         // alert('暂停')
         // portfolio.setAttribute("visible", true);
         document.querySelector("#paintandquest-video-mp4").pause();
-
         status = false;
       }
 
@@ -100,7 +104,7 @@
         // alert('AR引擎已启动')
       });
       sceneEl.addEventListener("arError", (event) => {
-        alert('相机未启动成功！')
+        alert('相機未啟動成功！')
       });
     });
   </script>
