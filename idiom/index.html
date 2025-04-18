@@ -2,12 +2,8 @@
  功能：
  1) 題目：6 字亂序（前 4 字為正解）
  2) 拖入「答案區」排出正確 4 字 → ✔ 正確、計時
- 3) 結束條件：
-    • 成功排出正確 4 字（status = "solved"）
-    • 超過 15 秒仍未完成（status = "timeout"）
-    → 結束時透過 `fetch` 將紀錄 **POST** 到伺服器 `/log` 端點 (JSON body)
-      若伺服器不可用 → 備援下載 `log_<epoch>.txt`
- 4) 累計 10 題即結束（停用「換一題」）
+ 3) 結束條件：solved / timeout (15 s) → 將紀錄 POST `/log`，失敗則下載
+ 4) **外部讀檔**：使用 `fetch('combined_idioms_fixed.json')`，需在 http(s) 伺服器環境執行，避免 file:// CORS
 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -19,7 +15,6 @@
   <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css" />
   <style>
-    /* --- 基本樣式保持不變 --- */
     html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#f3f4f6;font-family:"Noto Sans TC",sans-serif}
     .card{width:150px;height:150px;background:#fff;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.15);position:absolute;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:700;cursor:move;user-select:none}
     #answerZone{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);width:700px;height:170px;border:3px dashed #9ca3af;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:20px;pointer-events:none}
@@ -46,54 +41,26 @@ $(function(){
 
   /* ---------- 伺服器記錄 ---------- */
   async function sendToServer(obj){
-    try{
-      const res=await fetch('/log',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(obj)
-      });
-      if(!res.ok) throw new Error(res.statusText);
-      console.log('%c🚀 已送出至伺服器','color:#0ea5e9',obj);
-    }catch(err){
-      console.warn('伺服器寫入失敗，改為下載',err);
-      fallbackDownload(obj);
-    }
-  }
-  function fallbackDownload(data){
-    const blob=new Blob([JSON.stringify(data)],{type:'text/plain'});
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
-    a.download=`log_${Date.now()}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
+    try{const r=await fetch('/log',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)});if(!r.ok)throw new Error(r.statusText);console.log('🚀 已送出至伺服器',obj);}catch(e){console.warn('伺服器失敗，下載備份',e);downloadFallback(obj);} }
+  function downloadFallback(data){const b=new Blob([JSON.stringify(data)],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`log_${Date.now()}.txt`;a.click();}
 
   /* ---------- 工具 ---------- */
   const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-  function placed(){const top=$('#answerZone').position().top,bot=top+$('#answerZone').outerHeight();const arr=[];$('.card').each(function(){const p=$(this).position();const mid=p.top+CARD_H/2;if(mid>top&&mid<bot) arr.push({l:p.left,ch:$(this).text()});});arr.sort((a,b)=>a.l-b.l);return arr.map(o=>o.ch).join('');}
+  function placed(){const top=$('#answerZone').position().top,bot=top+$('#answerZone').outerHeight();const arr=[];$('.card').each(function(){const p=$(this).position();const mid=p.top+CARD_H/2;if(mid>top&&mid<bot)arr.push({l:p.left,ch:$(this).text()});});arr.sort((a,b)=>a.l-b.l);return arr.map(o=>o.ch).join('');}
 
-  /* ---------- 計時 ---------- */
-  function startTimer(){startTime=Date.now();logged=false;$('#timeoutMsg').hide();$('#timer').text('⏱ 0 s');clearInterval(timerID);timerID=setInterval(()=>{const s=Math.floor((Date.now()-startTime)/1000);$('#timer').text(`⏱ ${s} s`);if(s>=TIME_LIMIT&&!logged){timeout(s);} },1000);}  
+  function startTimer(){startTime=Date.now();logged=false;$('#timeoutMsg').hide();$('#timer').text('⏱ 0 s');clearInterval(timerID);timerID=setInterval(()=>{const s=Math.floor((Date.now()-startTime)/1000);$('#timer').text(`⏱ ${s} s`);if(s>=TIME_LIMIT&&!logged)timeout(s);},1000);}  
   function timeout(sec){$('#timeoutMsg').text(`⚠️ 超過 ${TIME_LIMIT} 秒！答案：${answer}`).show();end('timeout',sec);}  
-
-  /* ---------- 結束 ---------- */
-  async function end(status,sec){if(logged) return;logged=true;clearInterval(timerID);
-    const entry={timestamp:new Date().toISOString(),seconds:sec,status,question,answer,final:placed()||''};
-    await sendToServer(entry);
-  }
-
-  /* ---------- 分數 ---------- */
+  async function end(status,sec){if(logged)return;logged=true;clearInterval(timerID);await sendToServer({timestamp:new Date().toISOString(),seconds:sec,status,question,answer,final:placed()||''});}
   function updScore(){$('#scoreBoard').text(`${score} / 10`);if(score>=10){$('#scoreBoard').css('color','#16a34a');$('#randomBtn').prop('disabled',true).text('已完成 10 題');clearInterval(timerID);}}
 
-  /* ---------- 資料 ---------- */
-  $.getJSON('combined_idioms_fixed.json').done(list=>{idioms=list;next();});
-  $('#randomBtn').on('click',()=>{if(score<10) next();});
+  $('#randomBtn').on('click',()=>{if(score<10)init();});
 
-  function next(){let item=null;for(let i=0;i<40;i++){const c=idioms[Math.random()*idioms.length|0];if((c.generated||'').length>=6){item=c;break;}}if(!item){alert('資料不足');return;}answer=item.generated.slice(0,4);question=shuffle(item.generated.slice(0,6).split('')).join('');render(question.split(''));startTimer();}
+  /* ---------- 外部載入 JSON ---------- */
+  fetch('combined_idioms_fixed.json').then(r=>r.json()).then(data=>{idioms=data;init();}).catch(err=>{alert('讀取 JSON 失敗，請透過 http(s) 伺服器開啟\n'+err);});
+
+  function init(){if(!idioms.length){alert('資料不足');return;}let it=null;for(let i=0;i<40;i++){const c=idioms[Math.random()*idioms.length|0];if((c.generated||'').length>=6){it=c;break;}}if(!it){alert('沒有足夠長度片語');return;}answer=it.generated.slice(0,4);question=shuffle(it.generated.slice(0,6).split('')).join('');render(question.split(''));startTimer();}
   function render(chars){$('.card').remove();$('#result').hide();$('#answerZone').css('border-color','#9ca3af');solved=false;chars.forEach((ch,i)=>$('<div class="card"/>').text(ch).css({left:layout[i].x,top:layout[i].y}).appendTo('body').draggable({containment:'body',stop:check}));}
-
-  function check(){if(solved||logged) return;const cur=placed();if(cur.length<4) return;if(cur.slice(0,4)===answer){solved=true;score++;updScore();$('#result').show();$('#answerZone').css('border-color','#16a34a');const sec=Math.floor((Date.now()-startTime)/1000);end('solved',sec);} }
+  function check(){if(solved||logged)return;const cur=placed();if(cur.length<4)return;if(cur.slice(0,4)===answer){solved=true;score++;updScore();$('#result').show();$('#answerZone').css('border-color','#16a34a');const sec=Math.floor((Date.now()-startTime)/1000);end('solved',sec);} }
 });
 </script>
 </body>
