@@ -13,7 +13,7 @@
     #answerZone{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);width:700px;height:170px;border:3px dashed #9ca3af;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:20px;pointer-events:none}
     #randomBtn{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);padding:12px 22px;font-size:18px;background:#2563eb;color:#fff;border:none;border-radius:10px;box-shadow:0 3px 8px rgba(0,0,0,.25);cursor:pointer}
     #randomBtn:hover{background:#1d4ed8}
-    #result{position:fixed;top:20px;left:50%;transform:translateX(-50%);font-size:26px;font-weight:700;color:#16a34a;display:none}
+    #result{position:fixed;bottom:0px;left:50%;transform:translateX(-50%);font-size:26px;font-weight:700;color:#16a34a;display:none}
     #timeoutMsg{position:fixed;top:60px;left:50%;transform:translateX(-50%);font-size:22px;font-weight:600;color:#dc2626;display:none}
     #scoreBoard{position:fixed;top:20px;right:30px;font-size:22px;font-weight:600;color:#1f2937}
     #timer{position:fixed;top:60px;right:30px;font-size:20px;color:#374151}
@@ -43,7 +43,7 @@
 
 <div id="summaryDlg" class="dialog" style="display:none"></div>
 <div id="result">✔ 正確！</div>
-<div id="timeoutMsg"></div>
+<div id="timeoutMsg" style="position:fixed;bottom:-30px;left:50%;transform:translateX(-50%);font-size:22px;font-weight:600;color:#dc2626;display:none"></div>
 <div id="scoreBoard">0 / 10</div>
 <div id="timer">⏱ 0 s</div>
 <div id="answerZone">將 4 張正確字卡拖到此處並依序排列</div>

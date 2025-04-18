@@ -1,5 +1,5 @@
 <?php
-// log.php ─ 同名＋同日：TXT 寫原 JSON，CSV 追加欄位含 total 及 bank
+// log.php ┐ 同名＋同日：TXT 寫原 JSON，CSV 附加欄位含 total 及 bank
 header('Content-Type: application/json');
 
 /* 1. 只接受 POST */
@@ -24,7 +24,8 @@ if (empty($data['name']) || empty($data['bank'])) {
 }
 
 /* 3. 檔名資訊 */
-$name = preg_replace('/[^A-Za-z0-9_\-]/', '_', trim($data['name']));
+$name_raw = trim($data['name']);
+$name_sanitized = preg_replace('/[^\p{L}\p{N}_-]+/u', '_', $name_raw); // 保留中文、英數、_與-
 $date = (new DateTime('now', new DateTimeZone('Asia/Taipei')))->format('Y-m-d');
 $dir  = __DIR__ . '/log_data';
 if (!is_dir($dir) && !mkdir($dir, 0777, true)) {
@@ -32,17 +33,17 @@ if (!is_dir($dir) && !mkdir($dir, 0777, true)) {
     echo json_encode(['error' => 'cannot create log_data dir']);
     exit;
 }
-$txtFile = sprintf('%s/log_%s_%s.txt', $dir, $name, $date);
-$csvFile = sprintf('%s/log_%s_%s.csv', $dir, $name, $date);
+$txtFile = sprintf('%s/log_%s_%s.txt', $dir, $name_sanitized, $date);
+$csvFile = sprintf('%s/log_%s_%s.csv', $dir, $name_sanitized, $date);
 
-/* 4. 追加 TXT（原 JSON） */
+/* 4. 附加 TXT（原 JSON） */
 if (file_put_contents($txtFile, $raw . PHP_EOL, FILE_APPEND) === false) {
     http_response_code(500);
     echo json_encode(['error' => 'write TXT failed']);
     exit;
 }
 
-/* 5. 追加 CSV（擴充 bank 欄） */
+/* 5. 附加 CSV（擴充 bank 欄） */
 $firstCsv = !file_exists($csvFile);
 $fp = fopen($csvFile, 'a');
 if (!$fp) {
@@ -51,10 +52,8 @@ if (!$fp) {
     exit;
 }
 if ($firstCsv) {
-    // 標題列新增 bank
     fputcsv($fp, ['timestamp','seconds','total','status','bank','question','answer','final']);
 }
-// 依欄位順序填入
 fputcsv($fp, [
     $data['timestamp'] ?? '',
     $data['seconds']   ?? '',
