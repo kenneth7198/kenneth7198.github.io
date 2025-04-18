@@ -1,0 +1,2420 @@
+[
+  {
+    "idiom1": "一日三秋",
+    "idiom2": "一波三折",
+    "question": "一日三秋波折",
+    "common": "一、三"
+  },
+  {
+    "idiom1": "一日三秋",
+    "idiom2": "一日千里",
+    "question": "一日三秋千里",
+    "common": "日、一"
+  },
+  {
+    "idiom1": "心平氣和",
+    "idiom2": "一團和氣",
+    "question": "心平氣和一團",
+    "common": "氣、和"
+  },
+  {
+    "idiom1": "遊山玩水",
+    "idiom2": "山高水長",
+    "question": "遊山玩水高長",
+    "common": "水、山"
+  },
+  {
+    "idiom1": "遊山玩水",
+    "idiom2": "青山綠水",
+    "question": "遊山玩水青綠",
+    "common": "水、山"
+  },
+  {
+    "idiom1": "山高水長",
+    "idiom2": "細水長流",
+    "question": "山高水長細流",
+    "common": "水、長"
+  },
+  {
+    "idiom1": "山高水長",
+    "idiom2": "水漲船高",
+    "question": "山高水長漲船",
+    "common": "水、高"
+  },
+  {
+    "idiom1": "山高水長",
+    "idiom2": "青山綠水",
+    "question": "山高水長青綠",
+    "common": "水、山"
+  },
+  {
+    "idiom1": "山高水長",
+    "idiom2": "山高路陡",
+    "question": "山高水長路陡",
+    "common": "高、山"
+  },
+  {
+    "idiom1": "大公無私",
+    "idiom2": "公正無私",
+    "question": "大公無私正",
+    "common": "私、無、公"
+  },
+  {
+    "idiom1": "石沉大海",
+    "idiom2": "大海撈針",
+    "question": "石沉大海撈針",
+    "common": "大、海"
+  },
+  {
+    "idiom1": "此起彼落",
+    "idiom2": "顧此失彼",
+    "question": "此起彼落顧失",
+    "common": "此、彼"
+  },
+  {
+    "idiom1": "此起彼落",
+    "idiom2": "厚此薄彼",
+    "question": "此起彼落厚薄",
+    "common": "此、彼"
+  },
+  {
+    "idiom1": "口是心非",
+    "idiom2": "心直口快",
+    "question": "口是心非直快",
+    "common": "心、口"
+  },
+  {
+    "idiom1": "口是心非",
+    "idiom2": "苦口婆心",
+    "question": "口是心非苦婆",
+    "common": "心、口"
+  },
+  {
+    "idiom1": "人定勝天",
+    "idiom2": "引人入勝",
+    "question": "人定勝天引入",
+    "common": "人、勝"
+  },
+  {
+    "idiom1": "人定勝天",
+    "idiom2": "吉人天相",
+    "question": "人定勝天吉相",
+    "common": "人、天"
+  },
+  {
+    "idiom1": "眉開眼笑",
+    "idiom2": "大開眼界",
+    "question": "眉開眼笑大界",
+    "common": "開、眼"
+  },
+  {
+    "idiom1": "眉開眼笑",
+    "idiom2": "笑逐顏開",
+    "question": "眉開眼笑逐顏",
+    "common": "開、笑"
+  },
+  {
+    "idiom1": "眉開眼笑",
+    "idiom2": "擠眉弄眼",
+    "question": "眉開眼笑擠弄",
+    "common": "眉、眼"
+  },
+  {
+    "idiom1": "眉開眼笑",
+    "idiom2": "濃眉大眼",
+    "question": "眉開眼笑濃大",
+    "common": "眉、眼"
+  },
+  {
+    "idiom1": "眉開眼笑",
+    "idiom2": "皺眉蹙眼",
+    "question": "眉開眼笑皺蹙",
+    "common": "眉、眼"
+  },
+  {
+    "idiom1": "一路順風",
+    "idiom2": "風調雨順",
+    "question": "一路順風調雨",
+    "common": "風、順"
+  },
+  {
+    "idiom1": "五花八門",
+    "idiom2": "五花大綁",
+    "question": "五花八門大綁",
+    "common": "花、五"
+  },
+  {
+    "idiom1": "萬紫千紅",
+    "idiom2": "千真萬確",
+    "question": "萬紫千紅真確",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "萬紫千紅",
+    "idiom2": "千變萬化",
+    "question": "萬紫千紅變化",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "萬紫千紅",
+    "idiom2": "千軍萬馬",
+    "question": "萬紫千紅軍馬",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "萬紫千紅",
+    "idiom2": "千辛萬苦",
+    "question": "萬紫千紅辛苦",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "萬紫千紅",
+    "idiom2": "千頭萬緒",
+    "question": "萬紫千紅頭緒",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "走馬看花",
+    "idiom2": "霧裡看花",
+    "question": "走馬看花霧裡",
+    "common": "看、花"
+  },
+  {
+    "idiom1": "比手畫腳",
+    "idiom2": "七手八腳",
+    "question": "比手畫腳七八",
+    "common": "手、腳"
+  },
+  {
+    "idiom1": "比手畫腳",
+    "idiom2": "手忙腳亂",
+    "question": "比手畫腳忙亂",
+    "common": "手、腳"
+  },
+  {
+    "idiom1": "表裡如一",
+    "idiom2": "一見如故",
+    "question": "表裡如一見故",
+    "common": "如、一"
+  },
+  {
+    "idiom1": "表裡如一",
+    "idiom2": "一表人才",
+    "question": "表裡如一人才",
+    "common": "表、一"
+  },
+  {
+    "idiom1": "出人意外",
+    "idiom2": "出其不意",
+    "question": "出人意外其不",
+    "common": "意、出"
+  },
+  {
+    "idiom1": "出人意外",
+    "idiom2": "差強人意",
+    "question": "出人意外差強",
+    "common": "人、意"
+  },
+  {
+    "idiom1": "不差什麼",
+    "idiom2": "參差不齊",
+    "question": "不差什麼參齊",
+    "common": "差、不"
+  },
+  {
+    "idiom1": "不知所措",
+    "idiom2": "不知輕重",
+    "question": "不知所措輕重",
+    "common": "知、不"
+  },
+  {
+    "idiom1": "不知所措",
+    "idiom2": "不知不覺",
+    "question": "不知所措覺",
+    "common": "知、不"
+  },
+  {
+    "idiom1": "大同小異",
+    "idiom2": "同床異夢",
+    "question": "大同小異床夢",
+    "common": "同、異"
+  },
+  {
+    "idiom1": "大同小異",
+    "idiom2": "大街小巷",
+    "question": "大同小異街巷",
+    "common": "小、大"
+  },
+  {
+    "idiom1": "大同小異",
+    "idiom2": "大呼小叫",
+    "question": "大同小異呼叫",
+    "common": "小、大"
+  },
+  {
+    "idiom1": "大同小異",
+    "idiom2": "因小失大",
+    "question": "大同小異因失",
+    "common": "小、大"
+  },
+  {
+    "idiom1": "大同小異",
+    "idiom2": "大驚小怪",
+    "question": "大同小異驚怪",
+    "common": "小、大"
+  },
+  {
+    "idiom1": "大同小異",
+    "idiom2": "異曲同工",
+    "question": "大同小異曲工",
+    "common": "同、異"
+  },
+  {
+    "idiom1": "言之過早",
+    "idiom2": "言之有物",
+    "question": "言之過早有物",
+    "common": "言、之"
+  },
+  {
+    "idiom1": "言之過早",
+    "idiom2": "總而言之",
+    "question": "言之過早總而",
+    "common": "言、之"
+  },
+  {
+    "idiom1": "吹牛大王",
+    "idiom2": "大吹法螺",
+    "question": "吹牛大王法螺",
+    "common": "吹、大"
+  },
+  {
+    "idiom1": "一拍即合",
+    "idiom2": "一觸即發",
+    "question": "一拍即合觸發",
+    "common": "一、即"
+  },
+  {
+    "idiom1": "七手八腳",
+    "idiom2": "七上八下",
+    "question": "七手八腳上下",
+    "common": "八、七"
+  },
+  {
+    "idiom1": "七手八腳",
+    "idiom2": "手忙腳亂",
+    "question": "七手八腳忙亂",
+    "common": "手、腳"
+  },
+  {
+    "idiom1": "七手八腳",
+    "idiom2": "七嘴八舌",
+    "question": "七手八腳嘴舌",
+    "common": "八、七"
+  },
+  {
+    "idiom1": "七手八腳",
+    "idiom2": "亂七八糟",
+    "question": "七手八腳亂糟",
+    "common": "八、七"
+  },
+  {
+    "idiom1": "手舞足蹈",
+    "idiom2": "手足無措",
+    "question": "手舞足蹈無措",
+    "common": "手、足"
+  },
+  {
+    "idiom1": "左鄰右舍",
+    "idiom2": "左思右想",
+    "question": "左鄰右舍思想",
+    "common": "左、右"
+  },
+  {
+    "idiom1": "左鄰右舍",
+    "idiom2": "左右逢源",
+    "question": "左鄰右舍逢源",
+    "common": "左、右"
+  },
+  {
+    "idiom1": "左鄰右舍",
+    "idiom2": "左顧右盼",
+    "question": "左鄰右舍顧盼",
+    "common": "左、右"
+  },
+  {
+    "idiom1": "左思右想",
+    "idiom2": "左右逢源",
+    "question": "左思右想逢源",
+    "common": "左、右"
+  },
+  {
+    "idiom1": "左思右想",
+    "idiom2": "胡思亂想",
+    "question": "左思右想胡亂",
+    "common": "想、思"
+  },
+  {
+    "idiom1": "左思右想",
+    "idiom2": "左顧右盼",
+    "question": "左思右想顧盼",
+    "common": "左、右"
+  },
+  {
+    "idiom1": "左右逢源",
+    "idiom2": "左顧右盼",
+    "question": "左右逢源顧盼",
+    "common": "左、右"
+  },
+  {
+    "idiom1": "別無他法",
+    "idiom2": "目無法紀",
+    "question": "別無他法目紀",
+    "common": "法、無"
+  },
+  {
+    "idiom1": "七上八下",
+    "idiom2": "不相上下",
+    "question": "七上八下不相",
+    "common": "上、下"
+  },
+  {
+    "idiom1": "七上八下",
+    "idiom2": "七嘴八舌",
+    "question": "七上八下嘴舌",
+    "common": "八、七"
+  },
+  {
+    "idiom1": "七上八下",
+    "idiom2": "上漏下溼",
+    "question": "七上八下漏溼",
+    "common": "上、下"
+  },
+  {
+    "idiom1": "七上八下",
+    "idiom2": "亂七八糟",
+    "question": "七上八下亂糟",
+    "common": "八、七"
+  },
+  {
+    "idiom1": "不相上下",
+    "idiom2": "上漏下溼",
+    "question": "不相上下漏溼",
+    "common": "上、下"
+  },
+  {
+    "idiom1": "春色滿園",
+    "idiom2": "滿面春風",
+    "question": "春色滿園面風",
+    "common": "滿、春"
+  },
+  {
+    "idiom1": "輕而易舉",
+    "idiom2": "淺而易見",
+    "question": "輕而易舉淺見",
+    "common": "易、而"
+  },
+  {
+    "idiom1": "耳目一新",
+    "idiom2": "耳濡目染",
+    "question": "耳目一新濡染",
+    "common": "耳、目"
+  },
+  {
+    "idiom1": "不得要領",
+    "idiom2": "逼不得已",
+    "question": "不得要領逼已",
+    "common": "得、不"
+  },
+  {
+    "idiom1": "不得要領",
+    "idiom2": "要言不煩",
+    "question": "不得要領言煩",
+    "common": "要、不"
+  },
+  {
+    "idiom1": "不得要領",
+    "idiom2": "哭笑不得",
+    "question": "不得要領哭笑",
+    "common": "得、不"
+  },
+  {
+    "idiom1": "天花亂墜",
+    "idiom2": "花天酒地",
+    "question": "天花亂墜酒地",
+    "common": "花、天"
+  },
+  {
+    "idiom1": "海闊天空",
+    "idiom2": "天馬行空",
+    "question": "海闊天空馬行",
+    "common": "天、空"
+  },
+  {
+    "idiom1": "海闊天空",
+    "idiom2": "天涯海角",
+    "question": "海闊天空涯角",
+    "common": "海、天"
+  },
+  {
+    "idiom1": "心血來潮",
+    "idiom2": "椎心泣血",
+    "question": "心血來潮椎泣",
+    "common": "心、血"
+  },
+  {
+    "idiom1": "不知輕重",
+    "idiom2": "不知不覺",
+    "question": "不知輕重覺",
+    "common": "知、不"
+  },
+  {
+    "idiom1": "三長兩短",
+    "idiom2": "三番兩次",
+    "question": "三長兩短番次",
+    "common": "兩、三"
+  },
+  {
+    "idiom1": "三長兩短",
+    "idiom2": "三言兩語",
+    "question": "三長兩短言語",
+    "common": "兩、三"
+  },
+  {
+    "idiom1": "嚴陣以待",
+    "idiom2": "拭目以待",
+    "question": "嚴陣以待拭目",
+    "common": "待、以"
+  },
+  {
+    "idiom1": "爭先恐後",
+    "idiom2": "承先啟後",
+    "question": "爭先恐後承啟",
+    "common": "後、先"
+  },
+  {
+    "idiom1": "自討苦吃",
+    "idiom2": "自討沒趣",
+    "question": "自討苦吃沒趣",
+    "common": "自、討"
+  },
+  {
+    "idiom1": "千真萬確",
+    "idiom2": "千變萬化",
+    "question": "千真萬確變化",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "千真萬確",
+    "idiom2": "千軍萬馬",
+    "question": "千真萬確軍馬",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "千真萬確",
+    "idiom2": "千辛萬苦",
+    "question": "千真萬確辛苦",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "千真萬確",
+    "idiom2": "千頭萬緒",
+    "question": "千真萬確頭緒",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "回心轉意",
+    "idiom2": "心滿意足",
+    "question": "回心轉意滿足",
+    "common": "意、心"
+  },
+  {
+    "idiom1": "回心轉意",
+    "idiom2": "心灰意冷",
+    "question": "回心轉意灰冷",
+    "common": "意、心"
+  },
+  {
+    "idiom1": "回心轉意",
+    "idiom2": "心煩意亂",
+    "question": "回心轉意煩亂",
+    "common": "意、心"
+  },
+  {
+    "idiom1": "脫穎而出",
+    "idiom2": "蜂湧而出",
+    "question": "脫穎而出蜂湧",
+    "common": "出、而"
+  },
+  {
+    "idiom1": "溫故知新",
+    "idiom2": "明知故犯",
+    "question": "溫故知新明犯",
+    "common": "知、故"
+  },
+  {
+    "idiom1": "不時之需",
+    "idiom2": "不速之客",
+    "question": "不時之需速客",
+    "common": "之、不"
+  },
+  {
+    "idiom1": "不時之需",
+    "idiom2": "不治之症",
+    "question": "不時之需治症",
+    "common": "之、不"
+  },
+  {
+    "idiom1": "火上澆油",
+    "idiom2": "火上加油",
+    "question": "火上澆油加",
+    "common": "上、油、火"
+  },
+  {
+    "idiom1": "光天化日",
+    "idiom2": "偷天換日",
+    "question": "光天化日偷換",
+    "common": "日、天"
+  },
+  {
+    "idiom1": "無話不談",
+    "idiom2": "無微不至",
+    "question": "無話不談微至",
+    "common": "無、不"
+  },
+  {
+    "idiom1": "無話不談",
+    "idiom2": "不學無術",
+    "question": "無話不談學術",
+    "common": "不、無"
+  },
+  {
+    "idiom1": "千變萬化",
+    "idiom2": "變化多端",
+    "question": "千變萬化多端",
+    "common": "變、化"
+  },
+  {
+    "idiom1": "千變萬化",
+    "idiom2": "千軍萬馬",
+    "question": "千變萬化軍馬",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "千變萬化",
+    "idiom2": "千辛萬苦",
+    "question": "千變萬化辛苦",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "千變萬化",
+    "idiom2": "千頭萬緒",
+    "question": "千變萬化頭緒",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "千變萬化",
+    "idiom2": "瞬息萬變",
+    "question": "千變萬化瞬息",
+    "common": "變、萬"
+  },
+  {
+    "idiom1": "一成不變",
+    "idiom2": "打成一片",
+    "question": "一成不變打片",
+    "common": "一、成"
+  },
+  {
+    "idiom1": "一成不變",
+    "idiom2": "一事無成",
+    "question": "一成不變事無",
+    "common": "一、成"
+  },
+  {
+    "idiom1": "一成不變",
+    "idiom2": "不顧一切",
+    "question": "一成不變顧切",
+    "common": "一、不"
+  },
+  {
+    "idiom1": "一成不變",
+    "idiom2": "一毛不拔",
+    "question": "一成不變毛拔",
+    "common": "一、不"
+  },
+  {
+    "idiom1": "一成不變",
+    "idiom2": "一錢不值",
+    "question": "一成不變錢值",
+    "common": "一、不"
+  },
+  {
+    "idiom1": "一成不變",
+    "idiom2": "不成體統",
+    "question": "一成不變體統",
+    "common": "不、成"
+  },
+  {
+    "idiom1": "一成不變",
+    "idiom2": "一介不取",
+    "question": "一成不變介取",
+    "common": "一、不"
+  },
+  {
+    "idiom1": "千里鵝毛",
+    "idiom2": "一日千里",
+    "question": "千里鵝毛一日",
+    "common": "千、里"
+  },
+  {
+    "idiom1": "得心應手",
+    "idiom2": "心安理得",
+    "question": "得心應手安理",
+    "common": "得、心"
+  },
+  {
+    "idiom1": "得心應手",
+    "idiom2": "聖手仁心",
+    "question": "得心應手聖仁",
+    "common": "手、心"
+  },
+  {
+    "idiom1": "站穩腳跟",
+    "idiom2": "站不住腳",
+    "question": "站穩腳跟不住",
+    "common": "站、腳"
+  },
+  {
+    "idiom1": "同床異夢",
+    "idiom2": "異曲同工",
+    "question": "同床異夢曲工",
+    "common": "同、異"
+  },
+  {
+    "idiom1": "花天酒地",
+    "idiom2": "歡天喜地",
+    "question": "花天酒地歡喜",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "花天酒地",
+    "idiom2": "天經地義",
+    "question": "花天酒地經義",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "花天酒地",
+    "idiom2": "冰天雪地",
+    "question": "花天酒地冰雪",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "花天酒地",
+    "idiom2": "驚天動地",
+    "question": "花天酒地驚動",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "花天酒地",
+    "idiom2": "天羅地網",
+    "question": "花天酒地羅網",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "花天酒地",
+    "idiom2": "天造地設",
+    "question": "花天酒地造設",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "花天酒地",
+    "idiom2": "天翻地覆",
+    "question": "花天酒地翻覆",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "花天酒地",
+    "idiom2": "天旋地轉",
+    "question": "花天酒地旋轉",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "打成一片",
+    "idiom2": "一事無成",
+    "question": "打成一片事無",
+    "common": "一、成"
+  },
+  {
+    "idiom1": "目不暇給",
+    "idiom2": "目不識丁",
+    "question": "目不暇給識丁",
+    "common": "目、不"
+  },
+  {
+    "idiom1": "歡天喜地",
+    "idiom2": "天經地義",
+    "question": "歡天喜地經義",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "歡天喜地",
+    "idiom2": "冰天雪地",
+    "question": "歡天喜地冰雪",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "歡天喜地",
+    "idiom2": "驚天動地",
+    "question": "歡天喜地驚動",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "歡天喜地",
+    "idiom2": "天羅地網",
+    "question": "歡天喜地羅網",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "歡天喜地",
+    "idiom2": "天造地設",
+    "question": "歡天喜地造設",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "歡天喜地",
+    "idiom2": "天翻地覆",
+    "question": "歡天喜地翻覆",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "歡天喜地",
+    "idiom2": "天旋地轉",
+    "question": "歡天喜地旋轉",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "呼風喚雨",
+    "idiom2": "風雨交加",
+    "question": "呼風喚雨交加",
+    "common": "雨、風"
+  },
+  {
+    "idiom1": "呼風喚雨",
+    "idiom2": "狂風暴雨",
+    "question": "呼風喚雨狂暴",
+    "common": "雨、風"
+  },
+  {
+    "idiom1": "呼風喚雨",
+    "idiom2": "風雨無阻",
+    "question": "呼風喚雨無阻",
+    "common": "雨、風"
+  },
+  {
+    "idiom1": "呼風喚雨",
+    "idiom2": "風調雨順",
+    "question": "呼風喚雨調順",
+    "common": "雨、風"
+  },
+  {
+    "idiom1": "滴水穿石",
+    "idiom2": "水落石出",
+    "question": "滴水穿石落出",
+    "common": "水、石"
+  },
+  {
+    "idiom1": "拿手好戲",
+    "idiom2": "頂尖好手",
+    "question": "拿手好戲頂尖",
+    "common": "手、好"
+  },
+  {
+    "idiom1": "一落千丈",
+    "idiom2": "一字千金",
+    "question": "一落千丈字金",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "一落千丈",
+    "idiom2": "一刻千金",
+    "question": "一落千丈刻金",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "一落千丈",
+    "idiom2": "千鈞一髮",
+    "question": "一落千丈鈞髮",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "一落千丈",
+    "idiom2": "一日千里",
+    "question": "一落千丈日里",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "一落千丈",
+    "idiom2": "千篇一律",
+    "question": "一落千丈篇律",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "面紅耳赤",
+    "idiom2": "面紅耳熱",
+    "question": "面紅耳赤熱",
+    "common": "耳、面、紅"
+  },
+  {
+    "idiom1": "面紅耳赤",
+    "idiom2": "耳提面命",
+    "question": "面紅耳赤提命",
+    "common": "耳、面"
+  },
+  {
+    "idiom1": "一字千金",
+    "idiom2": "一刻千金",
+    "question": "一字千金刻",
+    "common": "金、千、一"
+  },
+  {
+    "idiom1": "一字千金",
+    "idiom2": "千鈞一髮",
+    "question": "一字千金鈞髮",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "一字千金",
+    "idiom2": "一日千里",
+    "question": "一字千金日里",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "一字千金",
+    "idiom2": "千篇一律",
+    "question": "一字千金篇律",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "一掃而光",
+    "idiom2": "一炮而紅",
+    "question": "一掃而光炮紅",
+    "common": "一、而"
+  },
+  {
+    "idiom1": "斬草除根",
+    "idiom2": "剪草除根",
+    "question": "斬草除根剪",
+    "common": "除、草、根"
+  },
+  {
+    "idiom1": "一乾二淨",
+    "idiom2": "一清二楚",
+    "question": "一乾二淨清楚",
+    "common": "二、一"
+  },
+  {
+    "idiom1": "一乾二淨",
+    "idiom2": "乾淨俐落",
+    "question": "一乾二淨俐落",
+    "common": "乾、淨"
+  },
+  {
+    "idiom1": "低聲下氣",
+    "idiom2": "忍氣吞聲",
+    "question": "低聲下氣忍吞",
+    "common": "氣、聲"
+  },
+  {
+    "idiom1": "低聲下氣",
+    "idiom2": "唉聲嘆氣",
+    "question": "低聲下氣唉嘆",
+    "common": "氣、聲"
+  },
+  {
+    "idiom1": "低聲下氣",
+    "idiom2": "聲淚俱下",
+    "question": "低聲下氣淚俱",
+    "common": "下、聲"
+  },
+  {
+    "idiom1": "天經地義",
+    "idiom2": "冰天雪地",
+    "question": "天經地義冰雪",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "天經地義",
+    "idiom2": "驚天動地",
+    "question": "天經地義驚動",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "天經地義",
+    "idiom2": "天羅地網",
+    "question": "天經地義羅網",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "天經地義",
+    "idiom2": "天造地設",
+    "question": "天經地義造設",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "天經地義",
+    "idiom2": "天翻地覆",
+    "question": "天經地義翻覆",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "天經地義",
+    "idiom2": "天旋地轉",
+    "question": "天經地義旋轉",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "冰天雪地",
+    "idiom2": "冰雪聰明",
+    "question": "冰天雪地聰明",
+    "common": "冰、雪"
+  },
+  {
+    "idiom1": "冰天雪地",
+    "idiom2": "驚天動地",
+    "question": "冰天雪地驚動",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "冰天雪地",
+    "idiom2": "天羅地網",
+    "question": "冰天雪地羅網",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "冰天雪地",
+    "idiom2": "天造地設",
+    "question": "冰天雪地造設",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "冰天雪地",
+    "idiom2": "天翻地覆",
+    "question": "冰天雪地翻覆",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "冰天雪地",
+    "idiom2": "天旋地轉",
+    "question": "冰天雪地旋轉",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "千奇百怪",
+    "idiom2": "千方百計",
+    "question": "千奇百怪方計",
+    "common": "百、千"
+  },
+  {
+    "idiom1": "東奔西跑",
+    "idiom2": "東西南北",
+    "question": "東奔西跑南北",
+    "common": "東、西"
+  },
+  {
+    "idiom1": "東奔西跑",
+    "idiom2": "東倒西歪",
+    "question": "東奔西跑倒歪",
+    "common": "東、西"
+  },
+  {
+    "idiom1": "東奔西跑",
+    "idiom2": "東食西宿",
+    "question": "東奔西跑食宿",
+    "common": "東、西"
+  },
+  {
+    "idiom1": "日新月異",
+    "idiom2": "日月如梭",
+    "question": "日新月異如梭",
+    "common": "日、月"
+  },
+  {
+    "idiom1": "日新月異",
+    "idiom2": "日積月累",
+    "question": "日新月異積累",
+    "common": "日、月"
+  },
+  {
+    "idiom1": "日新月異",
+    "idiom2": "標新立異",
+    "question": "日新月異標立",
+    "common": "異、新"
+  },
+  {
+    "idiom1": "度日如年",
+    "idiom2": "日月如梭",
+    "question": "度日如年月梭",
+    "common": "日、如"
+  },
+  {
+    "idiom1": "博古通今",
+    "idiom2": "講古論今",
+    "question": "博古通今講論",
+    "common": "古、今"
+  },
+  {
+    "idiom1": "品學兼優",
+    "idiom2": "敦品勵學",
+    "question": "品學兼優敦勵",
+    "common": "品、學"
+  },
+  {
+    "idiom1": "一飽眼福",
+    "idiom2": "大飽口福",
+    "question": "一飽眼福大口",
+    "common": "福、飽"
+  },
+  {
+    "idiom1": "一飽眼福",
+    "idiom2": "一板一眼",
+    "question": "一飽眼福板",
+    "common": "眼、一"
+  },
+  {
+    "idiom1": "書香門第",
+    "idiom2": "書香社會",
+    "question": "書香門第社會",
+    "common": "香、書"
+  },
+  {
+    "idiom1": "語無倫次",
+    "idiom2": "無與倫比",
+    "question": "語無倫次與比",
+    "common": "倫、無"
+  },
+  {
+    "idiom1": "事半功倍",
+    "idiom2": "功過參半",
+    "question": "事半功倍過參",
+    "common": "功、半"
+  },
+  {
+    "idiom1": "視同兒戲",
+    "idiom2": "一視同仁",
+    "question": "視同兒戲一仁",
+    "common": "視、同"
+  },
+  {
+    "idiom1": "風雨交加",
+    "idiom2": "狂風暴雨",
+    "question": "風雨交加狂暴",
+    "common": "雨、風"
+  },
+  {
+    "idiom1": "風雨交加",
+    "idiom2": "風雨無阻",
+    "question": "風雨交加無阻",
+    "common": "雨、風"
+  },
+  {
+    "idiom1": "風雨交加",
+    "idiom2": "風調雨順",
+    "question": "風雨交加調順",
+    "common": "雨、風"
+  },
+  {
+    "idiom1": "火上加油",
+    "idiom2": "雪上加霜",
+    "question": "火上加油雪霜",
+    "common": "上、加"
+  },
+  {
+    "idiom1": "自圓其說",
+    "idiom2": "自食其力",
+    "question": "自圓其說食力",
+    "common": "自、其"
+  },
+  {
+    "idiom1": "三番兩次",
+    "idiom2": "三言兩語",
+    "question": "三番兩次言語",
+    "common": "兩、三"
+  },
+  {
+    "idiom1": "不顧一切",
+    "idiom2": "一毛不拔",
+    "question": "不顧一切毛拔",
+    "common": "一、不"
+  },
+  {
+    "idiom1": "不顧一切",
+    "idiom2": "奮不顧身",
+    "question": "不顧一切奮身",
+    "common": "不、顧"
+  },
+  {
+    "idiom1": "不顧一切",
+    "idiom2": "一錢不值",
+    "question": "不顧一切錢值",
+    "common": "一、不"
+  },
+  {
+    "idiom1": "不顧一切",
+    "idiom2": "一介不取",
+    "question": "不顧一切介取",
+    "common": "一、不"
+  },
+  {
+    "idiom1": "揚眉吐氣",
+    "idiom2": "趾高氣揚",
+    "question": "揚眉吐氣趾高",
+    "common": "揚、氣"
+  },
+  {
+    "idiom1": "目中無人",
+    "idiom2": "目無法紀",
+    "question": "目中無人法紀",
+    "common": "目、無"
+  },
+  {
+    "idiom1": "千方百計",
+    "idiom2": "百年大計",
+    "question": "千方百計年大",
+    "common": "百、計"
+  },
+  {
+    "idiom1": "待人接物",
+    "idiom2": "典型人物",
+    "question": "待人接物典型",
+    "common": "人、物"
+  },
+  {
+    "idiom1": "大街小巷",
+    "idiom2": "大呼小叫",
+    "question": "大街小巷呼叫",
+    "common": "小、大"
+  },
+  {
+    "idiom1": "大街小巷",
+    "idiom2": "街頭巷尾",
+    "question": "大街小巷頭尾",
+    "common": "巷、街"
+  },
+  {
+    "idiom1": "大街小巷",
+    "idiom2": "因小失大",
+    "question": "大街小巷因失",
+    "common": "小、大"
+  },
+  {
+    "idiom1": "大街小巷",
+    "idiom2": "大驚小怪",
+    "question": "大街小巷驚怪",
+    "common": "小、大"
+  },
+  {
+    "idiom1": "明媒正娶",
+    "idiom2": "驗明正身",
+    "question": "明媒正娶驗身",
+    "common": "明、正"
+  },
+  {
+    "idiom1": "不負眾望",
+    "idiom2": "眾望所歸",
+    "question": "不負眾望所歸",
+    "common": "眾、望"
+  },
+  {
+    "idiom1": "本末倒置",
+    "idiom2": "捨本逐末",
+    "question": "本末倒置捨逐",
+    "common": "本、末"
+  },
+  {
+    "idiom1": "自以為是",
+    "idiom2": "不以為然",
+    "question": "自以為是不然",
+    "common": "為、以"
+  },
+  {
+    "idiom1": "自以為是",
+    "idiom2": "習以為常",
+    "question": "自以為是習常",
+    "common": "為、以"
+  },
+  {
+    "idiom1": "備而不用",
+    "idiom2": "不翼而飛",
+    "question": "備而不用翼飛",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "備而不用",
+    "idiom2": "不期而遇",
+    "question": "備而不用期遇",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "備而不用",
+    "idiom2": "不寒而慄",
+    "question": "備而不用寒慄",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "備而不用",
+    "idiom2": "不謀而合",
+    "question": "備而不用謀合",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "備而不用",
+    "idiom2": "祕而不宣",
+    "question": "備而不用祕宣",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "備而不用",
+    "idiom2": "不約而同",
+    "question": "備而不用約同",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "備而不用",
+    "idiom2": "不言而喻",
+    "question": "備而不用言喻",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "矮人一截",
+    "idiom2": "高人一等",
+    "question": "矮人一截高等",
+    "common": "人、一"
+  },
+  {
+    "idiom1": "矮人一截",
+    "idiom2": "一表人才",
+    "question": "矮人一截表才",
+    "common": "人、一"
+  },
+  {
+    "idiom1": "不動聲色",
+    "idiom2": "原封不動",
+    "question": "不動聲色原封",
+    "common": "動、不"
+  },
+  {
+    "idiom1": "飄忽不定",
+    "idiom2": "搖擺不定",
+    "question": "飄忽不定搖擺",
+    "common": "不、定"
+  },
+  {
+    "idiom1": "飄忽不定",
+    "idiom2": "陰晴不定",
+    "question": "飄忽不定陰晴",
+    "common": "不、定"
+  },
+  {
+    "idiom1": "飄忽不定",
+    "idiom2": "舉棋不定",
+    "question": "飄忽不定舉棋",
+    "common": "不、定"
+  },
+  {
+    "idiom1": "面紅耳熱",
+    "idiom2": "耳提面命",
+    "question": "面紅耳熱提命",
+    "common": "耳、面"
+  },
+  {
+    "idiom1": "寸步不離",
+    "idiom2": "寸步難行",
+    "question": "寸步不離難行",
+    "common": "步、寸"
+  },
+  {
+    "idiom1": "寸步不離",
+    "idiom2": "寸草不留",
+    "question": "寸步不離草留",
+    "common": "寸、不"
+  },
+  {
+    "idiom1": "一毛不拔",
+    "idiom2": "一錢不值",
+    "question": "一毛不拔錢值",
+    "common": "一、不"
+  },
+  {
+    "idiom1": "一毛不拔",
+    "idiom2": "一介不取",
+    "question": "一毛不拔介取",
+    "common": "一、不"
+  },
+  {
+    "idiom1": "不可思議",
+    "idiom2": "不假思索",
+    "question": "不可思議假索",
+    "common": "思、不"
+  },
+  {
+    "idiom1": "不可思議",
+    "idiom2": "不可或缺",
+    "question": "不可思議或缺",
+    "common": "不、可"
+  },
+  {
+    "idiom1": "不可思議",
+    "idiom2": "高不可攀",
+    "question": "不可思議高攀",
+    "common": "不、可"
+  },
+  {
+    "idiom1": "不可思議",
+    "idiom2": "遙不可及",
+    "question": "不可思議遙及",
+    "common": "不、可"
+  },
+  {
+    "idiom1": "不可思議",
+    "idiom2": "不置可否",
+    "question": "不可思議置否",
+    "common": "不、可"
+  },
+  {
+    "idiom1": "偶一為之",
+    "idiom2": "一技之長",
+    "question": "偶一為之技長",
+    "common": "之、一"
+  },
+  {
+    "idiom1": "偶一為之",
+    "idiom2": "付之一炬",
+    "question": "偶一為之付炬",
+    "common": "之、一"
+  },
+  {
+    "idiom1": "東西南北",
+    "idiom2": "東倒西歪",
+    "question": "東西南北倒歪",
+    "common": "東、西"
+  },
+  {
+    "idiom1": "東西南北",
+    "idiom2": "南來北往",
+    "question": "東西南北來往",
+    "common": "南、北"
+  },
+  {
+    "idiom1": "東西南北",
+    "idiom2": "東食西宿",
+    "question": "東西南北食宿",
+    "common": "東、西"
+  },
+  {
+    "idiom1": "袖手旁觀",
+    "idiom2": "旁觀者清",
+    "question": "袖手旁觀者清",
+    "common": "旁、觀"
+  },
+  {
+    "idiom1": "不修邊幅",
+    "idiom2": "不著邊際",
+    "question": "不修邊幅著際",
+    "common": "邊、不"
+  },
+  {
+    "idiom1": "大呼小叫",
+    "idiom2": "因小失大",
+    "question": "大呼小叫因失",
+    "common": "小、大"
+  },
+  {
+    "idiom1": "大呼小叫",
+    "idiom2": "大驚小怪",
+    "question": "大呼小叫驚怪",
+    "common": "小、大"
+  },
+  {
+    "idiom1": "站不住腳",
+    "idiom2": "招架不住",
+    "question": "站不住腳招架",
+    "common": "不、住"
+  },
+  {
+    "idiom1": "目不識丁",
+    "idiom2": "不識抬舉",
+    "question": "目不識丁抬舉",
+    "common": "識、不"
+  },
+  {
+    "idiom1": "日月如梭",
+    "idiom2": "日積月累",
+    "question": "日月如梭積累",
+    "common": "日、月"
+  },
+  {
+    "idiom1": "日月如梭",
+    "idiom2": "歲月如梭",
+    "question": "日月如梭歲",
+    "common": "梭、如、月"
+  },
+  {
+    "idiom1": "甜言蜜語",
+    "idiom2": "三言兩語",
+    "question": "甜言蜜語三兩",
+    "common": "言、語"
+  },
+  {
+    "idiom1": "不速之客",
+    "idiom2": "不治之症",
+    "question": "不速之客治症",
+    "common": "之、不"
+  },
+  {
+    "idiom1": "招兵買馬",
+    "idiom2": "兵荒馬亂",
+    "question": "招兵買馬荒亂",
+    "common": "馬、兵"
+  },
+  {
+    "idiom1": "心滿意足",
+    "idiom2": "心灰意冷",
+    "question": "心滿意足灰冷",
+    "common": "意、心"
+  },
+  {
+    "idiom1": "心滿意足",
+    "idiom2": "心煩意亂",
+    "question": "心滿意足煩亂",
+    "common": "意、心"
+  },
+  {
+    "idiom1": "豐衣足食",
+    "idiom2": "布衣蔬食",
+    "question": "豐衣足食布蔬",
+    "common": "衣、食"
+  },
+  {
+    "idiom1": "豐衣足食",
+    "idiom2": "錦衣玉食",
+    "question": "豐衣足食錦玉",
+    "common": "衣、食"
+  },
+  {
+    "idiom1": "大海撈針",
+    "idiom2": "海底撈針",
+    "question": "大海撈針底",
+    "common": "海、撈、針"
+  },
+  {
+    "idiom1": "化繁為簡",
+    "idiom2": "化險為夷",
+    "question": "化繁為簡險夷",
+    "common": "為、化"
+  },
+  {
+    "idiom1": "化繁為簡",
+    "idiom2": "橘化為枳",
+    "question": "化繁為簡橘枳",
+    "common": "為、化"
+  },
+  {
+    "idiom1": "明知故犯",
+    "idiom2": "心知肚明",
+    "question": "明知故犯心肚",
+    "common": "知、明"
+  },
+  {
+    "idiom1": "東倒西歪",
+    "idiom2": "東食西宿",
+    "question": "東倒西歪食宿",
+    "common": "東、西"
+  },
+  {
+    "idiom1": "心直口快",
+    "idiom2": "苦口婆心",
+    "question": "心直口快苦婆",
+    "common": "心、口"
+  },
+  {
+    "idiom1": "街頭巷尾",
+    "idiom2": "虎頭蛇尾",
+    "question": "街頭巷尾虎蛇",
+    "common": "頭、尾"
+  },
+  {
+    "idiom1": "街頭巷尾",
+    "idiom2": "藏頭露尾",
+    "question": "街頭巷尾藏露",
+    "common": "頭、尾"
+  },
+  {
+    "idiom1": "大開眼界",
+    "idiom2": "大千世界",
+    "question": "大開眼界千世",
+    "common": "界、大"
+  },
+  {
+    "idiom1": "大開眼界",
+    "idiom2": "濃眉大眼",
+    "question": "大開眼界濃眉",
+    "common": "眼、大"
+  },
+  {
+    "idiom1": "虎背熊腰",
+    "idiom2": "彎腰駝背",
+    "question": "虎背熊腰彎駝",
+    "common": "背、腰"
+  },
+  {
+    "idiom1": "言之有物",
+    "idiom2": "總而言之",
+    "question": "言之有物總而",
+    "common": "言、之"
+  },
+  {
+    "idiom1": "寸步難行",
+    "idiom2": "蝸步難移",
+    "question": "寸步難行蝸移",
+    "common": "難、步"
+  },
+  {
+    "idiom1": "孤高自許",
+    "idiom2": "孤芳自賞",
+    "question": "孤高自許芳賞",
+    "common": "孤、自"
+  },
+  {
+    "idiom1": "一言難盡",
+    "idiom2": "一派胡言",
+    "question": "一言難盡派胡",
+    "common": "言、一"
+  },
+  {
+    "idiom1": "瞎子摸象",
+    "idiom2": "盲人摸象",
+    "question": "瞎子摸象盲人",
+    "common": "摸、象"
+  },
+  {
+    "idiom1": "不以為然",
+    "idiom2": "習以為常",
+    "question": "不以為然習常",
+    "common": "為、以"
+  },
+  {
+    "idiom1": "不以為然",
+    "idiom2": "不足為訓",
+    "question": "不以為然足訓",
+    "common": "不、為"
+  },
+  {
+    "idiom1": "南來北往",
+    "idiom2": "禮尚往來",
+    "question": "南來北往禮尚",
+    "common": "往、來"
+  },
+  {
+    "idiom1": "心灰意冷",
+    "idiom2": "心煩意亂",
+    "question": "心灰意冷煩亂",
+    "common": "意、心"
+  },
+  {
+    "idiom1": "不翼而飛",
+    "idiom2": "不期而遇",
+    "question": "不翼而飛期遇",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不翼而飛",
+    "idiom2": "不寒而慄",
+    "question": "不翼而飛寒慄",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不翼而飛",
+    "idiom2": "不謀而合",
+    "question": "不翼而飛謀合",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不翼而飛",
+    "idiom2": "祕而不宣",
+    "question": "不翼而飛祕宣",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不翼而飛",
+    "idiom2": "不約而同",
+    "question": "不翼而飛約同",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不翼而飛",
+    "idiom2": "不言而喻",
+    "question": "不翼而飛言喻",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "一團和氣",
+    "idiom2": "串通一氣",
+    "question": "一團和氣串通",
+    "common": "氣、一"
+  },
+  {
+    "idiom1": "莫名其妙",
+    "idiom2": "名副其實",
+    "question": "莫名其妙副實",
+    "common": "名、其"
+  },
+  {
+    "idiom1": "因小失大",
+    "idiom2": "大驚小怪",
+    "question": "因小失大驚怪",
+    "common": "小、大"
+  },
+  {
+    "idiom1": "迫不及待",
+    "idiom2": "遙不可及",
+    "question": "迫不及待遙可",
+    "common": "不、及"
+  },
+  {
+    "idiom1": "迫不及待",
+    "idiom2": "從容不迫",
+    "question": "迫不及待從容",
+    "common": "不、迫"
+  },
+  {
+    "idiom1": "破綻百出",
+    "idiom2": "醜態百出",
+    "question": "破綻百出醜態",
+    "common": "出、百"
+  },
+  {
+    "idiom1": "不期而遇",
+    "idiom2": "不寒而慄",
+    "question": "不期而遇寒慄",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不期而遇",
+    "idiom2": "不謀而合",
+    "question": "不期而遇謀合",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不期而遇",
+    "idiom2": "祕而不宣",
+    "question": "不期而遇祕宣",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不期而遇",
+    "idiom2": "不約而同",
+    "question": "不期而遇約同",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不期而遇",
+    "idiom2": "不言而喻",
+    "question": "不期而遇言喻",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不寒而慄",
+    "idiom2": "不謀而合",
+    "question": "不寒而慄謀合",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不寒而慄",
+    "idiom2": "祕而不宣",
+    "question": "不寒而慄祕宣",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不寒而慄",
+    "idiom2": "不約而同",
+    "question": "不寒而慄約同",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不寒而慄",
+    "idiom2": "不言而喻",
+    "question": "不寒而慄言喻",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "七嘴八舌",
+    "idiom2": "亂七八糟",
+    "question": "七嘴八舌亂糟",
+    "common": "八、七"
+  },
+  {
+    "idiom1": "心悅誠服",
+    "idiom2": "賞心悅目",
+    "question": "心悅誠服賞目",
+    "common": "心、悅"
+  },
+  {
+    "idiom1": "高人一等",
+    "idiom2": "一表人才",
+    "question": "高人一等表才",
+    "common": "人、一"
+  },
+  {
+    "idiom1": "蔚為奇觀",
+    "idiom2": "嘆為觀止",
+    "question": "蔚為奇觀嘆止",
+    "common": "為、觀"
+  },
+  {
+    "idiom1": "抱頭鼠竄",
+    "idiom2": "抱頭痛哭",
+    "question": "抱頭鼠竄痛哭",
+    "common": "頭、抱"
+  },
+  {
+    "idiom1": "蜂湧而出",
+    "idiom2": "蜂擁而上",
+    "question": "蜂湧而出擁上",
+    "common": "蜂、而"
+  },
+  {
+    "idiom1": "驚天動地",
+    "idiom2": "天羅地網",
+    "question": "驚天動地羅網",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "驚天動地",
+    "idiom2": "天造地設",
+    "question": "驚天動地造設",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "驚天動地",
+    "idiom2": "天翻地覆",
+    "question": "驚天動地翻覆",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "驚天動地",
+    "idiom2": "天旋地轉",
+    "question": "驚天動地旋轉",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "不謀而合",
+    "idiom2": "祕而不宣",
+    "question": "不謀而合祕宣",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不謀而合",
+    "idiom2": "不約而同",
+    "question": "不謀而合約同",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "不謀而合",
+    "idiom2": "不言而喻",
+    "question": "不謀而合言喻",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "自食惡果",
+    "idiom2": "自食其力",
+    "question": "自食惡果其力",
+    "common": "自、食"
+  },
+  {
+    "idiom1": "顧此失彼",
+    "idiom2": "厚此薄彼",
+    "question": "顧此失彼厚薄",
+    "common": "此、彼"
+  },
+  {
+    "idiom1": "柳暗花明",
+    "idiom2": "明查暗訪",
+    "question": "柳暗花明查訪",
+    "common": "明、暗"
+  },
+  {
+    "idiom1": "不足掛齒",
+    "idiom2": "不足為訓",
+    "question": "不足掛齒為訓",
+    "common": "足、不"
+  },
+  {
+    "idiom1": "無微不至",
+    "idiom2": "不學無術",
+    "question": "無微不至學術",
+    "common": "不、無"
+  },
+  {
+    "idiom1": "天涯海角",
+    "idiom2": "咫尺天涯",
+    "question": "天涯海角咫尺",
+    "common": "涯、天"
+  },
+  {
+    "idiom1": "千軍萬馬",
+    "idiom2": "千辛萬苦",
+    "question": "千軍萬馬辛苦",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "千軍萬馬",
+    "idiom2": "千頭萬緒",
+    "question": "千軍萬馬頭緒",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "大功告成",
+    "idiom2": "功敗垂成",
+    "question": "大功告成敗垂",
+    "common": "功、成"
+  },
+  {
+    "idiom1": "千辛萬苦",
+    "idiom2": "千頭萬緒",
+    "question": "千辛萬苦頭緒",
+    "common": "千、萬"
+  },
+  {
+    "idiom1": "心如堅石",
+    "idiom2": "心如刀割",
+    "question": "心如堅石刀割",
+    "common": "如、心"
+  },
+  {
+    "idiom1": "無價之寶",
+    "idiom2": "無妄之災",
+    "question": "無價之寶妄災",
+    "common": "之、無"
+  },
+  {
+    "idiom1": "引狼入室",
+    "idiom2": "引人入勝",
+    "question": "引狼入室人勝",
+    "common": "入、引"
+  },
+  {
+    "idiom1": "一刻千金",
+    "idiom2": "千鈞一髮",
+    "question": "一刻千金鈞髮",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "一刻千金",
+    "idiom2": "一日千里",
+    "question": "一刻千金日里",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "一刻千金",
+    "idiom2": "千篇一律",
+    "question": "一刻千金篇律",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "歷久不衰",
+    "idiom2": "久旱不雨",
+    "question": "歷久不衰旱雨",
+    "common": "久、不"
+  },
+  {
+    "idiom1": "祕而不宣",
+    "idiom2": "不約而同",
+    "question": "祕而不宣約同",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "祕而不宣",
+    "idiom2": "心照不宣",
+    "question": "祕而不宣心照",
+    "common": "宣、不"
+  },
+  {
+    "idiom1": "祕而不宣",
+    "idiom2": "不言而喻",
+    "question": "祕而不宣言喻",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "出其不意",
+    "idiom2": "層出不窮",
+    "question": "出其不意層窮",
+    "common": "出、不"
+  },
+  {
+    "idiom1": "嗤之以鼻",
+    "idiom2": "繩之以法",
+    "question": "嗤之以鼻繩法",
+    "common": "之、以"
+  },
+  {
+    "idiom1": "名不虛傳",
+    "idiom2": "名不副實",
+    "question": "名不虛傳副實",
+    "common": "名、不"
+  },
+  {
+    "idiom1": "百讀不厭",
+    "idiom2": "兵不厭詐",
+    "question": "百讀不厭兵詐",
+    "common": "不、厭"
+  },
+  {
+    "idiom1": "片甲不留",
+    "idiom2": "寸草不留",
+    "question": "片甲不留寸草",
+    "common": "留、不"
+  },
+  {
+    "idiom1": "不約而同",
+    "idiom2": "不同凡響",
+    "question": "不約而同凡響",
+    "common": "同、不"
+  },
+  {
+    "idiom1": "不約而同",
+    "idiom2": "不言而喻",
+    "question": "不約而同言喻",
+    "common": "不、而"
+  },
+  {
+    "idiom1": "交頭接耳",
+    "idiom2": "抓頭挖耳",
+    "question": "交頭接耳抓挖",
+    "common": "耳、頭"
+  },
+  {
+    "idiom1": "良藥苦口",
+    "idiom2": "苦口婆心",
+    "question": "良藥苦口婆心",
+    "common": "苦、口"
+  },
+  {
+    "idiom1": "一錢不值",
+    "idiom2": "一介不取",
+    "question": "一錢不值介取",
+    "common": "一、不"
+  },
+  {
+    "idiom1": "昏迷不醒",
+    "idiom2": "執迷不悟",
+    "question": "昏迷不醒執悟",
+    "common": "迷、不"
+  },
+  {
+    "idiom1": "虎頭蛇尾",
+    "idiom2": "藏頭露尾",
+    "question": "虎頭蛇尾藏露",
+    "common": "頭、尾"
+  },
+  {
+    "idiom1": "村夫野老",
+    "idiom2": "老夫老妻",
+    "question": "村夫野老妻",
+    "common": "夫、老"
+  },
+  {
+    "idiom1": "冠冕堂皇",
+    "idiom2": "富麗堂皇",
+    "question": "冠冕堂皇富麗",
+    "common": "堂、皇"
+  },
+  {
+    "idiom1": "化險為夷",
+    "idiom2": "橘化為枳",
+    "question": "化險為夷橘枳",
+    "common": "為、化"
+  },
+  {
+    "idiom1": "千鈞一髮",
+    "idiom2": "一日千里",
+    "question": "千鈞一髮日里",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "千鈞一髮",
+    "idiom2": "千篇一律",
+    "question": "千鈞一髮篇律",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "狂風暴雨",
+    "idiom2": "風雨無阻",
+    "question": "狂風暴雨無阻",
+    "common": "雨、風"
+  },
+  {
+    "idiom1": "狂風暴雨",
+    "idiom2": "風調雨順",
+    "question": "狂風暴雨調順",
+    "common": "雨、風"
+  },
+  {
+    "idiom1": "自食其力",
+    "idiom2": "不自量力",
+    "question": "自食其力不量",
+    "common": "自、力"
+  },
+  {
+    "idiom1": "不自量力",
+    "idiom2": "不遺餘力",
+    "question": "不自量力遺餘",
+    "common": "力、不"
+  },
+  {
+    "idiom1": "逼不得已",
+    "idiom2": "哭笑不得",
+    "question": "逼不得已哭笑",
+    "common": "得、不"
+  },
+  {
+    "idiom1": "名副其實",
+    "idiom2": "名不副實",
+    "question": "名副其實不",
+    "common": "名、副、實"
+  },
+  {
+    "idiom1": "規矩準繩",
+    "idiom2": "循規蹈矩",
+    "question": "規矩準繩循蹈",
+    "common": "矩、規"
+  },
+  {
+    "idiom1": "搖擺不定",
+    "idiom2": "陰晴不定",
+    "question": "搖擺不定陰晴",
+    "common": "不、定"
+  },
+  {
+    "idiom1": "搖擺不定",
+    "idiom2": "舉棋不定",
+    "question": "搖擺不定舉棋",
+    "common": "不、定"
+  },
+  {
+    "idiom1": "朝三暮四",
+    "idiom2": "三催四請",
+    "question": "朝三暮四催請",
+    "common": "四、三"
+  },
+  {
+    "idiom1": "總而言之",
+    "idiom2": "不言而喻",
+    "question": "總而言之不喻",
+    "common": "言、而"
+  },
+  {
+    "idiom1": "命不該絕",
+    "idiom2": "連綿不絕",
+    "question": "命不該絕連綿",
+    "common": "絕、不"
+  },
+  {
+    "idiom1": "命不該絕",
+    "idiom2": "讚不絕口",
+    "question": "命不該絕讚口",
+    "common": "絕、不"
+  },
+  {
+    "idiom1": "漠不關心",
+    "idiom2": "漫不經心",
+    "question": "漠不關心漫經",
+    "common": "不、心"
+  },
+  {
+    "idiom1": "漠不關心",
+    "idiom2": "心照不宣",
+    "question": "漠不關心照宣",
+    "common": "不、心"
+  },
+  {
+    "idiom1": "如膠似漆",
+    "idiom2": "如夢似幻",
+    "question": "如膠似漆夢幻",
+    "common": "如、似"
+  },
+  {
+    "idiom1": "天羅地網",
+    "idiom2": "天造地設",
+    "question": "天羅地網造設",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "天羅地網",
+    "idiom2": "天翻地覆",
+    "question": "天羅地網翻覆",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "天羅地網",
+    "idiom2": "天旋地轉",
+    "question": "天羅地網旋轉",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "金蘭之交",
+    "idiom2": "刎頸之交",
+    "question": "金蘭之交刎頸",
+    "common": "交、之"
+  },
+  {
+    "idiom1": "天造地設",
+    "idiom2": "設身處地",
+    "question": "天造地設身處",
+    "common": "地、設"
+  },
+  {
+    "idiom1": "天造地設",
+    "idiom2": "天翻地覆",
+    "question": "天造地設翻覆",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "天造地設",
+    "idiom2": "天旋地轉",
+    "question": "天造地設旋轉",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "不可或缺",
+    "idiom2": "高不可攀",
+    "question": "不可或缺高攀",
+    "common": "不、可"
+  },
+  {
+    "idiom1": "不可或缺",
+    "idiom2": "遙不可及",
+    "question": "不可或缺遙及",
+    "common": "不、可"
+  },
+  {
+    "idiom1": "不可或缺",
+    "idiom2": "不置可否",
+    "question": "不可或缺置否",
+    "common": "不、可"
+  },
+  {
+    "idiom1": "一日千里",
+    "idiom2": "千篇一律",
+    "question": "一日千里篇律",
+    "common": "千、一"
+  },
+  {
+    "idiom1": "密不透風",
+    "idiom2": "弱不禁風",
+    "question": "密不透風弱禁",
+    "common": "風、不"
+  },
+  {
+    "idiom1": "漫不經心",
+    "idiom2": "心照不宣",
+    "question": "漫不經心照宣",
+    "common": "不、心"
+  },
+  {
+    "idiom1": "恍然大悟",
+    "idiom2": "龐然大物",
+    "question": "恍然大悟龐物",
+    "common": "然、大"
+  },
+  {
+    "idiom1": "隨心所欲",
+    "idiom2": "暢所欲言",
+    "question": "隨心所欲暢言",
+    "common": "欲、所"
+  },
+  {
+    "idiom1": "連綿不絕",
+    "idiom2": "讚不絕口",
+    "question": "連綿不絕讚口",
+    "common": "絕、不"
+  },
+  {
+    "idiom1": "男女老幼",
+    "idiom2": "扶老攜幼",
+    "question": "男女老幼扶攜",
+    "common": "幼、老"
+  },
+  {
+    "idiom1": "忍氣吞聲",
+    "idiom2": "唉聲嘆氣",
+    "question": "忍氣吞聲唉嘆",
+    "common": "氣、聲"
+  },
+  {
+    "idiom1": "當仁不讓",
+    "idiom2": "麻木不仁",
+    "question": "當仁不讓麻木",
+    "common": "仁、不"
+  },
+  {
+    "idiom1": "陷入絕境",
+    "idiom2": "漸入佳境",
+    "question": "陷入絕境漸佳",
+    "common": "入、境"
+  },
+  {
+    "idiom1": "破鏡重圓",
+    "idiom2": "跌破眼鏡",
+    "question": "破鏡重圓跌眼",
+    "common": "破、鏡"
+  },
+  {
+    "idiom1": "一技之長",
+    "idiom2": "付之一炬",
+    "question": "一技之長付炬",
+    "common": "之、一"
+  },
+  {
+    "idiom1": "擠眉弄眼",
+    "idiom2": "濃眉大眼",
+    "question": "擠眉弄眼濃大",
+    "common": "眉、眼"
+  },
+  {
+    "idiom1": "擠眉弄眼",
+    "idiom2": "皺眉蹙眼",
+    "question": "擠眉弄眼皺蹙",
+    "common": "眉、眼"
+  },
+  {
+    "idiom1": "天翻地覆",
+    "idiom2": "天旋地轉",
+    "question": "天翻地覆旋轉",
+    "common": "地、天"
+  },
+  {
+    "idiom1": "投機取巧",
+    "idiom2": "巧取豪奪",
+    "question": "投機取巧豪奪",
+    "common": "巧、取"
+  },
+  {
+    "idiom1": "不識抬舉",
+    "idiom2": "舉棋不定",
+    "question": "不識抬舉棋定",
+    "common": "不、舉"
+  },
+  {
+    "idiom1": "明哲保身",
+    "idiom2": "驗明正身",
+    "question": "明哲保身驗正",
+    "common": "明、身"
+  },
+  {
+    "idiom1": "手足無措",
+    "idiom2": "束手無策",
+    "question": "手足無措束策",
+    "common": "手、無"
+  },
+  {
+    "idiom1": "布衣蔬食",
+    "idiom2": "錦衣玉食",
+    "question": "布衣蔬食錦玉",
+    "common": "衣、食"
+  },
+  {
+    "idiom1": "刻不容緩",
+    "idiom2": "義不容辭",
+    "question": "刻不容緩義辭",
+    "common": "容、不"
+  },
+  {
+    "idiom1": "刻不容緩",
+    "idiom2": "從容不迫",
+    "question": "刻不容緩從迫",
+    "common": "容、不"
+  },
+  {
+    "idiom1": "要言不煩",
+    "idiom2": "不言而喻",
+    "question": "要言不煩而喻",
+    "common": "言、不"
+  },
+  {
+    "idiom1": "高不可攀",
+    "idiom2": "遙不可及",
+    "question": "高不可攀遙及",
+    "common": "不、可"
+  },
+  {
+    "idiom1": "高不可攀",
+    "idiom2": "不置可否",
+    "question": "高不可攀置否",
+    "common": "不、可"
+  },
+  {
+    "idiom1": "濃眉大眼",
+    "idiom2": "皺眉蹙眼",
+    "question": "濃眉大眼皺蹙",
+    "common": "眉、眼"
+  },
+  {
+    "idiom1": "義不容辭",
+    "idiom2": "從容不迫",
+    "question": "義不容辭從迫",
+    "common": "容、不"
+  },
+  {
+    "idiom1": "風雨無阻",
+    "idiom2": "風調雨順",
+    "question": "風雨無阻調順",
+    "common": "雨、風"
+  },
+  {
+    "idiom1": "陰晴不定",
+    "idiom2": "舉棋不定",
+    "question": "陰晴不定舉棋",
+    "common": "不、定"
+  },
+  {
+    "idiom1": "無與倫比",
+    "idiom2": "與世無爭",
+    "question": "無與倫比世爭",
+    "common": "與、無"
+  },
+  {
+    "idiom1": "遙不可及",
+    "idiom2": "不置可否",
+    "question": "遙不可及置否",
+    "common": "不、可"
+  },
+  {
+    "idiom1": "耳熟能詳",
+    "idiom2": "熟能生巧",
+    "question": "耳熟能詳生巧",
+    "common": "熟、能"
+  },
+  {
+    "idiom1": "不甘示弱",
+    "idiom2": "弱不禁風",
+    "question": "不甘示弱禁風",
+    "common": "弱、不"
+  },
+  {
+    "idiom1": "有備無患",
+    "idiom2": "無獨有偶",
+    "question": "有備無患獨偶",
+    "common": "有、無"
+  },
+  {
+    "idiom1": "有備無患",
+    "idiom2": "絕無僅有",
+    "question": "有備無患絕僅",
+    "common": "有、無"
+  },
+  {
+    "idiom1": "無獨有偶",
+    "idiom2": "絕無僅有",
+    "question": "無獨有偶絕僅",
+    "common": "有、無"
+  }
+]

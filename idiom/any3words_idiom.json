@@ -1,0 +1,58 @@
+[
+  {
+    "idiom1": "大公無私",
+    "idiom2": "公正無私",
+    "merged": "大公無私正",
+    "question": "大公無私正足",
+    "common": "正"
+  },
+  {
+    "idiom1": "火上澆油",
+    "idiom2": "火上加油",
+    "merged": "火上澆油加",
+    "question": "火上澆油加添",
+    "common": "加"
+  },
+  {
+    "idiom1": "面紅耳赤",
+    "idiom2": "面紅耳熱",
+    "merged": "面紅耳赤熱",
+    "question": "面紅耳赤熱洗",
+    "common": "熱"
+  },
+  {
+    "idiom1": "一字千金",
+    "idiom2": "一刻千金",
+    "merged": "一字千金刻",
+    "question": "一字千金刻光",
+    "common": "刻"
+  },
+  {
+    "idiom1": "斬草除根",
+    "idiom2": "剪草除根",
+    "merged": "斬草除根剪",
+    "question": "斬草除根剪拔",
+    "common": "剪"
+  },
+  {
+    "idiom1": "日月如梭",
+    "idiom2": "歲月如梭",
+    "merged": "日月如梭歲",
+    "question": "日月如梭歲雪",
+    "common": "歲"
+  },
+  {
+    "idiom1": "大海撈針",
+    "idiom2": "海底撈針",
+    "merged": "大海撈針底",
+    "question": "大海撈針底心",
+    "common": "底"
+  },
+  {
+    "idiom1": "名副其實",
+    "idiom2": "名不副實",
+    "merged": "名副其實不",
+    "question": "名副其實不務",
+    "common": "不"
+  }
+]

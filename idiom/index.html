@@ -1,10 +1,3 @@
-<!-- index.html · Draggable Chinese Cards (jQuery + jQuery‑UI)
- 功能：
- 1) 題目：6 字亂序（前 4 字為正解）
- 2) 拖入「答案區」排出正確 4 字 → ✔ 正確、計時
- 3) 結束條件：solved / timeout (15 s) → 將紀錄 POST `/log`，失敗則下載
- 4) **外部讀檔**：使用 `fetch('combined_idioms_fixed.json')`，需在 http(s) 伺服器環境執行，避免 file:// CORS
--->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -21,46 +14,162 @@
     #randomBtn{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);padding:12px 22px;font-size:18px;background:#2563eb;color:#fff;border:none;border-radius:10px;box-shadow:0 3px 8px rgba(0,0,0,.25);cursor:pointer}
     #randomBtn:hover{background:#1d4ed8}
     #result{position:fixed;top:20px;left:50%;transform:translateX(-50%);font-size:26px;font-weight:700;color:#16a34a;display:none}
-    #timeoutMsg{position:fixed;top:60px;left:50%;transform:translateX(-50%);font-size:22px;font-weight:600;color:#dc2626;display:none;white-space:nowrap}
+    #timeoutMsg{position:fixed;top:60px;left:50%;transform:translateX(-50%);font-size:22px;font-weight:600;color:#dc2626;display:none}
     #scoreBoard{position:fixed;top:20px;right:30px;font-size:22px;font-weight:600;color:#1f2937}
     #timer{position:fixed;top:60px;right:30px;font-size:20px;color:#374151}
+    #mask,#summaryDlg{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:50}
+    #mask{background:rgba(0,0,0,.6)}
+    .dialog{background:#fff;padding:40px 60px;border-radius:12px;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+    .dialog input,.dialog select{width:240px;font-size:18px;padding:8px 10px;border:1px solid #ccc;border-radius:6px;margin-bottom:14px}
+    .dialog button{padding:10px 26px;font-size:18px;border:none;border-radius:8px;cursor:pointer}
+    #startBtn{background:#16a34a;color:#fff}
+    #startBtn:disabled{background:#9ca3af;cursor:not-allowed}
   </style>
 </head>
 <body>
-  <div id="result">✔ 正確！</div>
-  <div id="timeoutMsg"></div>
-  <div id="scoreBoard">0 / 10</div>
-  <div id="timer">⏱ 0 s</div>
-  <div id="answerZone">將 4 張正確字卡拖到此處並依序排列</div>
-  <button id="randomBtn">換一題</button>
+<div id="mask">
+  <div class="dialog">
+    <h2>請輸入名字並選擇題庫</h2>
+    <input id="userNameInput" placeholder="名字" />
+    <select id="bankSelect">
+      <option value="" disabled selected>請選擇題庫</option>
+      <option value="any3">題庫A：任三詞題庫</option>
+      <option value="any2">題庫B：任二詞題庫</option>
+      <option value="combined">題庫C：任一詞題庫</option>
+    </select>
+    <button id="startBtn" disabled>開始遊戲</button>
+  </div>
+</div>
+
+<div id="summaryDlg" class="dialog" style="display:none"></div>
+<div id="result">✔ 正確！</div>
+<div id="timeoutMsg"></div>
+<div id="scoreBoard">0 / 10</div>
+<div id="timer">⏱ 0 s</div>
+<div id="answerZone">將 4 張正確字卡拖到此處並依序排列</div>
+<button id="randomBtn" disabled>下一題</button>
 
 <script>
 $(function(){
-  const layout=[{x:40,y:40},{x:220,y:40},{x:400,y:40},{x:40,y:240},{x:220,y:240},{x:400,y:240}],CARD_H=150,TIME_LIMIT=15;
-  let idioms=[],answer='',question='',score=0,startTime,timerID,logged=false,solved=false;
+  const layout=[{x:40,y:40},{x:220,y:40},{x:400,y:40},{x:40,y:240},{x:220,y:240},{x:400,y:240}],
+        CARD=150, T_LIMIT=30, MAX=10;
+  let bank='', data=[], answer1='', answer2='', question='', user='',
+      start=0, timerID, logged=false, solved=false;
+  let total=0, records=[];
 
-  /* ---------- 伺服器記錄 ---------- */
-  async function sendToServer(obj){
-    try{const r=await fetch('/log',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)});if(!r.ok)throw new Error(r.statusText);console.log('🚀 已送出至伺服器',obj);}catch(e){console.warn('伺服器失敗，下載備份',e);downloadFallback(obj);} }
-  function downloadFallback(data){const b=new Blob([JSON.stringify(data)],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`log_${Date.now()}.txt`;a.click();}
+  const srcMap={ any3:'any3words_idiom.json', any2:'any2words_idiom.json', combined:'combined_idioms_fixed.json' };
 
-  /* ---------- 工具 ---------- */
-  const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-  function placed(){const top=$('#answerZone').position().top,bot=top+$('#answerZone').outerHeight();const arr=[];$('.card').each(function(){const p=$(this).position();const mid=p.top+CARD_H/2;if(mid>top&&mid<bot)arr.push({l:p.left,ch:$(this).text()});});arr.sort((a,b)=>a.l-b.l);return arr.map(o=>o.ch).join('');}
+  function checkReady(){
+    $('#startBtn').prop('disabled', !($('#userNameInput').val().trim() && $('#bankSelect').val()));
+  }
+  $('#userNameInput,#bankSelect').on('input change', checkReady);
+  checkReady();
 
-  function startTimer(){startTime=Date.now();logged=false;$('#timeoutMsg').hide();$('#timer').text('⏱ 0 s');clearInterval(timerID);timerID=setInterval(()=>{const s=Math.floor((Date.now()-startTime)/1000);$('#timer').text(`⏱ ${s} s`);if(s>=TIME_LIMIT&&!logged)timeout(s);},1000);}  
-  function timeout(sec){$('#timeoutMsg').text(`⚠️ 超過 ${TIME_LIMIT} 秒！答案：${answer}`).show();end('timeout',sec);}  
-  async function end(status,sec){if(logged)return;logged=true;clearInterval(timerID);await sendToServer({timestamp:new Date().toISOString(),seconds:sec,status,question,answer,final:placed()||''});}
-  function updScore(){$('#scoreBoard').text(`${score} / 10`);if(score>=10){$('#scoreBoard').css('color','#16a34a');$('#randomBtn').prop('disabled',true).text('已完成 10 題');clearInterval(timerID);}}
+  $('#startBtn').on('click', async ()=>{
+    user=$('#userNameInput').val().trim();
+    bank=$('#bankSelect').val();
+    try{ data=await (await fetch(srcMap[bank])).json(); }
+    catch{ return alert('題庫載入失敗'); }
+    $('#mask').fadeOut();$('#randomBtn').prop('disabled',false);
+    next();
+  });
 
-  $('#randomBtn').on('click',()=>{if(score<10)init();});
+  const shuffle=a=>{for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+  function placed(){
+    const t=$('#answerZone').position().top, b=t+$('#answerZone').outerHeight(), arr=[];
+    $('.card').each(function(){const p=$(this).position(), m=p.top+CARD/2; if(m>t&&m<b) arr.push({l:p.left,ch:$(this).text()});});
+    arr.sort((a,b)=>a.l-b.l); return arr.map(o=>o.ch).join('');
+  }
 
-  /* ---------- 外部載入 JSON ---------- */
-  fetch('combined_idioms_fixed.json').then(r=>r.json()).then(data=>{idioms=data;init();}).catch(err=>{alert('讀取 JSON 失敗，請透過 http(s) 伺服器開啟\n'+err);});
+  function startTimer(){
+    start=Date.now(); logged=false; $('#timeoutMsg').hide(); $('#timer').text('⏱ 0 s');
+    clearInterval(timerID);
+    timerID=setInterval(()=>{
+      let s=Math.floor((Date.now()-start)/1000);
+      $('#timer').text(`⏱ ${s} s`);
+      if(s>=T_LIMIT&&!logged) timeout(s);
+    },1000);
+  }
 
-  function init(){if(!idioms.length){alert('資料不足');return;}let it=null;for(let i=0;i<40;i++){const c=idioms[Math.random()*idioms.length|0];if((c.generated||'').length>=6){it=c;break;}}if(!it){alert('沒有足夠長度片語');return;}answer=it.generated.slice(0,4);question=shuffle(it.generated.slice(0,6).split('')).join('');render(question.split(''));startTimer();}
-  function render(chars){$('.card').remove();$('#result').hide();$('#answerZone').css('border-color','#9ca3af');solved=false;chars.forEach((ch,i)=>$('<div class="card"/>').text(ch).css({left:layout[i].x,top:layout[i].y}).appendTo('body').draggable({containment:'body',stop:check}));}
-  function check(){if(solved||logged)return;const cur=placed();if(cur.length<4)return;if(cur.slice(0,4)===answer){solved=true;score++;updScore();$('#result').show();$('#answerZone').css('border-color','#16a34a');const sec=Math.floor((Date.now()-startTime)/1000);end('solved',sec);} }
+  function timeout(sec){
+    let ansText=answer2?`${answer1} / ${answer2}`:answer1;
+    $('#timeoutMsg').text(`⚠️ 超過 ${T_LIMIT} 秒！答案：${ansText}`).show();
+    end('timeout',sec);
+  }
+
+  async function send(rec){rec.bank=bank;
+    try{ await fetch('log.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rec)}); }
+    catch(e){console.error(e);}
+  }
+
+  async function end(status,sec){
+    if(logged) return; logged=true; clearInterval(timerID);
+    total+=sec;
+    let rec={name:user,timestamp:new Date().toISOString(),seconds:sec,total,status,question,answer:answer1,final:placed()||''};
+    records.push(rec); await send(rec);
+    $('#scoreBoard').text(`${records.length} / ${MAX}`);
+    if(records.length>=MAX){ $('#randomBtn').prop('disabled',true); summary(); }
+  }
+
+  $('#randomBtn').on('click', ()=>{ if(records.length<MAX) next(); });
+
+  function next(){
+    let it=data[Math.floor(Math.random()*data.length)];
+    if(bank==='combined'){
+      let gen=it.generated||''; answer1=gen.slice(0,4); question=shuffle(gen.slice(0,6).split('')).join('');
+    }else{
+      answer1=it.idiom1; answer2=it.idiom2||''; question=shuffle((bank==='any3'?it.question:it.question).slice(0,6).split('')).join('');
+    }
+    render(question.split('')); startTimer();
+  }
+
+  function render(chars){
+    $('.card').remove(); $('#result').hide(); $('#answerZone').css('border-color','#9ca3af'); solved=false;
+    chars.forEach((ch,i)=>{
+      $('<div class="card"/>').text(ch)
+        .css({left:layout[i].x,top:layout[i].y})
+        .appendTo('body')
+        .draggable({containment:'body',stop:check});
+    });
+  }
+
+  function check(){
+    if(solved||logged) return;
+    let cur=placed(); if(cur.length<4) return;
+    let got=cur.slice(0,4);
+    if(bank==='combined'){
+      if(got===answer1) correct();
+    }else{
+      let answers=[answer1,answer2].filter(Boolean);
+      if(answers.includes(got)) correct();
+    }
+  }
+
+  function correct(){
+    solved=true; $('#result').show(); $('#answerZone').css('border-color','#16a34a');
+    let sec=Math.floor((Date.now()-start)/1000);
+    end('solved',sec);
+  }
+
+  function summary(){
+    let html='<h2 style="margin-top:0">測驗結束</h2>';
+    html+=`<p>總花費時間：<span style="color:#2563eb;font-weight:700">${total}</span> 秒</p>`;
+    html+='<table border="1" cellpadding="6" style="border-collapse:collapse;margin:auto"><tr>'+
+          '<th>#</th><th>狀態</th><th>秒數</th><th>題目</th><th>正確答案</th></tr>';
+    records.forEach((r,i)=>{
+      let col=r.status==='solved'?'#2563eb':'#dc2626';
+      html+=`<tr><td>${i+1}</td><td>${r.status}</td><td>${r.seconds}</td>`+
+            `<td>${r.status==='solved'?'—':r.question}</td>`+
+            `<td style="color:${col}">${r.answer}</td></tr>`;
+    });
+    html+='</table><br/><button id="chooseBankBtn">切換題庫</button>';
+    $('#summaryDlg').html(html).show();
+    $('#chooseBankBtn').on('click',()=>{
+      $('#summaryDlg').hide(); records=[]; total=0;
+      $('#scoreBoard').text(`0 / ${MAX}`); $('#timer').text('⏱ 0 s');
+      $('#mask').fadeIn(); $('#randomBtn').prop('disabled',true);
+    });
+  }
 });
 </script>
 </body>
