@@ -48,22 +48,36 @@ $(function(){
     }
     
     function render(chars){
-      $('.card').remove(); $('#result').hide(); $('#answerZone').css('border-color','#9ca3af'); solved=false;
-      let positions = [];
-      chars.forEach((ch)=>{
-        const pos = randomPosition(positions);
-        positions.push(pos);
-        $('<div class="card"/>').text(ch)
-          .css({left: pos.x, top: pos.y, opacity: 0})
-          .appendTo('body')
-          .draggable({
-            containment:'body',
-            start:function(){$(this).css('transform','scale(1.2)').css('z-index',999);},
-            stop:function(){$(this).css('transform','scale(1)').css('z-index',''); check();}
-          })
-          .animate({opacity: 1}, 500);
-      });
-    }
+        $('.card').remove(); 
+        $('#result').hide(); 
+        $('#answerZone').css('border-color','#9ca3af'); 
+        solved = false;
+      
+        let positions = [];
+      
+        chars.forEach((ch) => {
+          const pos = randomPosition(positions);
+          positions.push(pos);
+      
+          const rotateDeg = (Math.random() * 20 - 10).toFixed(2); // -10 ~ +10度 (正負皆可)
+      
+          $('<div class="card"/>').text(ch)
+            .css({ left: pos.x, top: pos.y, opacity: 0, transform: `rotate(${rotateDeg}deg)` })
+            .appendTo('body')
+            .draggable({
+              containment: 'body',
+              start: function () {
+                $(this).css('transform', `rotate(${rotateDeg}deg) scale(1.2)`).css('z-index', 999);
+              },
+              stop: function () {
+                $(this).css('transform', `rotate(${rotateDeg}deg) scale(1)`).css('z-index', '');
+                check();
+              }
+            })
+            .animate({ opacity: 1 }, 500);
+        });
+      }
+      
     
     function placed(){
       const t=$('#answerZone').position().top, b=t+$('#answerZone').outerHeight(), arr=[];
