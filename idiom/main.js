@@ -1,5 +1,6 @@
 $(function(){
     const CARD = 150, T_LIMIT = 30, MAX = 10;
+    const banks = ['combined', 'any2', 'any3'];
     let bank='', data=[], answer1='', answer2='', question='', user='',
         start=0, timerID, logged=false, solved=false;
     let total=0, records=[];
@@ -11,16 +12,20 @@ $(function(){
     };
     
     function checkReady(){
-      $('#startBtn').prop('disabled', !($('#userNameInput').val().trim() && $('#bankSelect').val()));
+      $('#startBtn').prop('disabled', !($('#userNameInput').val().trim()));
     }
     $('#userNameInput,#bankSelect').on('input change', checkReady);
     
     $('#startBtn').on('click', async ()=>{
-      user=$('#userNameInput').val().trim();
-      bank=$('#bankSelect').val();
-      try{ data=await (await fetch(srcMap[bank])).json(); }
-      catch{ return alert('題庫載入失敗'); }
-      $('#mask').fadeOut();$('#randomBtn').prop('disabled',false);
+      user = $('#userNameInput').val().trim();
+      bank = banks[Math.floor(Math.random() * banks.length)];  // 隨機選題庫
+      try {
+        data = await (await fetch(srcMap[bank])).json();
+      } catch {
+        return alert('題庫載入失敗');
+      }
+      $('#mask').fadeOut();
+      $('#randomBtn').prop('disabled', false);
       next();
     });
     
@@ -141,6 +146,8 @@ $(function(){
       }
     }
     
+    $('#userNameInput').on('input', checkReady);
+
     function correct(){
       solved=true; $('#result').show(); $('#answerZone').css('border-color','#16a34a');
       let sec=Math.floor((Date.now()-start)/1000);
@@ -158,7 +165,7 @@ $(function(){
               `<td>${r.status==='solved'?'—':r.question}</td>`+
               `<td style="color:${col}">${r.answer}</td></tr>`;
       });
-      html+='</table><br/><button id="chooseBankBtn">切換題庫</button>';
+      html+='</table><br/><button id="chooseBankBtn">重新開始</button>';
       $('#summaryDlg').html(html).show();
       $('#chooseBankBtn').on('click',()=>{
         $('#summaryDlg').hide(); records=[]; total=0;
