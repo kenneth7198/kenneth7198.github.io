@@ -6,7 +6,7 @@ $(function(){
     let total=0, records=[];
     
     const srcMap = {
-      any3:'any3words_idiom.json',
+      any3:'combined_idioms_fixed.json',
       any2:'any2words_idiom.json',
       combined:'combined_idioms_fixed.json'
     };
