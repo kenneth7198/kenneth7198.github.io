@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>劉士達 - 課程教學用範例程式碼頁</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #5a5a5a;
+            line-height: 1.6;
+        }
+
+        /* 側邊欄樣式 */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: #ffffff;
+            border-right: 1px solid #e9ecef;
+            z-index: 1000;
+            overflow-y: auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+            text-align: center;
+        }
+
+        .sidebar-header h2 {
+            color: #007bff;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .sidebar-menu {
+            padding: 1rem 0;
+        }
+
+        .menu-item {
+            padding: 0.75rem 1.5rem;
+            color: #5a5a5a;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .menu-item:hover {
+            background-color: #f8f9fa;
+            color: #007bff;
+            border-left-color: #007bff;
+        }
+
+        .menu-item.active {
+            background-color: #e3f2fd;
+            color: #007bff;
+            border-left-color: #007bff;
+        }
+
+        .menu-item i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* 主要內容區域 */
+        .main-content {
+            margin-left: 260px;
+            min-height: 100vh;
+        }
+
+        /* 頂部導航 */
+        .top-nav {
+            background: #ffffff;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .breadcrumb {
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        /* 歡迎區域 */
+        .welcome-section {
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 1.5rem;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .welcome-section p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .welcome-time {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* 統計卡片區域 */
+        .stats-container {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .stat-icon.ar {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+        }
+
+        .stat-icon.idiom {
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+        }
+
+        .stat-icon.iot {
+            background: linear-gradient(45deg, #ffecd2, #fcb69f);
+        }
+
+        .stat-icon.sifteo {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .stat-icon.arduino {
+            background: linear-gradient(45deg, #00979d, #00c6cf);
+        }
+
+        .stat-icon.raspberry {
+            background: linear-gradient(45deg, #c51850, #e91e63);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-description {
+            color: #5a5a5a;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        /* 功能列表 */
+        .feature-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list li {
+            padding: 0.3rem 0;
+            color: #6c757d;
+            font-size: 0.85rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        /* 按鈕樣式 */
+        .action-btn {
+            background: #007bff;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0,123,255,0.3);
+        }
+
+        /* 進度條 */
+        .progress-bar {
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            transition: width 0.3s ease;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .welcome-section h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 側邊欄切換按鈕 (手機版) */
+        .sidebar-toggle {
+            display: none;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-right: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-toggle {
+                display: block;
+            }
+        }
+
+        /* 額外的視覺效果 */
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, rgba(0,123,255,0.1), transparent);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+    </style>
+</head>
+<body>
+    <!-- 側邊欄 -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-graduation-cap"></i> 教學中心</h2>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="#" class="menu-item active">
+                <i class="fas fa-home"></i>
+                <span>首頁</span>
+            </a>
+             <a href="iot-cross-media/frontend/" class="menu-item">
+                <i class="fas fa-wifi"></i>
+                <span>IoT Cross-Media System
+                    <!-- <span class="badge badge-info">新</span> -->
+                </span>
+            </a>
+
+            <a href="arduino/" class="menu-item">
+                <i class="fas fa-microchip"></i>
+                <span>Arduino</span>
+            </a>
+
+            <a href="raspberry-pi/" class="menu-item">
+                <i class="fab fa-raspberry-pi"></i>
+                <span>Raspberry Pi</span>
+            </a>
+
+            <a href="ar/" class="menu-item">
+                <i class="fas fa-vr-cardboard"></i>
+                <span>擴增實境</span>
+            </a>
+
+            <a href="idiom/" class="menu-item">
+                <i class="fas fa-book"></i>
+                <span>成語學習</span>
+            </a>
+           
+            <!-- <a href="sifteo/" class="menu-item">
+                <i class="fas fa-gamepad"></i>
+                <span>Sifteo Cube</span>
+            </a> -->
+        </nav>
+    </div>
+
+    <!-- 主要內容 -->
+    <div class="main-content">
+        <!-- 頂部導航 -->
+        <div class="top-nav">
+            <button class="sidebar-toggle" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="breadcrumb">
+                <a href="#">首頁</a> / <span>儀表板</span>
+            </div>
+        </div>
+
+        <!-- 歡迎區域 -->
+        <div class="welcome-section">
+            <div class="welcome-content">
+                <h1>歡迎來到劉士達老師教學資源中心！</h1>
+                <p>探索跨域技術整合的教學範例與實作專案，從物聯網到擴增實境，開啟跨領域學習的無限可能</p>
+                <div class="welcome-time">
+                    <i class="fas fa-clock"></i> 
+                    <span id="currentTime"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 統計卡片區域 -->
+        <div class="stats-container">
+            <div class="stats-grid">
+                <!-- IoT 專案卡片 - 移到第一個 -->
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon iot">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">IoT</div>
+                    <div class="stat-label">跨媒體整合</div>
+                    <div class="stat-description">
+                        物聯網技術與跨媒體整合的完整教學專案，展示現代 IoT 生態系統的建構與應用。
+                    </div>
+                    <ul class="feature-list">
+                        <li>MQTT 通訊協定整合</li>
+                        <li>前後端分離架構設計</li>
+                        <li>即時數據監控系統</li>
+                        <li>跨平台設備連接</li>
+                    </ul>
+                    <a href="iot-cross-media/frontend/" class="action-btn">
+                        <i class="fas fa-arrow-right"></i>
+                        進入系統
+                    </a>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                </div>
+
+                <!-- Arduino 專案卡片 - 新增 -->
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon arduino">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">Arduino</div>
+                    <div class="stat-label">微控制器開發</div>
+                    <div class="stat-description">
+                        探索 Arduino 微控制器的無限可能！從基礎電路到進階物聯網應用，打造您的創意專案。
+                    </div>
+                    <ul class="feature-list">
+                        <li>基礎電路設計與實作</li>
+                        <li>感測器數據採集</li>
+                        <li>無線通訊整合</li>
+                        <li>智能控制系統開發</li>
+                    </ul>
+                    <a href="arduino/" class="action-btn">
+                        <i class="fas fa-arrow-right"></i>
+                        開始開發
+                    </a>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 88%"></div>
+                    </div>
+                </div>
+
+                <!-- Raspberry Pi 專案卡片 - 新增 -->
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon raspberry">
+                            <i class="fab fa-raspberry-pi"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">樹莓派</div>
+                    <div class="stat-label">Raspberry Pi 5 教學</div>
+                    <div class="stat-description">
+                        深入學習 Raspberry Pi 5 的強大功能！從基礎系統設定到進階應用開發，打造智慧物聯網專案。
+                    </div>
+                    <ul class="feature-list">
+                        <li>系統安裝與環境設定</li>
+                        <li>GPIO 介面程式設計</li>
+                        <li>攝影機與感測器整合</li>
+                        <li>網路服務與遠端控制</li>
+                    </ul>
+                    <a href="raspberry-pi/" class="action-btn">
+                        <i class="fas fa-arrow-right"></i>
+                        開始學習
+                    </a>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 82%"></div>
+                    </div>
+                </div>
+
+                <!-- AR 專案卡片 -->
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon ar">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">AR</div>
+                    <div class="stat-label">擴增實境專案</div>
+                    <div class="stat-description">
+                        探索擴增實境技術的無限可能！使用 AR.js 和 MindAR 框架創建互動式 AR 體驗。
+                    </div>
+                    <ul class="feature-list">
+                        <li>圖像追蹤與辨識技術</li>
+                        <li>3D 模型渲染與動畫</li>
+                        <li>跨平台 WebAR 解決方案</li>
+                        <li>多種 AR Target 範例</li>
+                    </ul>
+                    <a href="ar/" class="action-btn">
+                        <i class="fas fa-arrow-right"></i>
+                        探索專案
+                    </a>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85%"></div>
+                    </div>
+                </div>
+
+                <!-- 成語專案卡片 -->
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon idiom">
+                            <i class="fas fa-book"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">成語</div>
+                    <div class="stat-label">學習系統</div>
+                    <div class="stat-description">
+                        結合傳統文化與現代科技的成語學習平台，提供豐富的成語資料庫與互動學習體驗。
+                    </div>
+                    <ul class="feature-list">
+                        <li>完整的成語資料庫 (JSON格式)</li>
+                        <li>智能成語檢索系統</li>
+                        <li>多詞彙組合查詢功能</li>
+                        <li>文化傳承數位化展示</li>
+                    </ul>
+                    <a href="idiom/" class="action-btn">
+                        <i class="fas fa-arrow-right"></i>
+                        開始學習
+                    </a>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 92%"></div>
+                    </div>
+                </div>
+
+                <!-- Sifteo 專案卡片 - 隱藏 -->
+                <!-- <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon sifteo">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">Sifteo</div>
+                    <div class="stat-label">互動方塊</div>
+                    <div class="stat-description">
+                        探索創新的觸覺互動技術，Sifteo 方塊為教育與娛樂帶來全新的互動體驗模式。
+                    </div>
+                    <ul class="feature-list">
+                        <li>觸覺感應互動技術</li>
+                        <li>多方塊協同操作</li>
+                        <li>遊戲化學習設計</li>
+                        <li>C++ API 開發指南</li>
+                    </ul>
+                    <a href="sifteo/" class="action-btn">
+                        <i class="fas fa-arrow-right"></i>
+                        體驗創新
+                    </a>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 更新當前時間
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-TW', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('currentTime').textContent = timeString;
+        }
+
+        // 切換側邊欄 (手機版)
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // 初始化
+        updateTime();
+        setInterval(updateTime, 60000); // 每分鐘更新時間
+
+        // 點擊側邊欄外部關閉側邊欄 (手機版)
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.sidebar-toggle');
+            
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
