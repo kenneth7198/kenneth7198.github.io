@@ -18,7 +18,6 @@ $(function(){
     
     $('#startBtn').on('click', async ()=>{
       user = $('#userNameInput').val().trim();
-      bank = banks[Math.floor(Math.random() * banks.length)];  // 隨機選題庫
       try {
         data = await (await fetch(srcMap[bank])).json();
       } catch {
@@ -91,13 +90,18 @@ $(function(){
     }
     
     function startTimer(){
-      start=Date.now(); logged=false; $('#timeoutMsg').hide(); $('#timer').text('⏱ 0 s');
+      start = Date.now(); logged = false; $('#timeoutMsg').hide();
+      let remain = T_LIMIT;
+      $('#timer').text(`⏱ ${remain} s`);
       clearInterval(timerID);
-      timerID=setInterval(()=>{
-        let s=Math.floor((Date.now()-start)/1000);
-        $('#timer').text(`⏱ ${s} s`);
-        if(s>=T_LIMIT&&!logged) timeout(s);
-      },1000);
+      timerID = setInterval(() => {
+        remain--;
+        $('#timer').text(`⏱ ${remain} s`);
+        if(remain <= 0 && !logged) {
+          timeout(T_LIMIT);
+          clearInterval(timerID);
+        }
+      }, 1000);
     }
     
     function timeout(sec){
@@ -123,13 +127,25 @@ $(function(){
     $('#randomBtn').on('click', ()=>{ if(records.length<MAX) next(); });
     
     function next(){
-      let it=data[Math.floor(Math.random()*data.length)];
-      if(bank==='combined'){
-        let gen=it.generated||''; answer1=gen.slice(0,4); question=shuffle(gen.slice(0,6).split('')).join('');
-      }else{
-        answer1=it.idiom1; answer2=it.idiom2||''; question=shuffle((bank==='any3'?it.question:it.question).slice(0,6).split('')).join('');
-      }
-      render(question.split('')); startTimer();
+      bank = banks[Math.floor(Math.random() * banks.length)]; // 每次出題時隨機選題庫
+      fetch(srcMap[bank])
+        .then(res => res.json())
+        .then(json => {
+          data = json;
+          let it = data[Math.floor(Math.random() * data.length)];
+          if(bank === 'combined'){
+            let gen = it.generated || '';
+            answer1 = gen.slice(0,4);
+            question = shuffle(gen.slice(0,6).split('')).join('');
+          }else{
+            answer1 = it.idiom1;
+            answer2 = it.idiom2 || '';
+            question = shuffle((bank === 'any3' ? it.question : it.question).slice(0,6).split('')).join('');
+          }
+          render(question.split(''));
+          startTimer();
+        })
+        .catch(() => alert('題庫載入失敗'));
     }
     
     function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -174,4 +190,3 @@ $(function(){
       });
     }
     });
-    

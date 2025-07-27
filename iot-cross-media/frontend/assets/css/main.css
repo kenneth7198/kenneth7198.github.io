@@ -1,0 +1,282 @@
+/* 主要樣式 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* 功能卡片 */
+.feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #dee2e6;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-color: #0d6efd;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* 狀態項目 */
+.status-item {
+    padding: 1rem;
+}
+
+.status-item i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.status-item h6 {
+    margin: 0.5rem 0;
+    color: #6c757d;
+}
+
+/* Jumbotron 自定義 */
+.jumbotron {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 1px solid #dee2e6;
+}
+
+/* 導航欄自定義 */
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* 教學頁面專用樣式 */
+.learning-section {
+    border-left: 4px solid #0d6efd;
+    padding-left: 20px;
+    margin-bottom: 30px;
+}
+
+.code-example {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.exercise-card {
+    border: 2px solid #198754;
+    background-color: #d1e7dd;
+}
+
+.theory-card {
+    border: 2px solid #0dcaf0;
+    background-color: #cff4fc;
+}
+
+.progress-tracker {
+    position: sticky;
+    top: 20px;
+}
+
+.step-completed {
+    color: #198754;
+}
+
+.step-current {
+    color: #fd7e14;
+    font-weight: bold;
+}
+
+.api-result {
+    background-color: #000;
+    color: #0f0;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    min-height: 100px;
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .learning-section {
+        padding-left: 10px;
+        border-left-width: 2px;
+    }
+    
+    .code-example {
+        padding: 10px;
+    }
+    
+    .progress-tracker {
+        position: static;
+        margin-top: 20px;
+    }
+}
+
+/* 代碼高亮自定義 */
+pre {
+    background-color: #2d3748;
+    color: #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+code {
+    background-color: #e2e8f0;
+    color: #2d3748;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+/* 學習進度動畫 */
+.progress-bar {
+    transition: width 0.6s ease;
+}
+
+/* 按鈕組樣式 */
+.btn-group-custom {
+    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* 課程標題樣式 */
+.course-header {
+    background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+/* IoT 架構圖樣式 */
+.architecture-layer {
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.architecture-layer:hover {
+    border-color: #0d6efd;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .feature-icon {
+        font-size: 2rem;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .status-item {
+        padding: 0.5rem;
+    }
+    
+    .status-item i {
+        font-size: 1.5rem;
+    }
+}
+
+/* 動畫效果 */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.badge.bg-success {
+    animation: pulse 2s infinite;
+}
+
+/* 卡片內容 */
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #dee2e6;
+}
+
+.card-header {
+    border-bottom: 1px solid #dee2e6;
+    background-color: #fff;
+}
+
+.card-header.bg-primary {
+    background-color: #0d6efd !important;
+}
+
+/* 按鈕樣式 */
+.btn {
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+/* 頁尾 */
+footer {
+    margin-top: auto;
+}
+
+/* 工具提示樣式 */
+.tooltip {
+    font-size: 0.875rem;
+}
+
+/* 載入動畫 */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #0d6efd;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

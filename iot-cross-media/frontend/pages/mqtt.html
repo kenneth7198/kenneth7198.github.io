@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQTT 學習 - IoT Cross-Media 教學系統</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- 自定義樣式 -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-microchip me-2"></i>
+                IoT Cross-Media 教學系統
+            </a>
+            
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-home me-1"></i>返回首頁
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容 -->
+    <main class="container mt-4">
+        <!-- 標題 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1>
+                    <i class="fas fa-exchange-alt text-primary me-3"></i>
+                    MQTT 通訊協定學習
+                </h1>
+                <p class="lead">理解 IoT 設備間的通訊方式</p>
+            </div>
+        </div>
+
+        <!-- MQTT 概念說明 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-book me-2"></i>MQTT 基礎概念</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>什麼是 MQTT？</h6>
+                                <p>MQTT (Message Queuing Telemetry Transport) 是一個輕量級的通訊協定，專為 IoT 設備設計：</p>
+                                <ul>
+                                    <li><strong>輕量級</strong>：適合資源有限的設備</li>
+                                    <li><strong>低延遲</strong>：即時訊息傳遞</li>
+                                    <li><strong>可靠性</strong>：支援多種服務品質等級</li>
+                                    <li><strong>發布/訂閱</strong>：解耦發送者和接收者</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>MQTT 架構</h6>
+                                <div class="bg-light p-3 rounded">
+                                    <pre class="mb-0">
+設備A (溫度感測器)
+    ↓ 發布
+MQTT Broker (localhost:1883)
+    ↓ 推送
+設備B (控制系統)
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MQTT 狀態監控 -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-server me-2"></i>MQTT Broker 狀態</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="mqtt-broker-status">
+                            <p class="text-muted">載入中...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-wifi me-2"></i>已連接設備</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="mqtt-clients">
+                            <p class="text-muted">載入中...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主題監控 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list me-2"></i>MQTT 主題活動</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>主題</th>
+                                        <th>訊息數量</th>
+                                        <th>最後訊息</th>
+                                        <th>時間</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mqtt-topics">
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted">載入中...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 即時訊息監控 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-stream me-2"></i>即時 MQTT 訊息</h5>
+                        <div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="clearMessages()">
+                                <i class="fas fa-trash me-1"></i>清除
+                            </button>
+                            <button class="btn btn-sm btn-outline-success" id="pause-btn" onclick="togglePause()">
+                                <i class="fas fa-pause me-1"></i>暫停
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="mqtt-messages" style="height: 300px; overflow-y: auto; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 10px;">
+                            <p class="text-muted">等待 MQTT 訊息...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 互動實驗 -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card border-success">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-flask me-2"></i>MQTT 發布實驗</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="publish-form">
+                            <div class="mb-3">
+                                <label for="topic" class="form-label">主題 (Topic)</label>
+                                <input type="text" class="form-control" id="topic" value="test/message" required>
+                                <div class="form-text">例如：sensor/temperature、device/led/control</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">訊息內容</label>
+                                <textarea class="form-control" id="message" rows="3" required>{"temperature": 25.5, "unit": "°C"}</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-paper-plane me-1"></i>發布訊息
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-info">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="fas fa-lightbulb me-2"></i>設備控制實驗</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>控制 LED 設備</h6>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-warning" onclick="controlLED('turn_on', 100)">
+                                <i class="fas fa-power-off me-1"></i>開啟 LED (100%)
+                            </button>
+                            <button class="btn btn-secondary" onclick="controlLED('set_brightness', 50)">
+                                <i class="fas fa-adjust me-1"></i>設定亮度 50%
+                            </button>
+                            <button class="btn btn-dark" onclick="controlLED('turn_off')">
+                                <i class="fas fa-power-off me-1"></i>關閉 LED
+                            </button>
+                        </div>
+                        
+                        <hr>
+                        
+                        <h6>控制感測器</h6>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-success" onclick="controlSensor('TEMP_001', 'enable')">
+                                <i class="fas fa-play me-1"></i>啟用溫度感測器
+                            </button>
+                            <button class="btn btn-danger" onclick="controlSensor('TEMP_001', 'disable')">
+                                <i class="fas fa-stop me-1"></i>停用溫度感測器
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 學習任務 -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>MQTT 學習任務</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>基礎任務</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="task1">
+                                    <label class="form-check-label" for="task1">
+                                        觀察 MQTT 訊息流向 5 分鐘
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="task2">
+                                    <label class="form-check-label" for="task2">
+                                        發布一條自定義 MQTT 訊息
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="task3">
+                                    <label class="form-check-label" for="task3">
+                                        控制 LED 開關和亮度
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>進階任務</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="task4">
+                                    <label class="form-check-label" for="task4">
+                                        解釋 MQTT vs HTTP 的差異
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="task5">
+                                    <label class="form-check-label" for="task5">
+                                        設計一個新的 MQTT 主題結構
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="task6">
+                                    <label class="form-check-label" for="task6">
+                                        分析感測器資料的 JSON 格式
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+        let isPaused = false;
+        let messageCount = 0;
+        
+        $(document).ready(function() {
+            console.log('📡 MQTT 學習頁面已載入');
+            
+            // 載入 MQTT 狀態
+            loadMQTTStatus();
+            
+            // 每 5 秒更新狀態
+            setInterval(loadMQTTStatus, 5000);
+            
+            // 設定表單提交
+            $('#publish-form').on('submit', function(e) {
+                e.preventDefault();
+                publishMessage();
+            });
+            
+            // 模擬即時訊息 (實際應用中會透過 WebSocket 接收)
+            startMessageSimulation();
+        });
+        
+        // 載入 MQTT 狀態
+        function loadMQTTStatus() {
+            $.ajax({
+                url: 'http://localhost:3001/api/mqtt/status',
+                method: 'GET',
+                success: function(data) {
+                    updateMQTTStatus(data);
+                },
+                error: function() {
+                    $('#mqtt-broker-status').html('<p class="text-danger">無法連接到 MQTT Broker</p>');
+                }
+            });
+        }
+        
+        // 更新 MQTT 狀態顯示
+        function updateMQTTStatus(data) {
+            // Broker 狀態
+            const brokerHtml = `
+                <div class="row">
+                    <div class="col-6">
+                        <strong>狀態:</strong> 
+                        <span class="badge ${data.running ? 'bg-success' : 'bg-danger'}">
+                            ${data.running ? '運行中' : '離線'}
+                        </span>
+                    </div>
+                    <div class="col-6">
+                        <strong>端口:</strong> ${data.port}
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <strong>客戶端:</strong> ${data.clientCount} 個
+                    </div>
+                    <div class="col-6">
+                        <strong>主題:</strong> ${data.topicCount} 個
+                    </div>
+                </div>
+            `;
+            $('#mqtt-broker-status').html(brokerHtml);
+            
+            // 客戶端清單
+            if (data.clients && data.clients.length > 0) {
+                const clientsHtml = data.clients.map(client => `
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span><i class="fas fa-wifi me-1"></i>${client.id}</span>
+                        <small class="text-muted">${new Date(client.connectedAt).toLocaleTimeString()}</small>
+                    </div>
+                `).join('');
+                $('#mqtt-clients').html(clientsHtml);
+            } else {
+                $('#mqtt-clients').html('<p class="text-muted">無客戶端連接</p>');
+            }
+            
+            // 主題清單
+            if (data.topics && data.topics.length > 0) {
+                const topicsHtml = data.topics.map(topic => `
+                    <tr>
+                        <td><code>${topic.topic}</code></td>
+                        <td><span class="badge bg-primary">${topic.messageCount}</span></td>
+                        <td><small>${JSON.stringify(topic.lastMessage || {}).substr(0, 50)}...</small></td>
+                        <td><small>${topic.lastTimestamp ? new Date(topic.lastTimestamp).toLocaleTimeString() : '-'}</small></td>
+                    </tr>
+                `).join('');
+                $('#mqtt-topics').html(topicsHtml);
+            } else {
+                $('#mqtt-topics').html('<tr><td colspan="4" class="text-center text-muted">無主題活動</td></tr>');
+            }
+        }
+        
+        // 發布 MQTT 訊息
+        function publishMessage() {
+            const topic = $('#topic').val();
+            const message = $('#message').val();
+            
+            $.ajax({
+                url: 'http://localhost:3001/api/mqtt/publish',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    topic: topic,
+                    message: message
+                }),
+                success: function() {
+                    alert('訊息發布成功！');
+                    addMessage('📤 發布', topic, message, 'outgoing');
+                },
+                error: function() {
+                    alert('訊息發布失敗！');
+                }
+            });
+        }
+        
+        // 控制 LED
+        function controlLED(command, value = null) {
+            const topic = 'device/LED_001/control';
+            const message = {
+                command: command,
+                value: value,
+                timestamp: new Date().toISOString()
+            };
+            
+            $.ajax({
+                url: 'http://localhost:3001/api/mqtt/publish',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    topic: topic,
+                    message: JSON.stringify(message)
+                }),
+                success: function() {
+                    addMessage('🎮 控制', topic, JSON.stringify(message), 'control');
+                }
+            });
+        }
+        
+        // 控制感測器
+        function controlSensor(deviceId, command) {
+            const topic = `device/${deviceId}/control`;
+            const message = {
+                command: command,
+                timestamp: new Date().toISOString()
+            };
+            
+            $.ajax({
+                url: 'http://localhost:3001/api/mqtt/publish',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    topic: topic,
+                    message: JSON.stringify(message)
+                }),
+                success: function() {
+                    addMessage('🔧 設備', topic, JSON.stringify(message), 'control');
+                }
+            });
+        }
+        
+        // 添加訊息到即時顯示
+        function addMessage(type, topic, message, category = 'incoming') {
+            if (isPaused) return;
+            
+            messageCount++;
+            const timestamp = new Date().toLocaleTimeString();
+            const colorClass = {
+                'incoming': 'text-primary',
+                'outgoing': 'text-success', 
+                'control': 'text-warning'
+            }[category] || 'text-secondary';
+            
+            const messageHtml = `
+                <div class="border-bottom pb-2 mb-2 ${colorClass}">
+                    <div class="d-flex justify-content-between">
+                        <strong>${type}</strong>
+                        <small>${timestamp}</small>
+                    </div>
+                    <div><strong>主題:</strong> <code>${topic}</code></div>
+                    <div><strong>內容:</strong> <pre class="mb-0 small">${message}</pre></div>
+                </div>
+            `;
+            
+            $('#mqtt-messages').prepend(messageHtml);
+            
+            // 限制顯示最多 20 條訊息
+            const messages = $('#mqtt-messages .border-bottom');
+            if (messages.length > 20) {
+                messages.slice(20).remove();
+            }
+        }
+        
+        // 模擬即時訊息
+        function startMessageSimulation() {
+            setInterval(() => {
+                if (!isPaused && Math.random() > 0.7) {
+                    const topics = ['sensor/TEMP_001/data', 'sensor/HUMID_001/data', 'sensor/LIGHT_001/data'];
+                    const topic = topics[Math.floor(Math.random() * topics.length)];
+                    const value = (Math.random() * 100).toFixed(1);
+                    const message = JSON.stringify({
+                        value: parseFloat(value),
+                        timestamp: new Date().toISOString()
+                    });
+                    
+                    addMessage('📊 感測器', topic, message, 'incoming');
+                }
+            }, 3000);
+        }
+        
+        // 清除訊息
+        function clearMessages() {
+            $('#mqtt-messages').html('<p class="text-muted">訊息已清除，等待新訊息...</p>');
+            messageCount = 0;
+        }
+        
+        // 切換暫停
+        function togglePause() {
+            isPaused = !isPaused;
+            const btn = $('#pause-btn');
+            if (isPaused) {
+                btn.html('<i class="fas fa-play me-1"></i>繼續');
+                btn.removeClass('btn-outline-success').addClass('btn-outline-warning');
+            } else {
+                btn.html('<i class="fas fa-pause me-1"></i>暫停');
+                btn.removeClass('btn-outline-warning').addClass('btn-outline-success');
+            }
+        }
+    </script>
+</body>
+</html>

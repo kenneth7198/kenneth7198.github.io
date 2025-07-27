@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Cross-Media 教學系統</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- 自定義樣式 -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-microchip me-2"></i>
+                IoT Cross-Media 教學系統
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">
+                            <i class="fas fa-home me-1"></i>首頁
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">
+                            <i class="fas fa-tachometer-alt me-1"></i>儀表板
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/devices">
+                            <i class="fas fa-wifi me-1"></i>設備管理
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/media">
+                            <i class="fas fa-photo-video me-1"></i>媒體庫
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="tutorialDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-graduation-cap me-1"></i>教學模式
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/pages/week1.html">
+                                <i class="fas fa-rocket me-2"></i>第1週：IoT基礎與環境建置
+                            </a></li>
+                            <li><a class="dropdown-item" href="/pages/week2.html">
+                                <i class="fas fa-code me-2"></i>第2週：前端開發與資料視覺化
+                            </a></li>
+                            <li><a class="dropdown-item" href="/pages/week3.html">
+                                <i class="fas fa-server me-2"></i>第3週：後端開發與資料庫操作
+                            </a></li>
+                            <li><a class="dropdown-item" href="/pages/week4.html">
+                                <i class="fas fa-network-wired me-2"></i>第4週：IoT通訊與系統整合
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/mqtt">
+                            <i class="fas fa-exchange-alt me-1"></i>MQTT 學習
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <span class="navbar-text me-3">
+                        <i class="fas fa-circle text-success me-1"></i>
+                        系統運行中
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容 -->
+    <main class="container mt-4">
+        <!-- 歡迎橫幅 -->
+        <div class="jumbotron bg-light p-5 rounded mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-4">
+                        <i class="fas fa-rocket text-primary me-3"></i>
+                        歡迎來到 IoT 世界！
+                    </h1>
+                    <p class="lead">
+                        這是一個專為大學教學設計的輕量級 IoT Cross-Media 系統。
+                        使用 jQuery.js 讓您輕鬆學習 IoT 核心概念！
+                    </p>
+                    <button class="btn btn-primary btn-lg" onclick="startTutorial()">
+                        <i class="fas fa-play me-2"></i>開始學習
+                    </button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-cogs" style="font-size: 8rem; color: #0d6efd; opacity: 0.1;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 功能卡片 -->
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100 feature-card" onclick="location.href='/dashboard'">
+                    <div class="card-body text-center">
+                        <i class="fas fa-tachometer-alt feature-icon text-info"></i>
+                        <h5 class="card-title">即時儀表板</h5>
+                        <p class="card-text">監控所有 IoT 設備的即時狀態和資料</p>
+                        <div class="mt-3">
+                            <span class="badge bg-success">4 個設備在線</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100 feature-card" onclick="location.href='/devices'">
+                    <div class="card-body text-center">
+                        <i class="fas fa-wifi feature-icon text-warning"></i>
+                        <h5 class="card-title">設備管理</h5>
+                        <p class="card-text">新增、編輯和管理您的虛擬 IoT 設備</p>
+                        <div class="mt-3">
+                            <span class="badge bg-info">溫度感測器</span>
+                            <span class="badge bg-info">濕度感測器</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100 feature-card" onclick="location.href='/media'">
+                    <div class="card-body text-center">
+                        <i class="fas fa-photo-video feature-icon text-danger"></i>
+                        <h5 class="card-title">媒體處理</h5>
+                        <p class="card-text">上傳、管理和處理圖片和影音檔案</p>
+                        <div class="mt-3">
+                            <span class="badge bg-secondary">0 個檔案</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100 feature-card" onclick="location.href='/pages/week1.html'">
+                    <div class="card-body text-center">
+                        <i class="fas fa-graduation-cap feature-icon text-success"></i>
+                        <h5 class="card-title">教學模式</h5>
+                        <p class="card-text">4週密集課程，從IoT基礎到系統整合</p>
+                        <div class="mt-3">
+                            <span class="badge bg-primary">第 1 週</span>
+                            <span class="badge bg-outline-secondary">IoT基礎</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 系統狀態 -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-server me-2"></i>系統狀態
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <div class="status-item">
+                                    <i class="fas fa-globe text-primary"></i>
+                                    <h6>前端服務</h6>
+                                    <span class="badge bg-success">運行中</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="status-item">
+                                    <i class="fas fa-server text-warning"></i>
+                                    <h6>後端 API</h6>
+                                    <span class="badge bg-success" id="backend-status">檢查中...</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="status-item">
+                                    <i class="fas fa-exchange-alt text-success"></i>
+                                    <h6>MQTT Broker</h6>
+                                    <span class="badge bg-success" id="mqtt-status">檢查中...</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="status-item">
+                                    <i class="fas fa-database text-info"></i>
+                                    <h6>資料庫</h6>
+                                    <span class="badge bg-success" id="db-status">檢查中...</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="status-item">
+                                    <i class="fas fa-microchip text-danger"></i>
+                                    <h6>IoT 設備</h6>
+                                    <span class="badge bg-success" id="iot-status">檢查中...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 快速開始 -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-lightbulb me-2"></i>快速開始指南
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-step-forward me-2 text-primary"></i>第一次使用？</h6>
+                                <ol>
+                                    <li>點擊「<strong>教學模式</strong>」開始互動式學習</li>
+                                    <li>瀏覽「<strong>儀表板</strong>」查看即時資料</li>
+                                    <li>在「<strong>設備管理</strong>」中探索虛擬設備</li>
+                                    <li>嘗試上傳圖片到「<strong>媒體庫</strong>」</li>
+                                </ol>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-tools me-2 text-warning"></i>開發者工具</h6>
+                                <ul>
+                                    <li>按 <kbd>F12</kbd> 開啟瀏覽器開發者工具</li>
+                                    <li>查看 <strong>Network</strong> 標籤觀察 API 請求</li>
+                                    <li>使用 <strong>Console</strong> 執行 JavaScript 代碼</li>
+                                    <li>後端 API 文檔: <a href="http://localhost:3001/api-docs" target="_blank">localhost:3001/api-docs</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-light mt-5 py-4">
+        <div class="container text-center">
+            <p class="text-muted mb-1">
+                <i class="fas fa-graduation-cap me-2"></i>
+                IoT Cross-Media 教學系統 - 專為大學教學設計
+            </p>
+            <p class="text-muted small">
+                使用 jQuery.js + Bootstrap + Node.js 建構 | 
+                <a href="https://github.com" class="text-decoration-none">
+                    <i class="fab fa-github me-1"></i>專案原始碼
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Socket.IO for real-time communication -->
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- 自定義 JavaScript -->
+    <script src="/assets/js/main.js"></script>
+    
+    <script>
+        // 頁面載入完成後執行
+        $(document).ready(function() {
+            console.log('🎓 IoT Cross-Media 教學系統已載入');
+            
+            // 檢查系統狀態
+            checkSystemStatus();
+            
+            // 每30秒檢查一次系統狀態
+            setInterval(checkSystemStatus, 30000);
+        });
+
+        // 檢查系統狀態
+        function checkSystemStatus() {
+            // 檢查後端 API
+            $.ajax({
+                url: 'http://localhost:3001/api/health',
+                method: 'GET',
+                timeout: 5000,
+                success: function(data) {
+                    $('#backend-status').removeClass('bg-danger').addClass('bg-success').text('正常運行');
+                    
+                    // 如果後端正常，檢查資料庫
+                    if (data.database) {
+                        $('#db-status').removeClass('bg-danger').addClass('bg-success').text('正常連接');
+                    }
+                    
+                    // 檢查 IoT 模擬器
+                    if (data.iot_simulator) {
+                        $('#iot-status').removeClass('bg-danger').addClass('bg-success').text('正常運行');
+                    }
+                    
+                    // 檢查 MQTT Broker
+                    if (data.mqtt_broker) {
+                        $('#mqtt-status').removeClass('bg-danger').addClass('bg-success').text(`運行中 (${data.mqtt_broker.clients}個客戶端)`);
+                    }
+                },
+                error: function() {
+                    $('#backend-status').removeClass('bg-success').addClass('bg-danger').text('連接失敗');
+                    $('#db-status').removeClass('bg-success').addClass('bg-warning').text('無法檢查');
+                    $('#iot-status').removeClass('bg-success').addClass('bg-warning').text('無法檢查');
+                    $('#mqtt-status').removeClass('bg-success').addClass('bg-warning').text('無法檢查');
+                }
+            });
+        }
+
+        // 開始教學
+        function startTutorial() {
+            if (confirm('即將開始第1週課程：IoT基礎與環境建置，是否繼續？')) {
+                window.location.href = '/pages/week1.html';
+            }
+        }
+    </script>
+</body>
+</html>
