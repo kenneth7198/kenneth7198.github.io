@@ -964,9 +964,14 @@ section h2 {
         top: calc(100% + 15px); /* 在移動設備上增加更多間距 */
     }
     
+    .monster-dropdown.show {
+        max-height: 400px; /* 在移動設備上稍微減少高度 */
+    }
+    
     .monster-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 8px;
+        max-height: 280px; /* 在移動設備上調整高度 */
     }
     
     .monster-option img {
@@ -1000,8 +1005,13 @@ section h2 {
         top: calc(100% + 20px); /* 在小螢幕上增加更多間距 */
     }
     
+    .monster-dropdown.show {
+        max-height: 350px; /* 在小螢幕上進一步調整高度 */
+    }
+    
     .monster-grid {
         grid-template-columns: repeat(2, 1fr);
+        max-height: 240px; /* 在小螢幕上調整高度 */
     }
     
     .monster-dropdown-btn {
