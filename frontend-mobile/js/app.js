@@ -3,7 +3,8 @@ class MonsterManager {
     constructor() {
         this.monsters = [
             '0-01.png', '1-01.png', '1-02.png', '2-01.png', '2-02.png',
-            '2-03.png', '4-01.png', '5-01.png', '5-02.png', '5-03.png'
+            '2-03.png', '3-01.png', '3-02.png', '4-01.png', '5-01.png', 
+            '5-02.png', '5-03.png'
         ];
         this.currentMonster = null;
         this.isDropdownOpen = false;

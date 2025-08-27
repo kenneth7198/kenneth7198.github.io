@@ -827,7 +827,7 @@ section h2 {
 }
 
 .monster-dropdown.show {
-    max-height: 400px;
+    max-height: 450px; /* 增加最大高度以容納更多小怪物 */
     opacity: 1;
     overflow-y: auto;
 }
@@ -836,6 +836,8 @@ section h2 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+    max-height: 320px; /* 增加最大高度以容納更多小怪物 */
+    overflow-y: auto; /* 如果內容太多，允許滾動 */
 }
 
 .monster-option {
