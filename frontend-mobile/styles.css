@@ -714,6 +714,10 @@ section h2 {
 .monster-display {
     margin: 15px 0;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* 增加元素之間的間距 */
 }
 
 .monster-image {
@@ -722,7 +726,6 @@ section h2 {
     border-radius: 50%;
     border: 3px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    margin-bottom: 10px;
     transition: transform 0.3s ease;
     cursor: pointer;
 }
@@ -740,23 +743,45 @@ section h2 {
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
-    padding: 8px 16px;
-    font-size: 0.9rem;
+    padding: 12px 20px; /* 增加按鈕內邊距 */
+    font-size: 1rem; /* 稍微增大字體 */
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    margin-top: 10px; /* 添加頂部邊距 */
+    min-height: 44px; /* 確保按鈕有足夠的觸摸面積 */
 }
 
 .monster-btn:hover {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.monster-btn:active {
+    transform: translateY(0);
+}
+
+/* 分隔線和動作區域 */
+.monster-separator {
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    margin: 5px 0;
+}
+
+.monster-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
 }
 
 /* 小怪物選擇器樣式 */
 .monster-selector {
     position: relative;
-    margin: 10px 0;
+    margin: 10px 0 20px 0; /* 增加底部邊距，與下方按鈕分離 */
 }
 
 .monster-dropdown-btn {
@@ -764,12 +789,15 @@ section h2 {
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.25);
     border-radius: 15px;
-    padding: 6px 12px;
-    font-size: 0.8rem;
+    padding: 8px 16px;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
-    margin-bottom: 5px;
+    min-height: 36px; /* 較小的觸摸面積，與主按鈕區別 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .monster-dropdown-btn:hover {
@@ -780,7 +808,7 @@ section h2 {
 
 .monster-dropdown {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 10px); /* 增加與按鈕的距離 */
     left: 50%;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.95);
@@ -795,6 +823,7 @@ section h2 {
     opacity: 0;
     transition: all 0.3s ease;
     width: 280px;
+    margin-top: 5px; /* 額外的間距 */
 }
 
 .monster-dropdown.show {
@@ -917,11 +946,20 @@ section h2 {
 
 /* 響應式設計 - 移動設備優化 */
 @media (max-width: 768px) {
+    .monster-display {
+        gap: 20px; /* 在移動設備上增加更多間距 */
+    }
+    
+    .monster-selector {
+        margin: 15px 0 25px 0; /* 在移動設備上增加更多間距 */
+    }
+    
     .monster-dropdown {
         width: 90vw;
         max-width: 320px;
         left: 50%;
         transform: translateX(-50%);
+        top: calc(100% + 15px); /* 在移動設備上增加更多間距 */
     }
     
     .monster-grid {
@@ -937,12 +975,27 @@ section h2 {
     .monster-option span {
         font-size: 0.65rem;
     }
+    
+    .monster-btn {
+        padding: 14px 24px; /* 在移動設備上增加按鈕大小 */
+        font-size: 1.1rem;
+        min-height: 48px; /* 符合移動設備觸摸標準 */
+    }
 }
 
 @media (max-width: 480px) {
+    .monster-display {
+        gap: 25px; /* 在小螢幕上進一步增加間距 */
+    }
+    
+    .monster-selector {
+        margin: 20px 0 30px 0; /* 在小螢幕上增加更多間距 */
+    }
+    
     .monster-dropdown {
         width: 95vw;
         max-width: 280px;
+        top: calc(100% + 20px); /* 在小螢幕上增加更多間距 */
     }
     
     .monster-grid {
@@ -950,8 +1003,15 @@ section h2 {
     }
     
     .monster-dropdown-btn {
-        font-size: 0.75rem;
-        padding: 5px 10px;
+        font-size: 0.8rem;
+        padding: 8px 14px;
+        min-height: 40px; /* 確保足夠的觸摸面積 */
+    }
+    
+    .monster-btn {
+        padding: 16px 28px; /* 在小螢幕上進一步增加按鈕大小 */
+        font-size: 1.2rem;
+        min-height: 52px; /* 更大的觸摸面積 */
     }
 }
 
