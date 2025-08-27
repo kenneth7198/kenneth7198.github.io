@@ -1,0 +1,736 @@
+/* 基礎樣式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.app-container {
+    min-height: 100vh;
+    padding-bottom: 80px; /* 為底部導航留空間 */
+}
+
+/* 頂部標題區 */
+.header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    text-align: center;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 15px;
+}
+
+.connection-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.dot.online {
+    background: #4CAF50;
+}
+
+.dot.offline {
+    background: #f44336;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* 主要內容區域 */
+.main-content {
+    padding: 20px;
+    max-width: 100%;
+}
+
+/* 區段樣式 */
+section {
+    background: white;
+    border-radius: 20px;
+    padding: 25px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 10px;
+}
+
+/* 感測器狀態卡片 */
+.sensor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.sensor-card {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.sensor-card.active {
+    border-color: #4CAF50;
+    background: linear-gradient(135deg, #e8f5e8, #d4edda);
+}
+
+.sensor-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.sensor-card h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #495057;
+}
+
+.sensor-value {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #667eea;
+}
+
+.toggle-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+    background: #5a6fd8;
+    transform: translateY(-2px);
+}
+
+.toggle-btn.active {
+    background: #4CAF50;
+}
+
+/* 手勢視覺化 */
+.gesture-visualization {
+    text-align: center;
+}
+
+.phone-model {
+    width: 100px;
+    height: 180px;
+    background: #333;
+    border-radius: 25px;
+    margin: 0 auto 20px;
+    position: relative;
+    transition: transform 0.5s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.phone-model .screen {
+    width: 80px;
+    height: 140px;
+    background: #1a1a1a;
+    border-radius: 15px;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    transition: background 0.3s ease;
+}
+
+.phone-model.face-down {
+    transform: rotateZ(180deg);
+}
+
+.phone-model.face-down .screen {
+    background: #667eea;
+}
+
+.gesture-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.confidence-bar {
+    width: 100%;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f44336, #ff9800, #4CAF50);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.confidence-text {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* NFC 接近雷達 */
+.proximity-display {
+    text-align: center;
+}
+
+.radar-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+    position: relative;
+}
+
+.radar-circle {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed #667eea;
+    border-radius: 50%;
+    position: absolute;
+    animation: radar-spin 4s linear infinite;
+}
+
+.radar-pulse {
+    width: 20px;
+    height: 20px;
+    background: #667eea;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+.radar-pulse.active {
+    animation: pulse-expand 2s ease-out;
+}
+
+@keyframes radar-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse-expand {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(10);
+    }
+}
+
+.user-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    z-index: 10;
+}
+
+.nfc-device {
+    position: absolute;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.nfc-device.near {
+    animation: device-blink 1s infinite;
+}
+
+@keyframes device-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.proximity-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    text-align: left;
+}
+
+.proximity-info > div {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* 觸發條件狀態 */
+.trigger-conditions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.condition {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.condition.met {
+    background: #d4edda;
+    border-left: 4px solid #4CAF50;
+}
+
+.condition-icon {
+    font-size: 1.2rem;
+}
+
+.condition-text {
+    flex: 1;
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.condition-status {
+    font-size: 1.2rem;
+}
+
+.trigger-button-container {
+    text-align: center;
+}
+
+.trigger-button {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.trigger-button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.trigger-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.trigger-button.active {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    animation: trigger-pulse 1s infinite;
+}
+
+@keyframes trigger-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* 事件歷史 */
+.history-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.clear-btn, .export-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.clear-btn:hover, .export-btn:hover {
+    background: #5a6268;
+}
+
+.event-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.event-item {
+    background: #f8f9fa;
+    border-left: 4px solid #667eea;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 0 8px 8px 0;
+}
+
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.event-type {
+    font-weight: 600;
+    color: #667eea;
+    font-size: 0.9rem;
+}
+
+.event-time {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.event-data {
+    font-size: 0.85rem;
+    color: #555;
+    background: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.no-events {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 40px;
+}
+
+/* 測試按鈕 */
+.test-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.test-btn {
+    background: #ffc107;
+    color: #333;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.test-btn:hover {
+    background: #e0a800;
+    transform: translateY(-2px);
+}
+
+/* 設定面板 */
+.settings-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+    backdrop-filter: blur(5px);
+}
+
+.settings-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 20px 20px 0 0;
+    padding: 30px 20px;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.setting-group {
+    margin-bottom: 20px;
+}
+
+.setting-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.setting-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.setting-group input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.setting-group input[type="range"] {
+    -webkit-appearance: none;
+    height: 6px;
+    background: #e9ecef;
+    border-radius: 3px;
+}
+
+.setting-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #667eea;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.setting-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.save-btn, .cancel-btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.save-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.cancel-btn {
+    background: #6c757d;
+    color: white;
+}
+
+/* 底部導航 */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    display: flex;
+    padding: 10px 0;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.nav-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #666;
+}
+
+.nav-btn.active {
+    color: #667eea;
+}
+
+.nav-btn:hover {
+    background: #f8f9fa;
+}
+
+.nav-icon {
+    font-size: 1.2rem;
+}
+
+.nav-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* 通知系統 */
+.notification-container {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    right: 20px;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.notification {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid #667eea;
+    animation: slideIn 0.3s ease;
+    pointer-events: auto;
+}
+
+.notification.success {
+    border-left-color: #4CAF50;
+}
+
+.notification.error {
+    border-left-color: #f44336;
+}
+
+.notification.warning {
+    border-left-color: #ff9800;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 響應式設計 */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 15px;
+    }
+    
+    section {
+        padding: 20px 15px;
+    }
+    
+    .sensor-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .test-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .phone-model {
+        width: 80px;
+        height: 144px;
+    }
+    
+    .phone-model .screen {
+        width: 64px;
+        height: 112px;
+        top: 16px;
+        left: 8px;
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    }
+    
+    section {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+    
+    section h2 {
+        color: white;
+        border-bottom-color: #667eea;
+    }
+    
+    .sensor-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+    
+    .sensor-card h3 {
+        color: #ccc;
+    }
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT 手勢 NFC 控制</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="IoT 手勢控制">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部狀態欄 -->
+        <header class="header">
+            <h1>🎯 手勢 NFC 控制</h1>
+            <p class="subtitle">螢幕朝下接近 ESP32 觸發</p>
+            <div class="connection-status">
+                <div class="status-indicator" id="mqttStatus">
+                    <span class="dot offline"></span>
+                    <span>MQTT 離線</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主要控制區域 -->
+        <main class="main-content">
+            <!-- 感測器狀態 -->
+            <section class="sensor-status">
+                <h2>📱 感測器狀態</h2>
+                <div class="sensor-grid">
+                    <div class="sensor-card gyro-card">
+                        <div class="sensor-icon">🔄</div>
+                        <h3>陀螺儀</h3>
+                        <div class="sensor-value" id="gyroStatus">未啟用</div>
+                        <button class="toggle-btn" id="gyroToggle" onclick="toggleGyroscope()">
+                            啟用
+                        </button>
+                    </div>
+                    
+                    <div class="sensor-card location-card">
+                        <div class="sensor-icon">📍</div>
+                        <h3>位置偵測</h3>
+                        <div class="sensor-value" id="locationStatus">未啟用</div>
+                        <button class="toggle-btn" id="locationToggle" onclick="toggleLocation()">
+                            啟用
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 手勢顯示區域 -->
+            <section class="gesture-display">
+                <h2>🤲 當前手勢</h2>
+                <div class="gesture-visualization" id="gestureViz">
+                    <div class="phone-model" id="phoneModel">
+                        <div class="screen"></div>
+                    </div>
+                    <div class="gesture-text" id="gestureText">穩定</div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="confidenceFill"></div>
+                    </div>
+                    <div class="confidence-text">信心度: <span id="confidenceValue">0%</span></div>
+                </div>
+            </section>
+
+            <!-- NFC 接近狀態 -->
+            <section class="nfc-proximity">
+                <h2>📡 NFC 設備接近</h2>
+                <div class="proximity-display">
+                    <div class="radar-container">
+                        <div class="radar-circle"></div>
+                        <div class="radar-pulse" id="radarPulse"></div>
+                        <div class="user-dot">📱</div>
+                        <div class="nfc-devices" id="nfcDevices">
+                            <!-- ESP32 設備會動態顯示在這裡 -->
+                        </div>
+                    </div>
+                    <div class="proximity-info">
+                        <div class="nearest-device">
+                            <strong>最近設備:</strong>
+                            <span id="nearestDevice">無</span>
+                        </div>
+                        <div class="distance">
+                            <strong>距離:</strong>
+                            <span id="deviceDistance">--</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 觸發狀態 -->
+            <section class="trigger-status">
+                <h2>⚡ 觸發狀態</h2>
+                <div class="trigger-conditions">
+                    <div class="condition" id="gestureCondition">
+                        <span class="condition-icon">🤲</span>
+                        <span class="condition-text">螢幕朝下</span>
+                        <span class="condition-status">❌</span>
+                    </div>
+                    <div class="condition" id="proximityCondition">
+                        <span class="condition-icon">📡</span>
+                        <span class="condition-text">接近 ESP32</span>
+                        <span class="condition-status">❌</span>
+                    </div>
+                </div>
+                <div class="trigger-button-container">
+                    <button class="trigger-button" id="triggerButton" disabled>
+                        <span class="trigger-icon">🚀</span>
+                        <span class="trigger-text">等待條件滿足</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 事件歷史 -->
+            <section class="event-history">
+                <h2>📋 事件歷史</h2>
+                <div class="history-controls">
+                    <button onclick="clearHistory()" class="clear-btn">清除歷史</button>
+                    <button onclick="exportHistory()" class="export-btn">匯出</button>
+                </div>
+                <div class="event-list" id="eventList">
+                    <div class="no-events">尚無事件記錄</div>
+                </div>
+            </section>
+
+            <!-- 測試控制 -->
+            <section class="test-controls">
+                <h2>🧪 測試功能</h2>
+                <div class="test-buttons">
+                    <button onclick="simulateGesture('face_down')" class="test-btn">
+                        測試螢幕朝下
+                    </button>
+                    <button onclick="simulateProximity('nfc_trigger_001')" class="test-btn">
+                        測試 NFC 接近
+                    </button>
+                    <button onclick="testMQTTConnection()" class="test-btn">
+                        測試 MQTT 連接
+                    </button>
+                    <button onclick="sendTestCommand()" class="test-btn">
+                        發送測試命令
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- 設定面板 -->
+        <div class="settings-panel" id="settingsPanel">
+            <div class="settings-content">
+                <h3>⚙️ 設定</h3>
+                <div class="setting-group">
+                    <label>MQTT Broker 位址:</label>
+                    <input type="text" id="mqttHost" value="192.168.50.100" placeholder="192.168.50.100">
+                </div>
+                <div class="setting-group">
+                    <label>MQTT 端口:</label>
+                    <input type="number" id="mqttPort" value="5000" placeholder="5000">
+                </div>
+                <div class="setting-group">
+                    <label>用戶 ID:</label>
+                    <input type="text" id="userId" value="user123" placeholder="user123">
+                </div>
+                <div class="setting-group">
+                    <label>設備 ID:</label>
+                    <input type="text" id="deviceId" readonly>
+                </div>
+                <div class="setting-group">
+                    <label>手勢靈敏度:</label>
+                    <input type="range" id="gestureSensitivity" min="0.1" max="1.0" step="0.1" value="0.7">
+                    <span id="sensitivityValue">0.7</span>
+                </div>
+                <div class="setting-buttons">
+                    <button onclick="saveSettings()" class="save-btn">儲存</button>
+                    <button onclick="closeSettings()" class="cancel-btn">取消</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部導航 -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" onclick="showPage('main')">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-text">主頁</span>
+            </button>
+            <button class="nav-btn" onclick="showPage('monitor')">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">監控</span>
+            </button>
+            <button class="nav-btn" onclick="openSettings()">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">設定</span>
+            </button>
+        </nav>
+
+        <!-- 通知區域 -->
+        <div class="notification-container" id="notificationContainer">
+            <!-- 通知會動態添加到這裡 -->
+        </div>
+    </div>
+
+    <!-- 載入 JavaScript -->
+    <script src="js/mqtt-socketio-client.js"></script>
+    <script src="js/gyro-sensor.js"></script>
+    <script src="js/nfc-proximity.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
