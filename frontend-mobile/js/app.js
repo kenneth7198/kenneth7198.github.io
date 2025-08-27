@@ -6,6 +6,7 @@ class MonsterManager {
             '2-03.png', '4-01.png', '5-01.png', '5-02.png', '5-03.png'
         ];
         this.currentMonster = null;
+        this.isDropdownOpen = false;
         this.init();
     }
 
@@ -13,27 +14,111 @@ class MonsterManager {
         // 頁面載入完成後選擇隨機小怪物
         document.addEventListener('DOMContentLoaded', () => {
             this.selectRandomMonster();
+            this.setupDropdown();
+            this.setupClickOutside();
         });
         
         // 添加鍵盤事件監聽
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 this.closeFullscreen();
+                this.closeDropdown();
             }
         });
     }
 
-    selectRandomMonster() {
-        const randomIndex = Math.floor(Math.random() * this.monsters.length);
-        const newMonster = this.monsters[randomIndex];
-        
-        // 如果選到同一個怪物，重新選擇
-        if (newMonster === this.currentMonster && this.monsters.length > 1) {
+    setupDropdown() {
+        const monsterGrid = document.getElementById('monsterGrid');
+        if (!monsterGrid) return;
+
+        // 清空現有內容
+        monsterGrid.innerHTML = '';
+
+        // 添加隨機選擇選項
+        const randomOption = document.createElement('div');
+        randomOption.className = 'monster-option';
+        randomOption.innerHTML = `
+            <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin-bottom: 5px; border: 2px solid rgba(255, 255, 255, 0.5);">
+                <span style="color: white; font-size: 1.2rem;">🎲</span>
+            </div>
+            <span>隨機</span>
+        `;
+        randomOption.onclick = () => {
             this.selectRandomMonster();
-            return;
+            this.closeDropdown();
+        };
+        monsterGrid.appendChild(randomOption);
+
+        // 添加每個小怪物選項
+        this.monsters.forEach((monster, index) => {
+            const option = document.createElement('div');
+            option.className = 'monster-option';
+            option.innerHTML = `
+                <img src="monster/${monster}" alt="${monster}">
+                <span>${monster.replace('.png', '')}</span>
+            `;
+            option.onclick = () => {
+                this.selectSpecificMonster(monster);
+                this.closeDropdown();
+            };
+            monsterGrid.appendChild(option);
+        });
+    }
+
+    setupClickOutside() {
+        document.addEventListener('click', (event) => {
+            const dropdown = document.getElementById('monsterDropdown');
+            const dropdownBtn = document.querySelector('.monster-dropdown-btn');
+            
+            if (dropdown && dropdownBtn && 
+                !dropdown.contains(event.target) && 
+                !dropdownBtn.contains(event.target)) {
+                this.closeDropdown();
+            }
+        });
+    }
+
+    toggleDropdown() {
+        const dropdown = document.getElementById('monsterDropdown');
+        if (!dropdown) return;
+
+        if (this.isDropdownOpen) {
+            this.closeDropdown();
+        } else {
+            this.openDropdown();
         }
-        
-        this.currentMonster = newMonster;
+    }
+
+    openDropdown() {
+        const dropdown = document.getElementById('monsterDropdown');
+        if (!dropdown) return;
+
+        dropdown.classList.add('show');
+        this.isDropdownOpen = true;
+        this.updateSelectedOption();
+    }
+
+    closeDropdown() {
+        const dropdown = document.getElementById('monsterDropdown');
+        if (!dropdown) return;
+
+        dropdown.classList.remove('show');
+        this.isDropdownOpen = false;
+    }
+
+    updateSelectedOption() {
+        const options = document.querySelectorAll('.monster-option');
+        options.forEach(option => {
+            option.classList.remove('selected');
+            const img = option.querySelector('img');
+            if (img && img.src.includes(this.currentMonster)) {
+                option.classList.add('selected');
+            }
+        });
+    }
+
+    selectSpecificMonster(monster) {
+        this.currentMonster = monster;
         
         const monsterImage = document.getElementById('randomMonster');
         if (monsterImage) {
@@ -51,8 +136,32 @@ class MonsterManager {
                 }, 50);
             }, 150);
             
-            console.log(`[Monster] 選擇了小怪物: ${this.currentMonster}`);
+            console.log(`[Monster] 選擇了特定小怪物: ${this.currentMonster}`);
         }
+        
+        // 更新下拉選單按鈕文字
+        this.updateDropdownButtonText();
+    }
+
+    updateDropdownButtonText() {
+        const dropdownBtn = document.querySelector('.monster-dropdown-btn');
+        if (dropdownBtn && this.currentMonster) {
+            const monsterName = this.currentMonster.replace('.png', '');
+            dropdownBtn.innerHTML = `🎭 ${monsterName}`;
+        }
+    }
+
+    selectRandomMonster() {
+        const randomIndex = Math.floor(Math.random() * this.monsters.length);
+        const newMonster = this.monsters[randomIndex];
+        
+        // 如果選到同一個怪物，重新選擇
+        if (newMonster === this.currentMonster && this.monsters.length > 1) {
+            this.selectRandomMonster();
+            return;
+        }
+        
+        this.selectSpecificMonster(newMonster);
     }
 
     openFullscreen() {

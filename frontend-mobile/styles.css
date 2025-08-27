@@ -753,6 +753,114 @@ section h2 {
     transform: translateY(-2px);
 }
 
+/* 小怪物選擇器樣式 */
+.monster-selector {
+    position: relative;
+    margin: 10px 0;
+}
+
+.monster-dropdown-btn {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 15px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    margin-bottom: 5px;
+}
+
+.monster-dropdown-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+.monster-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 1000;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    width: 280px;
+}
+
+.monster-dropdown.show {
+    max-height: 400px;
+    opacity: 1;
+    overflow-y: auto;
+}
+
+.monster-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.monster-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.monster-option:hover {
+    background: rgba(102, 126, 234, 0.2);
+    transform: translateY(-2px);
+}
+
+.monster-option.selected {
+    background: rgba(102, 126, 234, 0.3);
+    border: 2px solid #667eea;
+    animation: selectedPulse 0.5s ease;
+}
+
+.monster-option img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    margin-bottom: 5px;
+    transition: transform 0.2s ease;
+}
+
+.monster-option:hover img {
+    transform: scale(1.1);
+}
+
+.monster-option:active {
+    transform: scale(0.95);
+}
+
+@keyframes selectedPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.monster-option span {
+    font-size: 0.7rem;
+    color: #333;
+    text-align: center;
+    font-weight: 500;
+}
+
 /* 全螢幕小怪物彈出視窗 */
 .monster-fullscreen {
     position: fixed;
@@ -805,6 +913,46 @@ section h2 {
 @keyframes fadeInOut {
     0%, 100% { opacity: 0.4; }
     50% { opacity: 0.8; }
+}
+
+/* 響應式設計 - 移動設備優化 */
+@media (max-width: 768px) {
+    .monster-dropdown {
+        width: 90vw;
+        max-width: 320px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .monster-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+    
+    .monster-option img {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .monster-option span {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .monster-dropdown {
+        width: 95vw;
+        max-width: 280px;
+    }
+    
+    .monster-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .monster-dropdown-btn {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+    }
 }
 
 /* 深色模式支持 */

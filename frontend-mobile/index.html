@@ -21,6 +21,19 @@
             <!-- 小怪物顯示區域 -->
             <div class="monster-display">
                 <img id="randomMonster" src="" alt="隨機小怪物" class="monster-image" onclick="window.monsterManager.selectRandomMonster()" title="點擊重新選擇小怪物">
+                
+                <!-- 小怪物選擇下拉選單 -->
+                <div class="monster-selector">
+                    <button class="monster-dropdown-btn" onclick="window.monsterManager.toggleDropdown()">
+                        🎭 選擇小怪物
+                    </button>
+                    <div class="monster-dropdown" id="monsterDropdown">
+                        <div class="monster-grid" id="monsterGrid">
+                            <!-- 小怪物選項會動態添加到這裡 -->
+                        </div>
+                    </div>
+                </div>
+                
                 <button id="monsterButton" class="monster-btn" onclick="openMonsterFullscreen()">
                     開啟小怪物
                 </button>
