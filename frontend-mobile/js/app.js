@@ -1,3 +1,92 @@
+// 小怪物管理
+class MonsterManager {
+    constructor() {
+        this.monsters = [
+            '0-01.png', '1-01.png', '1-02.png', '2-01.png', '2-02.png',
+            '2-03.png', '4-01.png', '5-01.png', '5-02.png', '5-03.png'
+        ];
+        this.currentMonster = null;
+        this.init();
+    }
+
+    init() {
+        // 頁面載入完成後選擇隨機小怪物
+        document.addEventListener('DOMContentLoaded', () => {
+            this.selectRandomMonster();
+        });
+        
+        // 添加鍵盤事件監聽
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                this.closeFullscreen();
+            }
+        });
+    }
+
+    selectRandomMonster() {
+        const randomIndex = Math.floor(Math.random() * this.monsters.length);
+        const newMonster = this.monsters[randomIndex];
+        
+        // 如果選到同一個怪物，重新選擇
+        if (newMonster === this.currentMonster && this.monsters.length > 1) {
+            this.selectRandomMonster();
+            return;
+        }
+        
+        this.currentMonster = newMonster;
+        
+        const monsterImage = document.getElementById('randomMonster');
+        if (monsterImage) {
+            // 添加淡出效果
+            monsterImage.style.opacity = '0.5';
+            monsterImage.style.transform = 'scale(0.8)';
+            
+            setTimeout(() => {
+                monsterImage.src = `monster/${this.currentMonster}`;
+                
+                // 添加淡入效果
+                setTimeout(() => {
+                    monsterImage.style.opacity = '1';
+                    monsterImage.style.transform = 'scale(1)';
+                }, 50);
+            }, 150);
+            
+            console.log(`[Monster] 選擇了小怪物: ${this.currentMonster}`);
+        }
+    }
+
+    openFullscreen() {
+        const fullscreenDiv = document.getElementById('monsterFullscreen');
+        const fullscreenImage = document.getElementById('fullscreenMonster');
+        
+        if (fullscreenDiv && fullscreenImage && this.currentMonster) {
+            fullscreenImage.src = `monster/${this.currentMonster}`;
+            fullscreenDiv.classList.add('show');
+            document.body.style.overflow = 'hidden'; // 防止背景滾動
+        }
+    }
+
+    closeFullscreen() {
+        const fullscreenDiv = document.getElementById('monsterFullscreen');
+        if (fullscreenDiv) {
+            fullscreenDiv.classList.remove('show');
+            document.body.style.overflow = ''; // 恢復滾動
+        }
+    }
+}
+
+// 全域小怪物管理器
+window.monsterManager = new MonsterManager();
+
+// 全域函數
+window.openMonsterFullscreen = function() {
+    window.monsterManager.openFullscreen();
+};
+
+window.closeMonsterFullscreen = function() {
+    window.monsterManager.closeFullscreen();
+};
+
 // 主應用程式邏輯
 class IoTGestureApp {
     constructor() {

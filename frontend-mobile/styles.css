@@ -544,6 +544,7 @@ section h2 {
 
 .setting-group input[type="range"] {
     -webkit-appearance: none;
+    appearance: none;
     height: 6px;
     background: #e9ecef;
     border-radius: 3px;
@@ -551,6 +552,7 @@ section h2 {
 
 .setting-group input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
+    appearance: none;
     width: 20px;
     height: 20px;
     background: #667eea;
@@ -706,6 +708,103 @@ section h2 {
         top: 16px;
         left: 8px;
     }
+}
+
+/* 小怪物顯示樣式 */
+.monster-display {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.monster-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.monster-image:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.monster-image:active {
+    transform: scale(0.95);
+}
+
+.monster-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.monster-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+/* 全螢幕小怪物彈出視窗 */
+.monster-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.monster-fullscreen.show {
+    display: flex;
+}
+
+.fullscreen-monster-image {
+    max-width: 80vw;
+    max-height: 80vh;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+    animation: monsterAppear 0.5s ease-out;
+}
+
+@keyframes monsterAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.fullscreen-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    text-align: center;
+    animation: fadeInOut 3s infinite;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
 }
 
 /* 深色模式支持 */

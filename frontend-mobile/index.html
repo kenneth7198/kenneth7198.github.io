@@ -17,6 +17,15 @@
         <header class="header">
             <h1>🎯 手勢 NFC 控制</h1>
             <p class="subtitle">螢幕朝下接近 ESP32 觸發</p>
+            
+            <!-- 小怪物顯示區域 -->
+            <div class="monster-display">
+                <img id="randomMonster" src="" alt="隨機小怪物" class="monster-image" onclick="window.monsterManager.selectRandomMonster()" title="點擊重新選擇小怪物">
+                <button id="monsterButton" class="monster-btn" onclick="openMonsterFullscreen()">
+                    開啟小怪物
+                </button>
+            </div>
+            
             <div class="connection-status">
                 <div class="status-indicator" id="mqttStatus">
                     <span class="dot offline"></span>
@@ -197,6 +206,12 @@
         <!-- 通知區域 -->
         <div class="notification-container" id="notificationContainer">
             <!-- 通知會動態添加到這裡 -->
+        </div>
+        
+        <!-- 小怪物全螢幕彈出視窗 -->
+        <div class="monster-fullscreen" id="monsterFullscreen" onclick="closeMonsterFullscreen()">
+            <img id="fullscreenMonster" src="" alt="全螢幕小怪物" class="fullscreen-monster-image">
+            <div class="fullscreen-hint">點擊任意處或按 ESC 鍵關閉</div>
         </div>
     </div>
 
