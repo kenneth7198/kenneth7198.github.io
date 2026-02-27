@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小怪物功能測試</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .test-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .monster-list {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .monster-item {
+            text-align: center;
+        }
+        .monster-item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+        }
+        .monster-item span {
+            display: block;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🐾 小怪物功能測試</h1>
+        
+        <h2>所有可用的小怪物 (共12隻):</h2>
+        <div class="monster-list" id="monsterList">
+        </div>
+        
+        <h2>隨機選擇測試:</h2>
+        <button onclick="testRandomSelection()">隨機選擇小怪物</button>
+        <div id="selectedMonster" style="margin-top: 20px; text-align: center;"></div>
+        
+        <h2>功能說明:</h2>
+        <ul>
+            <li>✅ 頁面載入時會隨機選擇一隻小怪物顯示在首頁頂部</li>
+            <li>✅ 點擊小怪物圖片可以重新隨機選擇</li>
+            <li>🆕 <strong>點擊「選擇小怪物」按鈕可以打開下拉選單，預覽所有小怪物</strong></li>
+            <li>🆕 <strong>在下拉選單中點擊任意小怪物可以直接選擇</strong></li>
+            <li>🆕 <strong>下拉選單包含「隨機」選項和所有小怪物的縮圖預覽</strong></li>
+            <li>✅ 點擊「開啟小怪物」按鈕會顯示全黑背景的全螢幕視窗</li>
+            <li>✅ 全螢幕視窗中只顯示小怪物圖片，點擊任意處或按 ESC 關閉</li>
+            <li>✅ 包含平滑的動畫效果和響應式設計</li>
+        </ul>
+        
+        <h2>🎮 使用流程:</h2>
+        <ol>
+            <li>打開網頁，自動顯示隨機小怪物</li>
+            <li>點擊「🎭 選擇小怪物」按鈕打開下拉選單</li>
+            <li>在下拉選單中預覽並點擊想要的小怪物</li>
+            <li>點擊「開啟小怪物」按鈕進入全螢幕模式</li>
+            <li>欣賞你選擇的小怪物！</li>
+        </ol>
+    </div>
+
+    <script>
+        const monsters = [
+            '0-01.png', '1-01.png', '1-02.png', '2-01.png', '2-02.png',
+            '2-03.png', '3-01.png', '3-02.png', '4-01.png', '5-01.png', 
+            '5-02.png', '5-03.png'
+        ];
+
+        // 顯示所有小怪物
+        function displayAllMonsters() {
+            const listContainer = document.getElementById('monsterList');
+            monsters.forEach(monster => {
+                const item = document.createElement('div');
+                item.className = 'monster-item';
+                item.innerHTML = `
+                    <img src="monster/${monster}" alt="${monster}">
+                    <span>${monster}</span>
+                `;
+                listContainer.appendChild(item);
+            });
+        }
+
+        // 測試隨機選擇
+        function testRandomSelection() {
+            const randomIndex = Math.floor(Math.random() * monsters.length);
+            const selectedMonster = monsters[randomIndex];
+            
+            const container = document.getElementById('selectedMonster');
+            container.innerHTML = `
+                <img src="monster/${selectedMonster}" alt="${selectedMonster}" style="width: 100px; height: 100px; border-radius: 50%;">
+                <p>選擇了: ${selectedMonster}</p>
+            `;
+        }
+
+        // 頁面載入時執行
+        document.addEventListener('DOMContentLoaded', () => {
+            displayAllMonsters();
+            testRandomSelection();
+        });
+    </script>
+</body>
+</html>
