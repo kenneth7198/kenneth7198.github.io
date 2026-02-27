@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>穿戴科技與 AI 協作互動設計 | 16週課程大綱</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --phase1: #1abc9c;
+            --phase2: #9b59b6;
+            --phase3: #e67e22;
+            --phase4: #e74c3c;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, 'LiHei Pro', '微軟正黑體', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            letter-spacing: 1px;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 15px;
+            font-weight: 300;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .intro-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-top: -3rem;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            display: inline-block;
+        }
+        .phase-title {
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .phase-1 { background-color: var(--phase1); }
+        .phase-2 { background-color: var(--phase2); }
+        .phase-3 { background-color: var(--phase3); }
+        .phase-4 { background-color: var(--phase4); }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+        }
+        .card-1 { border-left: 5px solid var(--phase1); }
+        .card-2 { border-left: 5px solid var(--phase2); }
+        .card-3 { border-left: 5px solid var(--phase3); }
+        .card-4 { border-left: 5px solid var(--phase4); }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .week-badge {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .vibe-coding-box {
+            background-color: #f0f7ff;
+            border: 1px solid #cce3f6;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+        .vibe-coding-box strong {
+            color: #0056b3;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .prompt-example {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+            white-space: pre-wrap;
+        }
+        ul {
+            padding-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .hardware-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+        .hardware-list li {
+            background: #eee;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>穿戴科技與 AI 協作互動設計</h1>
+        <p>ESP32 × Vibe Coding：給非本科系學生的硬體互動魔法課</p>
+    </header>
+
+    <div class="container">
+        <div class="intro-box">
+            <h2 style="margin-top: 0; color: var(--primary-color);">💡 課程核心理念</h2>
+            <p>本課程專為<strong>沒有程式基礎</strong>的大學生設計。我們將打破傳統「背語法、解 Bug」的痛苦過程，導入最新的 <strong>Vibe Coding（AI 協作編程）</strong> 概念。學生將化身為「產品經理」與「導演」，透過自然語言向 AI（如 ChatGPT, Claude）下達指令，由 AI 生成 ESP32 程式碼，學生專注於<strong>創意發想、硬體組裝與互動體驗設計</strong>。</p>
+            <ul>
+                <li><strong>Logic over Syntax (邏輯大於語法)</strong>：不考分號、不背語法，重點在於如何將大問題拆解成小步驟。</li>
+                <li><strong>Prompt Engineering (提示詞工程)</strong>：學習如何精確地向 AI 描述硬體接線、預期功能與互動邏輯。</li>
+                <li><strong>Debug with AI (與 AI 共同除錯)</strong>：學會看懂錯誤訊息，並將錯誤訊息與硬體狀態回饋給 AI 來解決問題。</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">🛠️ 課程專屬硬體套件</h2>
+        <ul class="hardware-list">
+            <li>🧠 ESP32 開發板 (主控)</li>
+            <li>💡 NeoPixel 全彩 LED 燈條</li>
+            <li>🏃 MPU6050 六軸動態感測器</li>
+            <li>📳 微型震動馬達</li>
+            <li>❤️ 心率/脈搏感測器</li>
+            <li>🔋 穿戴式鋰電池與導電線</li>
+        </ul>
+
+        <!-- Phase 1 -->
+        <div class="phase-title phase-1">第一階段：Vibe Coding 與硬體初探 (Week 1-4)</div>
+        <p>目標：消除對硬體的恐懼，建立與 AI 協作寫程式的自信。</p>
+
+        <div class="card card-1">
+            <h3><span class="week-badge">Week 1</span> 什麼是 Vibe Coding？穿戴科技概論</h3>
+            <ul>
+                <li>介紹穿戴科技的應用（健康監測、藝術表演、互動服裝）。</li>
+                <li>註冊並熟悉 AI 工具（ChatGPT / Claude）。</li>
+                <li><strong>課堂實作：</strong>學習寫出第一個 Prompt，讓 AI 用白話文解釋硬體名詞。</li>
+            </ul>
+            <div class="vibe-coding-box">
+                <strong>🤖 Vibe Coding 提示詞範例：</strong>
+                <div class="prompt-example">「請扮演物聯網專家，用最簡單的白話文向沒有理工背景的大學生解釋『ESP32 開發板』是什麼？它能做什麼？請用生活中的例子來比喻。」</div>
+            </div>
+        </div>
+
+        <div class="card card-1">
+            <h3><span class="week-badge">Week 2</span> ESP32 初體驗與「點燈」魔法</h3>
+            <ul>
+                <li>認識麵包板、基本電路（正負極、接地 GND、供電 VCC）。</li>
+                <li>安裝 Arduino IDE 與 ESP32 開發環境。</li>
+                <li><strong>課堂實作：</strong>透過 AI 生成程式碼，讓外接 LED 燈閃爍。</li>
+            </ul>
+            <div class="vibe-coding-box">
+                <strong>🤖 Vibe Coding 提示詞範例：</strong>
+                <div class="prompt-example">「我有一塊 ESP32 開發板，我想讓接在 Pin 2 的 LED 燈每秒閃爍一次。請給我完整的 Arduino 程式碼，並告訴我硬體線路該怎麼接（LED 的長短腳分別接哪裡）。」</div>
+            </div>
+        </div>
+
+        <div class="card card-1">
+            <h3><span class="week-badge">Week 3</span> 感知世界：按鈕與基礎感測</h3>
+            <ul>
+                <li>數位輸入（按鈕開關）與類比輸入（光敏電阻、旋鈕）。</li>
+                <li>學習如何將編譯錯誤（Error Message）貼給 AI 求解。</li>
+                <li><strong>課堂實作：</strong>製作一個「天黑請開燈」的自動感光裝置。</li>
+            </ul>
+            <div class="vibe-coding-box">
+                <strong>🤖 Vibe Coding 提示詞範例：</strong>
+                <div class="prompt-example">「我現在 ESP32 的 Pin 34 接了一個光敏電阻，Pin 2 接了 LED。請幫我寫一段程式：當環境變暗（光敏電阻數值小於 500）時，自動亮起 LED 燈；變亮時則熄滅。請加上 Serial.print 讓我能在監控視窗看到數值。」</div>
+            </div>
+        </div>
+
+        <div class="card card-1">
+            <h3><span class="week-badge">Week 4</span> 穿戴式設計基礎：軟與硬的結合</h3>
+            <ul>
+                <li>如何將電子零件固定在衣服或身體上。</li>
+                <li>導電線縫紉技巧、電池安全與絕緣處理（熱縮套管、絕緣膠帶）。</li>
+                <li><strong>小作業：</strong>製作一個發光的互動手環或胸章。</li>
+            </ul>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="phase-title phase-2">第二階段：身體語彙與動態互動 (Week 5-8)</div>
+        <p>目標：捕捉人體動作，將物理行為轉化為數位訊號與視覺/觸覺回饋。</p>
+
+        <div class="card card-2">
+            <h3><span class="week-badge">Week 5</span> 動態捕捉：加速度計與陀螺儀 (MPU6050)</h3>
+            <ul>
+                <li>認識 X, Y, Z 軸與傾斜角，理解 I2C 通訊協定（SDA, SCL 接線）。</li>
+                <li><strong>課堂實作：</strong>讀取感測器數值，判斷「揮手」或「傾斜」的動作。</li>
+            </ul>
+            <div class="vibe-coding-box">
+                <strong>🤖 Vibe Coding 提示詞範例：</strong>
+                <div class="prompt-example">「我使用 ESP32 與 MPU6050 感測器。請給我一段 Arduino 程式碼，不需要複雜的數學，只要能偵測到『我的手正在快速揮動』就好。如果偵測到揮動，請在 Serial Monitor 印出『揮手中！』。」</div>
+            </div>
+        </div>
+
+        <div class="card card-2">
+            <h3><span class="week-badge">Week 6</span> 視覺與觸覺回饋 (NeoPixel & 震動馬達)</h3>
+            <ul>
+                <li>學習控制 WS2812B (NeoPixel) 全彩 LED 燈條的顏色與動畫。</li>
+                <li>控制微型震動馬達的震動強度（PWM 概念）。</li>
+                <li><strong>課堂實作：</strong>結合上週進度，製作動態回饋裝置。</li>
+            </ul>
+            <div class="vibe-coding-box">
+                <strong>🤖 Vibe Coding 提示詞範例：</strong>
+                <div class="prompt-example">「請幫我結合 MPU6050 與 NeoPixel 燈條（接在 Pin 4，共 8 顆燈）。邏輯是：當手快速揮動時，燈條閃爍紅色並啟動接在 Pin 5 的震動馬達；當手靜止時，燈條呈現藍色呼吸燈效果，馬達停止。」</div>
+            </div>
+        </div>
+
+        <div class="card card-2">
+            <h3><span class="week-badge">Week 7</span> 生物訊號初探 (心率/膚電感測)</h3>
+            <ul>
+                <li>如何讀取身體的隱性訊號（如緊張出汗、心跳加速）。</li>
+                <li>探討穿戴科技的隱私與倫理問題。</li>
+                <li><strong>課堂實作：</strong>製作一個「心跳視覺化」的發光胸針。</li>
+            </ul>
+        </div>
+
+        <div class="card card-2">
+            <h3><span class="week-badge">Week 8</span> 期中提案與黑客松 (Midterm Hackathon)</h3>
+            <ul>
+                <li><strong>期中專案：</strong>利用前 7 週學到的感測器與輸出元件，製作一個「能表達情緒的穿戴配件」。</li>
+                <li>學生需展示他們與 AI 的對話紀錄（Prompt Log），說明他們如何引導 AI 寫出程式並解決 Bug。</li>
+            </ul>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase-title phase-3">第三階段：無線連結與物聯網 (Week 9-12)</div>
+        <p>目標：讓穿戴裝置不再孤立，能與手機、網路或其他裝置溝通。</p>
+
+        <div class="card card-3">
+            <h3><span class="week-badge">Week 9</span> 藍牙 (BLE) 溝通：讓衣服與手機對話</h3>
+            <ul>
+                <li>ESP32 的藍牙 (BLE) 功能介紹。</li>
+                <li><strong>課堂實作：</strong>讓 ESP32 變成一個「藍牙鍵盤」或「藍牙滑鼠」。</li>
+            </ul>
+            <div class="vibe-coding-box">
+                <strong>🤖 Vibe Coding 提示詞範例：</strong>
+                <div class="prompt-example">「請幫我寫一段 ESP32 的 BLE Keyboard 程式。當我按下接在 Pin 12 的按鈕時，ESP32 會透過藍牙向連線的手機或電腦發送『空白鍵 (Space)』的指令。這可以用來控制簡報換頁。」</div>
+            </div>
+        </div>
+
+        <div class="card card-3">
+            <h3><span class="week-badge">Week 10</span> Wi-Fi 與雲端互動 (IoT)</h3>
+            <ul>
+                <li>讓 ESP32 連上 Wi-Fi 網路。</li>
+                <li>認識 Webhooks 與 IFTTT 服務。</li>
+                <li><strong>課堂實作：</strong>製作緊急求救手環。</li>
+            </ul>
+            <div class="vibe-coding-box">
+                <strong>🤖 Vibe Coding 提示詞範例：</strong>
+                <div class="prompt-example">「請給我一段 ESP32 連接 Wi-Fi 的程式碼。當 Pin 14 的按鈕被長按 3 秒時，觸發一個 HTTP GET 請求到我指定的 IFTTT Webhook 網址（用來發送 LINE 訊息）。」</div>
+            </div>
+        </div>
+
+        <div class="card card-3">
+            <h3><span class="week-badge">Week 11</span> 雙人互動：ESP32 互相通訊 (ESP-NOW)</h3>
+            <ul>
+                <li>介紹 ESP-NOW（無需 Wi-Fi 路由器的低延遲板對板通訊）。</li>
+                <li><strong>課堂實作：</strong>兩人一組，製作隔空互動服裝。</li>
+            </ul>
+            <div class="vibe-coding-box">
+                <strong>🤖 Vibe Coding 提示詞範例：</strong>
+                <div class="prompt-example">「我們有兩塊 ESP32，想要用 ESP-NOW 通訊。請分別給我『發送端』和『接收端』的程式碼。邏輯是：當發送端偵測到傾斜時，發送訊號給接收端；接收端收到訊號後，亮起綠燈並震動 1 秒。」</div>
+            </div>
+        </div>
+
+        <div class="card card-3">
+            <h3><span class="week-badge">Week 12</span> 進階 Vibe Coding 技巧與架構設計</h3>
+            <ul>
+                <li>當程式碼變長時，AI 容易「忘記」或「出錯」的應對策略。</li>
+                <li>學習如何模組化 Prompt（先寫感測器，測試成功再加輸出）。</li>
+                <li>如何請 AI 幫忙重構（Refactor）程式碼，讓它更整潔。</li>
+            </ul>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="phase-title phase-4">第四階段：期末專案實作與展演 (Week 13-16)</div>
+        <p>目標：完成一件具備完整概念、可穿戴且能穩定運作的互動作品。</p>
+
+        <div class="card card-4">
+            <h3><span class="week-badge">Week 13</span> 期末專案發想與系統架構圖</h3>
+            <ul>
+                <li>學生提出期末專案構想（例如：矯正駝背的智慧背心、舞者專用的互動發光服、盲人導航手環）。</li>
+                <li>利用 AI 協助評估技術可行性，並列出需要的硬體清單與腳位分配圖。</li>
+            </ul>
+        </div>
+
+        <div class="card card-4">
+            <h3><span class="week-badge">Week 14</span> Prototype 實作與 AI 結對編程 (Pair Programming)</h3>
+            <ul>
+                <li>課堂時間完全用於實作與 Debug。</li>
+                <li>教師與助教的角色轉為「Prompt 顧問」，協助學生優化他們問 AI 的問題，突破技術盲點。</li>
+            </ul>
+        </div>
+
+        <div class="card card-4">
+            <h3><span class="week-badge">Week 15</span> 使用者測試與穿戴優化 (User Testing)</h3>
+            <ul>
+                <li>將電路從麵包板轉移到實際衣物或配件上（簡易焊接或導電線縫紉）。</li>
+                <li>同學互相試穿作品，提供 UX（使用者體驗）回饋。</li>
+                <li>用 AI 快速修改程式邏輯以符合使用者回饋。</li>
+            </ul>
+        </div>
+
+        <div class="card card-4">
+            <h3><span class="week-badge">Week 16</span> 期末展演 (Final Showcase)</h3>
+            <ul>
+                <li>以走秀或互動展覽形式呈現最終作品。</li>
+                <li>學生分享作品理念，以及他們在「Vibe Coding」過程中遇到最有趣的 AI 溝通經驗與 Debug 血淚史。</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="margin-top: 3rem; background-color: #fdfbf7; border-left: 5px solid #f1c40f;">
+            <h2 style="margin-top: 0; color: #d35400;">📝 評分標準 (Grading Strategy)</h2>
+            <p>本課程不以「程式碼寫得多漂亮」為標準，而是看重解決問題與創新的能力：</p>
+            <ul>
+                <li><strong>創意與概念 (30%)：</strong>穿戴情境是否合理？互動設計是否有趣、能解決特定問題？</li>
+                <li><strong>Prompt 紀錄與除錯過程 (30%)：</strong>繳交「與 AI 的對話紀錄 (Chat Log)」，評估拆解問題與描述需求的能力。</li>
+                <li><strong>硬體整合與穿戴性 (20%)：</strong>作品是否真的能穿在身上？電路是否穩固、安全？</li>
+                <li><strong>最終呈現 (20%)：</strong>期末展演的完成度與口頭表達。</li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+</html>

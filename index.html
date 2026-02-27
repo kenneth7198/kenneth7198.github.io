@@ -200,6 +200,10 @@
             background: linear-gradient(45deg, #00979d, #00c6cf);
         }
 
+        .stat-icon.wearable {
+            background: linear-gradient(45deg, #6f42c1, #20c997);
+        }
+
         .stat-icon.raspberry {
             background: linear-gradient(45deg, #c51850, #e91e63);
         }
@@ -371,9 +375,14 @@
                 <span>擴增實境</span>
             </a>
 
-            <a href="idiom/" class="menu-item">
+            <a href="TUI/" class="menu-item">
                 <i class="fas fa-book"></i>
-                <span>成語學習</span>
+                <span>TUI可觸握介面</span>
+            </a>
+
+            <a href="wearable-vibe-coding/" class="menu-item">
+                <i class="fas fa-tshirt"></i>
+                <span>穿戴科技與 AI 協作</span>
             </a>
            
             <!-- <a href="sifteo/" class="menu-item">
@@ -399,7 +408,7 @@
         <div class="welcome-section">
             <div class="welcome-content">
                 <h1>歡迎來到劉士達老師教學資源中心！</h1>
-                <p>探索跨域技術整合的教學範例與實作專案，從物聯網到擴增實境，開啟跨領域學習的無限可能</p>
+                <p>探索跨域技術整合的教學範例與實作專案，從物聯網到TUI，開啟跨領域學習的無限可能</p>
                 <div class="welcome-time">
                     <i class="fas fa-clock"></i> 
                     <span id="currentTime"></span>
@@ -464,6 +473,33 @@
                     </div>
                 </div>
 
+                <!-- 穿戴科技與 AI 協作課程卡片 -->
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon wearable">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">Wearable</div>
+                    <div class="stat-label">ESP32 × Vibe Coding</div>
+                    <div class="stat-description">
+                        給不會寫程式的大學生的 16 週穿戴科技課程，從感測、互動到 AI 協作開發，完成可展示的期末作品。
+                    </div>
+                    <ul class="feature-list">
+                        <li>16 週完整課程教案</li>
+                        <li>每週 Vibe Coding Prompt 範例</li>
+                        <li>ESP32 穿戴互動實作流程</li>
+                        <li>期中黑客松與期末展演規劃</li>
+                    </ul>
+                    <a href="wearable-vibe-coding/" class="action-btn">
+                        <i class="fas fa-arrow-right"></i>
+                        前往課程
+                    </a>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+
                 <!-- Raspberry Pi 專案卡片 - 新增 -->
                 <div class="stat-card">
                     <div class="stat-header">
@@ -518,25 +554,25 @@
                     </div>
                 </div>
 
-                <!-- 成語專案卡片 -->
+                <!-- TUI 專案卡片 -->
                 <div class="stat-card">
                     <div class="stat-header">
                         <div class="stat-icon idiom">
                             <i class="fas fa-book"></i>
                         </div>
                     </div>
-                    <div class="stat-value">成語</div>
-                    <div class="stat-label">學習系統</div>
+                    <div class="stat-value">TUI可觸握介面</div>
+                    <div class="stat-label">Tangible User Interface學習系統</div>
                     <div class="stat-description">
-                        結合傳統文化與現代科技的成語學習平台，提供豐富的成語資料庫與互動學習體驗。
+                        結合 Tangible User Interface 的學習平台，提供豐富的資料與互動學習體驗。
                     </div>
                     <ul class="feature-list">
-                        <li>完整的成語資料庫 (JSON格式)</li>
-                        <li>智能成語檢索系統</li>
-                        <li>多詞彙組合查詢功能</li>
-                        <li>文化傳承數位化展示</li>
+                        <li>完整的元件資料庫</li>
+                        <li>智能TUI檢索系統</li>
+                        <li>TUI組合查詢功能</li>
+                        <li>TUI數位化展示</li>
                     </ul>
-                    <a href="idiom/" class="action-btn">
+                    <a href="TUI/" class="action-btn">
                         <i class="fas fa-arrow-right"></i>
                         開始學習
                     </a>

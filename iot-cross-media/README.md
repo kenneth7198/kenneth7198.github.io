@@ -64,12 +64,12 @@
 
 ```bash
 # 下載教學包
-git clone [repository]
-cd educational
+git clone [https://github.com/kenneth7198/IoT-Cross-Media-Tutorial.git]
+cd IoT-Cross-Media-Tutorial
 
 # 一鍵安裝和啟動
-npm run setup-education
-npm run start-education
+npm run setup
+npm run start
 
 # 系統自動開啟瀏覽器到 localhost:3000
 ```
