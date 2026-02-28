@@ -477,10 +477,161 @@
                 transform: rotate(360deg)
             }
         }
+
+        /* ── Login overlay ── */
+        .login-overlay {
+            display: flex;
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #0d0f1a 0%, #1a0832 50%, #0d1b4b 100%);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        .login-overlay.hidden {
+            display: none;
+        }
+
+        .login-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 44px 36px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, .6);
+            animation: fadeUp .4s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-logo {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f59e0b, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .login-sub {
+            font-size: 13px;
+            color: var(--text2);
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .login-field {
+            margin-bottom: 14px;
+        }
+
+        .login-field label {
+            display: block;
+            font-size: 12px;
+            color: var(--text2);
+            margin-bottom: 6px;
+            letter-spacing: .04em;
+        }
+
+        .login-field input {
+            width: 100%;
+            padding: 11px 16px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 15px;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .login-field input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(124, 106, 247, .18);
+        }
+
+        .login-btn {
+            width: 100%;
+            margin-top: 8px;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--accent), #5b4de0);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity .2s, transform .15s;
+            letter-spacing: .02em;
+        }
+
+        .login-btn:hover {
+            opacity: .9;
+            transform: translateY(-1px);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            opacity: .5;
+            cursor: default;
+        }
+
+        .login-error {
+            color: var(--red);
+            font-size: 13px;
+            margin-top: 10px;
+            text-align: center;
+            min-height: 18px;
+        }
+
+        .login-badge {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 11px;
+            color: var(--text2);
+            opacity: .6;
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- Login overlay -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-card">
+            <div class="login-logo">成語大辭典</div>
+            <div class="login-sub">Chinese Idiom Database — 32,616 條</div>
+            <div class="login-field">
+                <label>帳號 Username</label>
+                <input type="text" id="loginUser" placeholder="輸入帳號" autocomplete="username">
+            </div>
+            <div class="login-field">
+                <label>密碼 Password</label>
+                <input type="password" id="loginPass" placeholder="輸入密碼" autocomplete="current-password">
+            </div>
+            <button class="login-btn" id="loginBtn" onclick="doLogin()">登入 Login</button>
+            <div class="login-error" id="loginError"></div>
+            <div class="login-badge">🔒 資料受密碼保護</div>
+        </div>
+    </div>
 
     <div class="load-bar" id="loadBar"></div>
 
@@ -690,8 +841,51 @@
         function closePanelBg(e) { if (e.target === document.getElementById('overlay')) closeOverlay(); }
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
 
+        // ── Auth ────────────────────────────────────────────────────────────────────
+        // Hashes: SHA-256 of username 'admin' and password 'idiom@2026'
+        const HASH_USER = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
+        const HASH_PASS = '5e1a62a4c1b16957a49e3bc339691804631fad9fe1f15d9f40290e696e46b7ad';
+
+        async function sha256(str) {
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function doLogin() {
+            const btn = document.getElementById('loginBtn');
+            const errEl = document.getElementById('loginError');
+            const user = document.getElementById('loginUser').value.trim();
+            const pass = document.getElementById('loginPass').value;
+            if (!user || !pass) { errEl.textContent = '請輸入帳號與密碼'; return; }
+
+            btn.disabled = true;
+            btn.textContent = '驗證中…';
+            errEl.textContent = '';
+
+            const [hu, hp] = await Promise.all([sha256(user), sha256(pass)]);
+            if (hu === HASH_USER && hp === HASH_PASS) {
+                sessionStorage.setItem('idiom_auth', '1');
+                document.getElementById('loginOverlay').classList.add('hidden');
+                loadData();
+            } else {
+                errEl.textContent = '帳號或密碼錯誤，請重試';
+                btn.disabled = false;
+                btn.textContent = '登入 Login';
+            }
+        }
+
+        // Allow Enter key to submit
+        ['loginUser', 'loginPass'].forEach(id => {
+            document.getElementById(id).addEventListener('keydown', e => {
+                if (e.key === 'Enter') doLogin();
+            });
+        });
+
         // ── Boot ────────────────────────────────────────────────────────────────────
-        loadData();
+        if (sessionStorage.getItem('idiom_auth') === '1') {
+            document.getElementById('loginOverlay').classList.add('hidden');
+            loadData();
+        }
     </script>
 </body>
 
