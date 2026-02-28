@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成語大辭典｜32,616 條成語瀏覽器</title>
+    <meta name="description" content="收錄 32,616 條中文成語，含教育部成語典、chinese-xinhua、CIP 與 ChID 資料集，支援搜尋、篩選與詳細查閱。">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0f1a;
+            --surface: #161827;
+            --surface2: #1e2236;
+            --border: #2a2f4a;
+            --accent: #7c6af7;
+            --accent2: #a78bfa;
+            --gold: #f59e0b;
+            --text: #e8eaf6;
+            --text2: #9ca3c8;
+            --green: #34d399;
+            --red: #f87171;
+            --blue: #60a5fa;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a0832 0%, #0d1b4b 50%, #0a2a1a 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 28px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap
+        }
+
+        .logo {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 26px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f59e0b, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap
+        }
+
+        .logo span {
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            display: block;
+            -webkit-text-fill-color: var(--text2);
+            font-weight: 400
+        }
+
+        .search-wrap {
+            flex: 1;
+            min-width: 220px;
+            position: relative
+        }
+
+        .search-wrap input {
+            width: 100%;
+            padding: 11px 18px 11px 44px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: var(--text);
+            font-size: 15px;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s
+        }
+
+        .search-wrap input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(124, 106, 247, .18)
+        }
+
+        .search-wrap svg {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: .5
+        }
+
+        .search-wrap input::placeholder {
+            color: var(--text2)
+        }
+
+        .load-bar {
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            width: 0;
+            transition: width .4s;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999
+        }
+
+        /* Layout */
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 80px)
+        }
+
+        .sidebar {
+            width: 228px;
+            flex-shrink: 0;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: 20px 14px;
+            overflow-y: auto
+        }
+
+        .sidebar h3 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--text2);
+            margin-bottom: 10px;
+            padding-left: 6px
+        }
+
+        .src-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 9px 12px;
+            margin-bottom: 5px;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all .15s;
+            text-align: left
+        }
+
+        .src-btn:hover {
+            background: var(--surface2);
+            border-color: var(--border)
+        }
+
+        .src-btn.active {
+            background: rgba(124, 106, 247, .15);
+            border-color: var(--accent);
+            color: var(--accent2)
+        }
+
+        .src-btn .badge {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 11px;
+            padding: 2px 7px;
+            color: var(--text2);
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap
+        }
+
+        .src-btn.active .badge {
+            background: rgba(124, 106, 247, .2);
+            border-color: var(--accent);
+            color: var(--accent2)
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            padding: 24px 24px 40px;
+            overflow: hidden
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            flex-wrap: wrap
+        }
+
+        .total-label {
+            font-size: 13px;
+            color: var(--text2);
+            margin-left: auto
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(192px, 1fr));
+            gap: 12px
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 14px;
+            cursor: pointer;
+            transition: transform .15s, border-color .15s, box-shadow .15s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            opacity: 0;
+            transition: opacity .2s
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            box-shadow: 0 8px 28px rgba(124, 106, 247, .18)
+        }
+
+        .card:hover::before {
+            opacity: 1
+        }
+
+        .card-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 21px;
+            font-weight: 900;
+            margin-bottom: 5px
+        }
+
+        .card-pinyin {
+            font-size: 11px;
+            color: var(--text2);
+            margin-bottom: 7px
+        }
+
+        .card-meaning {
+            font-size: 11px;
+            color: var(--text2);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden
+        }
+
+        .card-source {
+            font-size: 10px;
+            margin-top: 9px;
+            padding: 2px 7px;
+            border-radius: 50px;
+            display: inline-block
+        }
+
+        .src-moe {
+            background: rgba(245, 158, 11, .12);
+            color: var(--gold);
+            border: 1px solid rgba(245, 158, 11, .3)
+        }
+
+        .src-open {
+            background: rgba(96, 165, 250, .1);
+            color: var(--blue);
+            border: 1px solid rgba(96, 165, 250, .25)
+        }
+
+        .src-cip {
+            background: rgba(52, 211, 153, .1);
+            color: var(--green);
+            border: 1px solid rgba(52, 211, 153, .25)
+        }
+
+        .src-chid {
+            background: rgba(192, 132, 252, .1);
+            color: #c084fc;
+            border: 1px solid rgba(192, 132, 252, .3)
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 28px;
+            flex-wrap: wrap
+        }
+
+        .pg-btn {
+            min-width: 36px;
+            height: 36px;
+            padding: 0 10px;
+            border-radius: 8px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all .15s;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .pg-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            color: var(--accent2)
+        }
+
+        .pg-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff
+        }
+
+        .pg-btn:disabled {
+            opacity: .4;
+            cursor: default
+        }
+
+        .pg-info {
+            font-size: 13px;
+            color: var(--text2);
+            padding: 0 6px
+        }
+
+        /* Detail overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .72);
+            z-index: 100;
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px
+        }
+
+        .overlay.open {
+            display: flex
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            max-width: 660px;
+            width: 100%;
+            max-height: 88vh;
+            overflow-y: auto;
+            padding: 32px;
+            position: relative;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, .6)
+        }
+
+        .panel-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            cursor: pointer;
+            color: var(--text2);
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .15s
+        }
+
+        .panel-close:hover {
+            border-color: var(--red);
+            color: var(--red)
+        }
+
+        .panel-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 40px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f59e0b, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px
+        }
+
+        .panel-pinyin {
+            font-size: 15px;
+            color: var(--text2);
+            margin-bottom: 18px;
+            letter-spacing: .04em
+        }
+
+        .sec-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--accent2);
+            margin-bottom: 7px;
+            margin-top: 18px
+        }
+
+        .sec-content {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.8;
+            background: var(--surface2);
+            border-radius: 10px;
+            padding: 13px 15px;
+            border: 1px solid var(--border)
+        }
+
+        .ex-list {
+            list-style: none
+        }
+
+        .ex-list li {
+            border-left: 3px solid var(--accent);
+            padding: 5px 11px;
+            margin-bottom: 7px;
+            font-size: 14px;
+            color: var(--text);
+            background: var(--surface2);
+            border-radius: 0 8px 8px 0
+        }
+
+        .empty {
+            text-align: center;
+            padding: 70px 20px;
+            color: var(--text2);
+            font-size: 16px
+        }
+
+        .spinner-wrap {
+            text-align: center;
+            padding: 60px 0
+        }
+
+        .spinner {
+            width: 36px;
+            height: 36px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+            margin: 0 auto 12px
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="load-bar" id="loadBar"></div>
+
+    <header class="header">
+        <div class="logo">
+            成語大辭典
+            <span>Chinese Idiom Database · 32,616 條</span>
+        </div>
+        <div class="search-wrap">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input type="text" id="searchInput" placeholder="搜尋成語、拼音、釋義…" autocomplete="off">
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <h3>資料來源</h3>
+            <div id="sourceList"></div>
+        </aside>
+        <main class="main">
+            <div class="toolbar">
+                <span id="totalLabel" class="total-label"></span>
+            </div>
+            <div id="grid" class="grid">
+                <div class="spinner-wrap" style="grid-column:1/-1">
+                    <div class="spinner"></div>
+                    <div style="color:var(--text2)">載入成語資料中…</div>
+                </div>
+            </div>
+            <div id="pagination" class="pagination"></div>
+        </main>
+    </div>
+
+    <!-- Detail overlay -->
+    <div class="overlay" id="overlay" onclick="closePanelBg(event)">
+        <div class="panel">
+            <button class="panel-close" onclick="closeOverlay()">✕</button>
+            <div id="panelContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // ── Data & state ───────────────────────────────────────────────────────────
+        let ALL = [];         // full dataset
+        let VIEW = [];        // filtered slice
+        const PER_PAGE = 24;
+
+        const SOURCE_ORDER = [
+            '教育部成語典',
+            '開源資料集(中華新華成語辭典)',
+            'CIP( Chinese-Idiom-Paraphrasing ) 成語釋義',
+            'ChID(A Large-scale Chinese IDiom Dataset) 成語辭典',
+        ];
+
+        const state = { q: '', source: '', page: 1 };
+
+        function srcClass(src) {
+            if (!src) return 'src-open';
+            if (src === '教育部成語典') return 'src-moe';
+            if (src.startsWith('CIP')) return 'src-cip';
+            if (src.startsWith('ChID')) return 'src-chid';
+            return 'src-open';
+        }
+
+        // ── Load data ──────────────────────────────────────────────────────────────
+        async function loadData() {
+            const bar = document.getElementById('loadBar');
+            bar.style.width = '20%';
+            await new Promise(r => setTimeout(r, 0)); // yield so spinner renders
+
+            const res = await fetch('idioms_data.json');
+            bar.style.width = '60%';
+            await new Promise(r => setTimeout(r, 0)); // yield
+
+            const text = await res.text();
+            bar.style.width = '85%';
+            await new Promise(r => setTimeout(r, 0)); // yield before heavy parse
+
+            ALL = JSON.parse(text);
+            bar.style.width = '100%';
+            bar.style.transition = 'opacity .6s';
+            setTimeout(() => { bar.style.opacity = 0; }, 600);
+
+            buildSidebar();
+            await new Promise(r => setTimeout(r, 0)); // yield before first render
+            applyFilter();
+        }
+
+        // ── Sidebar ────────────────────────────────────────────────────────────────
+        function buildSidebar() {
+            const counts = {};
+            ALL.forEach(d => { counts[d.s || '開源資料集'] = (counts[d.s || '開源資料集'] || 0) + 1; });
+
+            const known = SOURCE_ORDER.filter(k => counts[k]);
+            const extras = Object.keys(counts).filter(k => !SOURCE_ORDER.includes(k));
+
+            let html = `<button class="src-btn active" id="src-all" onclick="filterSrc('')">
+    <span>全部</span><span class="badge">${ALL.length.toLocaleString()}</span></button>`;
+
+            [...known, ...extras].forEach(k => {
+                html += `<button class="src-btn" data-src="${k}" onclick="filterSrc('${k}')">
+      <span>${k}</span><span class="badge">${counts[k].toLocaleString()}</span></button>`;
+            });
+            document.getElementById('sourceList').innerHTML = html;
+        }
+
+        // ── Filter + search ────────────────────────────────────────────────────────
+        function applyFilter() {
+            const q = state.q.toLowerCase();
+            const src = state.source;
+            VIEW = ALL.filter(d => {
+                if (src && (d.s || '') !== src) return false;
+                if (q && !((d.t || '').includes(q) || (d.p || '').toLowerCase().includes(q) || (d.m || '').includes(q))) return false;
+                return true;
+            });
+            state.page = 1;
+            render();
+        }
+
+        function filterSrc(src) {
+            state.source = src;
+            document.querySelectorAll('.src-btn').forEach(b => {
+                const match = src
+                    ? b.dataset.src === src
+                    : b.id === 'src-all';
+                b.classList.toggle('active', match);
+            });
+            applyFilter();
+        }
+
+        let searchTimer;
+        document.getElementById('searchInput').addEventListener('input', function () {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(() => { state.q = this.value.trim(); applyFilter(); }, 280);
+        });
+
+        // ── Render grid ─────────────────────────────────────────────────────────────
+        function render() {
+            const total = VIEW.length;
+            const pages = Math.ceil(total / PER_PAGE) || 1;
+            const page = Math.min(state.page, pages);
+            const start = (page - 1) * PER_PAGE;
+            const slice = VIEW.slice(start, start + PER_PAGE);
+
+            document.getElementById('totalLabel').textContent =
+                `共 ${total.toLocaleString()} 條，第 ${page}/${pages} 頁`;
+
+            const grid = document.getElementById('grid');
+            if (!slice.length) {
+                grid.innerHTML = '<div class="empty" style="grid-column:1/-1">沒有找到符合條件的成語</div>';
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+
+            grid.innerHTML = slice.map((d, i) => {
+                const cls = srcClass(d.s);
+                const meaning = d.m ? d.m.substring(0, 80) + (d.m.length > 80 ? '…' : '') : '';
+                return `<div class="card" onclick="showDetail(${start + i})">
+      <div class="card-title">${d.t}</div>
+      <div class="card-pinyin">${d.p || ''}</div>
+      <div class="card-meaning">${meaning}</div>
+      <span class="card-source ${cls}">${d.s || '開源資料集'}</span>
+    </div>`;
+            }).join('');
+
+            renderPagination(page, pages);
+            window.scrollTo(0, 0);
+        }
+
+        function renderPagination(page, pages) {
+            if (pages <= 1) { document.getElementById('pagination').innerHTML = ''; return; }
+            let html = `<button class="pg-btn" onclick="goPage(1)" ${page === 1 ? 'disabled' : ''}>«</button>`;
+            html += `<button class="pg-btn" onclick="goPage(${page - 1})" ${page === 1 ? 'disabled' : ''}>‹</button>`;
+            let s = Math.max(1, page - 3), e = Math.min(pages, page + 3);
+            if (s > 1) html += `<span class="pg-info">…</span>`;
+            for (let p = s; p <= e; p++) html += `<button class="pg-btn ${p === page ? 'active' : ''}" onclick="goPage(${p})">${p}</button>`;
+            if (e < pages) html += `<span class="pg-info">…</span>`;
+            html += `<button class="pg-btn" onclick="goPage(${page + 1})" ${page === pages ? 'disabled' : ''}>›</button>`;
+            html += `<button class="pg-btn" onclick="goPage(${pages})" ${page === pages ? 'disabled' : ''}>»</button>`;
+            document.getElementById('pagination').innerHTML = html;
+        }
+
+        function goPage(p) { state.page = p; render(); }
+
+        // ── Detail overlay ──────────────────────────────────────────────────────────
+        function showDetail(viewIdx) {
+            const d = VIEW[viewIdx];
+            const cls = srcClass(d.s);
+            document.getElementById('overlay').classList.add('open');
+
+            let html = `<div class="panel-title">${d.t}</div>
+    <div class="panel-pinyin">${[d.b, d.p].filter(Boolean).join('　')}</div>
+    <span class="card-source ${cls}" style="margin-bottom:4px">${d.s || '開源資料集'}</span>`;
+            if (d.m) html += `<div class="sec-label">釋義</div><div class="sec-content">${d.m}</div>`;
+            if (d.o) html += `<div class="sec-label">典故說明</div><div class="sec-content">${d.o}</div>`;
+            if (d.u) html += `<div class="sec-label">語義說明</div><div class="sec-content">${d.u}</div>`;
+            if (d.e && d.e.length) {
+                html += `<div class="sec-label">例句</div><ul class="ex-list">${d.e.map(ex => `<li>${ex}</li>`).join('')}</ul>`;
+            }
+            document.getElementById('panelContent').innerHTML = html;
+        }
+
+        function closeOverlay() { document.getElementById('overlay').classList.remove('open'); }
+        function closePanelBg(e) { if (e.target === document.getElementById('overlay')) closeOverlay(); }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
+
+        // ── Boot ────────────────────────────────────────────────────────────────────
+        loadData();
+    </script>
+</body>
+
+</html>
