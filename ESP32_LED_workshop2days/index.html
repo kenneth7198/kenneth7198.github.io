@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32-C3 LED 雙日工作坊 - 課程教學頁面</title>
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Highlight.js Theme -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #ff5858;
+            --primary-gradient: linear-gradient(135deg, #f857a6 0%, #ff5858 100%);
+            --accent: #f857a6;
+            --bg-body: #f8f9fa;
+            --bg-sidebar: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+            --border-color: #e2e8f0;
+            --code-bg: #1e1e2e;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* 頂部導航 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .toggle-sidebar-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 10px rgba(248, 87, 166, 0.3);
+        }
+
+        .logo h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .breadcrumbs {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumbs a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--primary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-speed);
+            background: white;
+        }
+
+        .back-home-btn:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(248, 87, 166, 0.1);
+        }
+
+        /* 佈局容器 */
+        .layout {
+            display: flex;
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* 側邊欄 */
+        aside.sidebar {
+            width: 320px;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1.5rem;
+            position: fixed;
+            top: 70px;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+            z-index: 90;
+            transition: transform var(--transition-speed);
+        }
+
+        .sidebar-group {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-group-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            padding-left: 0.75rem;
+        }
+
+        .sidebar-list {
+            list-style: none;
+        }
+
+        .sidebar-item {
+            margin-bottom: 0.35rem;
+        }
+
+        .sidebar-btn {
+            width: 100%;
+            border: none;
+            background: none;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all var(--transition-speed);
+        }
+
+        .sidebar-btn i {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            transition: color var(--transition-speed);
+        }
+
+        .sidebar-btn:hover {
+            background-color: rgba(248, 87, 166, 0.05);
+            color: var(--primary);
+        }
+
+        .sidebar-btn:hover i {
+            color: var(--primary);
+        }
+
+        .sidebar-btn.active {
+            background-color: rgba(248, 87, 166, 0.1);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .sidebar-btn.active i {
+            color: var(--primary);
+        }
+
+        /* 主要內容區 */
+        main.content {
+            flex: 1;
+            margin-left: 320px;
+            padding: 2.5rem;
+            max-width: 1100px;
+        }
+
+        .article-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            padding: 3rem;
+            min-height: 500px;
+        }
+
+        /* Markdown 文件內容排版 */
+        .article {
+            color: var(--text-main);
+        }
+
+        .article h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.75rem;
+            color: #1a202c;
+        }
+
+        .article h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .article h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 1.25rem;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .article h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1.8rem;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+
+        .article p {
+            margin-bottom: 1.2rem;
+            color: #4a5568;
+        }
+
+        .article ul, .article ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .article li {
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+
+        /* 表格排版 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.01);
+        }
+
+        .article table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .article th {
+            background-color: #f7fafc;
+            color: #4a5568;
+            font-weight: 600;
+            padding: 12px 16px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .article td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: #4a5568;
+        }
+
+        .article tr:last-child td {
+            border-bottom: none;
+        }
+
+        .article tr:hover td {
+            background-color: rgba(248, 87, 166, 0.02);
+        }
+
+        /* 程式碼與區塊 */
+        .article pre {
+            background-color: var(--code-bg);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .article code {
+            font-family: 'Consolas', 'Courier New', Monaco, monospace;
+            font-size: 0.9rem;
+            padding: 2px 6px;
+            background-color: #edf2f7;
+            color: #e53e3e;
+            border-radius: 4px;
+        }
+
+        .article pre code {
+            padding: 0;
+            background-color: transparent;
+            color: #e2e8f0;
+            font-size: 0.85rem;
+        }
+
+        /* 複製程式碼按鈕 */
+        .copy-code-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: #e2e8f0;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .article pre:hover .copy-code-btn {
+            opacity: 1;
+        }
+
+        .copy-code-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* 自訂警示框 Blockquote */
+        .article blockquote {
+            background-color: #f7fafc;
+            border-left: 4px solid var(--text-muted);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* 警告 alert 框 */
+        .article blockquote.alert-warning {
+            background-color: #fffaf0;
+            border-left-color: #dd6b20;
+            color: #9c4221;
+        }
+
+        /* 提示 alert 框 */
+        .article blockquote.alert-important {
+            background-color: #ebf8ff;
+            border-left-color: #3182ce;
+            color: #2b6cb0;
+        }
+
+        /* 分割線 */
+        .article hr {
+            border: 0;
+            height: 1px;
+            background: var(--border-color);
+            margin: 2rem 0;
+        }
+
+        /* 回到頂端按鈕 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(248, 87, 166, 0.3);
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all var(--transition-speed);
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(248, 87, 166, 0.4);
+        }
+
+        /* 錯誤訊息框 */
+        .error-message {
+            background-color: #fff5f5;
+            border: 1px solid #fed7d7;
+            color: #c53030;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* 手機與平板適應 */
+        @media (max-width: 992px) {
+            aside.sidebar {
+                transform: translateX(-100%);
+            }
+
+            aside.sidebar.active {
+                transform: translateX(0);
+            }
+
+            main.content {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+
+            .article-card {
+                padding: 1.5rem;
+            }
+
+            .toggle-sidebar-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+            header {
+                padding: 0 1rem;
+            }
+
+            .logo h1 {
+                font-size: 1rem;
+            }
+
+            .breadcrumbs {
+                display: none;
+            }
+
+            .article h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部導航 -->
+    <header>
+        <div class="header-left">
+            <button class="toggle-sidebar-btn" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="../" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h1>ESP32-C3 LED 雙日工作坊</h1>
+            </a>
+            <div class="breadcrumbs">
+                <span>/</span>
+                <a href="../">首頁</a>
+                <span>/</span>
+                <span id="currentDocTitle">載入中...</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="../" class="back-home-btn">
+                <i class="fas fa-home"></i>
+                <span>返回教學中心</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- 佈局容器 -->
+    <div class="layout">
+        <!-- 側邊欄 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-group">
+                <div class="sidebar-group-title">課程指引</div>
+                <ul class="sidebar-list">
+                    <li class="sidebar-item">
+                        <button class="sidebar-btn" data-file="docs/Day1_Guide.md" onclick="selectFile(this)">
+                            <i class="fas fa-calendar-day"></i>
+                            <span>第一天：硬體基礎與燈效</span>
+                        </button>
+                    </li>
+                    <li class="sidebar-item">
+                        <button class="sidebar-btn" data-file="docs/Day2_Guide.md" onclick="selectFile(this)">
+                            <i class="fas fa-calendar-days"></i>
+                            <span>第二天：物聯網與控制</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-group">
+                <div class="sidebar-group-title">硬體與準備</div>
+                <ul class="sidebar-list">
+                    <li class="sidebar-item">
+                        <button class="sidebar-btn" data-file="docs/Hardware_Wiring.md" onclick="selectFile(this)">
+                            <i class="fas fa-diagram-project"></i>
+                            <span>硬體接線圖說明</span>
+                        </button>
+                    </li>
+                    <li class="sidebar-item">
+                        <button class="sidebar-btn" data-file="docs/採購清單_25人.md" onclick="selectFile(this)">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>25人班級採購清單</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 主要內容區 -->
+        <main class="content">
+            <div id="errorBox"></div>
+            <div class="article-card">
+                <article class="article" id="article">
+                    <div style="text-align: center; padding: 3rem 0; color: var(--text-muted);">
+                        <i class="fas fa-spinner fa-spin fa-2x" style="margin-bottom: 1rem;"></i>
+                        <p>正在載入課程內容...</p>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <!-- 回到頂端按鈕 -->
+    <button class="back-to-top" id="backToTopBtn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Marked JS for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Highlight.js for Code Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/arduino.min.js"></script>
+
+    <script>
+        // 設定 marked 選項
+        marked.setOptions({
+            highlight: function(code, lang) {
+                const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                return hljs.highlight(code, { language }).value;
+            },
+            langPrefix: 'hljs language-'
+        });
+
+        // 側邊欄切換
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // 當點擊主要內容區且側邊欄是開啟狀態時，自動關閉 (手機版)
+        document.querySelector('main.content').addEventListener('click', () => {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth <= 992 && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // 讀取 URL Hash 中的檔案
+        function getHashFile() {
+            const hash = window.location.hash.replace(/^#/, '');
+            const params = new URLSearchParams(hash);
+            return params.get('file');
+        }
+
+        // 更新 URL Hash
+        function setHashFile(file) {
+            const params = new URLSearchParams();
+            params.set('file', file);
+            window.location.hash = params.toString();
+        }
+
+        // 載入並渲染 Markdown 檔案
+        async function loadDoc(file) {
+            const articleEl = document.getElementById('article');
+            const errorBox = document.getElementById('errorBox');
+            const currentDocTitle = document.getElementById('currentDocTitle');
+            
+            errorBox.innerHTML = '';
+            articleEl.innerHTML = `
+                <div style="text-align: center; padding: 3rem 0; color: var(--text-muted);">
+                    <i class="fas fa-spinner fa-spin fa-2x" style="margin-bottom: 1rem;"></i>
+                    <p>正在載入課程內容...</p>
+                </div>
+            `;
+
+            try {
+                const response = await fetch(file);
+                if (!response.ok) {
+                    throw new Error(`無法讀取檔案 (${response.status} ${response.statusText})`);
+                }
+                const markdown = await response.text();
+                
+                // 渲染 Markdown HTML
+                let htmlContent = marked.parse(markdown);
+                
+                // 用 DOMParser 進行後處理以處理表格和警示框等
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlContent, 'text/html');
+                
+                // 1. 包裝表格以支援響應式滾動
+                const tables = doc.querySelectorAll('table');
+                tables.forEach(table => {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'table-container';
+                    table.parentNode.insertBefore(wrapper, table);
+                    wrapper.appendChild(table);
+                });
+                
+                // 2. 處理 blockquote 警示樣式
+                const blockquotes = doc.querySelectorAll('blockquote');
+                blockquotes.forEach(bq => {
+                    const contentText = bq.textContent.trim();
+                    if (contentText.includes('⚠') || contentText.startsWith('注意') || contentText.startsWith('警告')) {
+                        bq.className = 'alert-warning';
+                    } else if (contentText.includes('★') || contentText.startsWith('重要') || contentText.startsWith('核心')) {
+                        bq.className = 'alert-important';
+                    }
+                });
+
+                // 3. 為 pre 區塊新增複製按鈕
+                const pres = doc.querySelectorAll('pre');
+                pres.forEach(pre => {
+                    const copyBtn = document.createElement('button');
+                    copyBtn.className = 'copy-code-btn';
+                    copyBtn.innerHTML = '<i class="far fa-copy"></i> 複製';
+                    
+                    const codeEl = pre.querySelector('code');
+                    const codeText = codeEl ? codeEl.textContent : pre.textContent;
+                    
+                    copyBtn.onclick = async () => {
+                        try {
+                            await navigator.clipboard.writeText(codeText);
+                            copyBtn.innerHTML = '<i class="fas fa-check"></i> 已複製';
+                            copyBtn.style.background = '#48bb78';
+                            copyBtn.style.borderColor = '#48bb78';
+                            setTimeout(() => {
+                                copyBtn.innerHTML = '<i class="far fa-copy"></i> 複製';
+                                copyBtn.style.background = '';
+                                copyBtn.style.borderColor = '';
+                            }, 2000);
+                        } catch (err) {
+                            console.error('複製失敗:', err);
+                            copyBtn.innerHTML = '<i class="fas fa-times"></i> 失敗';
+                        }
+                    };
+                    
+                    pre.appendChild(copyBtn);
+                });
+
+                // 將處理好的 HTML 放回頁面
+                articleEl.innerHTML = doc.body.innerHTML;
+                
+                // 更新麵包屑中的文件標題 (使用首個 h1)
+                const firstH1 = articleEl.querySelector('h1');
+                if (firstH1) {
+                    currentDocTitle.textContent = firstH1.textContent;
+                } else {
+                    currentDocTitle.textContent = file.split('/').pop().replace('.md', '');
+                }
+
+                // 讓 Highlight.js 對代碼進行高亮
+                articleEl.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
+
+                // 滾動回到頂部
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            } catch (err) {
+                console.error(err);
+                errorBox.innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>讀取 Markdown 失敗：${err.message}。若為本機環境，請確認使用本機伺服器（如 Live Server）開啟。</span>
+                    </div>
+                `;
+                articleEl.innerHTML = `<p style="color: var(--text-muted);">載入失敗，請從左側重新選擇檔案。</p>`;
+                currentDocTitle.textContent = '載入失敗';
+            }
+        }
+
+        // 選擇檔案與切換 Active 狀態
+        function selectFile(btn) {
+            const file = btn.getAttribute('data-file');
+            setHashFile(file);
+            
+            // 更新 Sidebar Active 狀態
+            document.querySelectorAll('.sidebar-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            btn.classList.add('active');
+
+            // 手機版自動收合
+            if (window.innerWidth <= 992) {
+                document.getElementById('sidebar').classList.remove('active');
+            }
+        }
+
+        // 初始化載入
+        function init() {
+            const hashFile = getHashFile();
+            let targetBtn = null;
+
+            if (hashFile) {
+                targetBtn = document.querySelector(`.sidebar-btn[data-file="${hashFile}"]`);
+            }
+
+            // 如果沒有 Hash 或找不到對應的按鈕，預設選擇第一個
+            if (!targetBtn) {
+                targetBtn = document.querySelector('.sidebar-btn');
+            }
+
+            if (targetBtn) {
+                const file = targetBtn.getAttribute('data-file');
+                targetBtn.classList.add('active');
+                setHashFile(file);
+                loadDoc(file);
+            }
+        }
+
+        // 監聽 Hash 改變
+        window.addEventListener('hashchange', () => {
+            const hashFile = getHashFile();
+            if (hashFile) {
+                const activeBtn = document.querySelector(`.sidebar-btn[data-file="${hashFile}"]`);
+                if (activeBtn) {
+                    document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+                    activeBtn.classList.add('active');
+                    loadDoc(hashFile);
+                }
+            }
+        });
+
+        // 監聽滾動以顯示/隱藏回到頂端按鈕
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 開始初始化
+        window.onload = init;
+    </script>
+</body>
+</html>
